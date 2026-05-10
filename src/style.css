@@ -1,0 +1,38 @@
+* {
+    color: red;
+}
+html,
+body {
+    margin: 0;
+}
+.card {
+    height: 200px;
+    position: relative;
+    border-radius: 10px;
+    border: 1px solid rgb(139, 139, 139);
+}
+
+.cards {
+    display: grid;
+    grid-template-areas: "unit";
+    place-content: center;
+}
+
+.shadow {
+    content: "";
+    position: absolute;
+    width: 78%;
+    height: 6px;
+    top: 100%;
+    left: 14%;
+    background: black;
+    border-radius: 50%;
+    filter: blur(15px);
+}
+
+.container {
+    width: fit-content;
+    height: fit-content;
+    margin: 50px;
+    grid-area: unit;
+}
