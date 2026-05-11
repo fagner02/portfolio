@@ -1,3 +1,16 @@
+:root {
+    --border-color: hsl(0, 0%, 0%, 0.2);
+}
+
+@font-face {
+    font-family: Roboto Slab;
+    src: url("./assets/Roboto_Slab/RobotoSlab.ttf");
+}
+
+* {
+    font-family: Roboto Slab;
+}
+
 html,
 body {
     margin: 0;
@@ -6,16 +19,21 @@ body {
 }
 
 section {
-    padding: 20px 40px;
-}
-
-section > p {
-    max-width: 500px;
+    padding: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    margin: 0 30px;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+}
+
+p,
+h2 {
+    margin: 7px 0;
+    font-size: 16px;
 }
 
 nav {
@@ -26,16 +44,64 @@ nav {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    --pad-h: 1;
-    --pad-v: 1;
+    --pad-h: 0;
+    --pad-v: 0;
+    --blur: 0;
+    --background: transparent;
     padding: calc(30px - calc(10px * var(--pad-v)))
         calc(50px - calc(20px * var(--pad-h)));
     z-index: 100000;
-    background-color: hsl(0, 0%, 100%, 0);
-    backdrop-filter: blur(0px);
+    background-color: var(--background);
+    backdrop-filter: blur(var(--blur));
 }
 header {
-    height: 300px;
+    height: 40dvh;
+}
+
+.links {
+    display: flex;
+    gap: 10px;
+    place-items: center;
+}
+.star {
+    width: 15px;
+    height: fit-content;
+}
+.link {
+    display: flex;
+    place-items: center;
+    gap: 10px;
+}
+
+.section-grid {
+    display: grid;
+    grid-template-areas:
+        "decor lhead rbox"
+        "decor ltext rbox";
+    grid-template-columns: min-content 500px;
+}
+.lhead {
+    grid-area: lhead;
+}
+.ltext {
+    grid-area: ltext;
+    max-width: 500px;
+}
+.rbox {
+    grid-area: rbox;
+}
+.sec-decor > svg {
+    width: 20px;
+}
+.sec-decor {
+    width: fit-content;
+    grid-area: decor;
+    position: relative;
+    top: -20px;
+    display: flex;
+    flex-direction: column;
+    place-self: center start;
+    margin-right: 10px;
 }
 .stars {
     object-fit: cover;
@@ -50,7 +116,7 @@ header {
     height: 200px;
     position: relative;
     border-radius: 10px;
-    border: 1px solid rgb(139, 139, 139);
+    border: 2px solid rgb(139, 139, 139);
 }
 
 .carrousel {
@@ -83,11 +149,14 @@ header {
         padding: calc(20px - calc(10px * var(--pad-v)))
             calc(30px - calc(20px * var(--pad-h)));
     }
+    header {
+        /* height: 300px; */
+    }
 }
 
 @media (max-width: 700px) {
     header {
-        height: 220px;
+        /* height: 290px; */
     }
 
     .stars {
@@ -105,12 +174,18 @@ header {
         text-align: end;
         background: hsl(0, 0%, 100%, 0.2);
         backdrop-filter: blur(5px);
-        border-left: 1px solid hsl(0, 0%, 0%, 0.2);
+        border-left: 1px solid var(--border-color);
         padding: 30px;
     }
 
     nav > div {
         display: flex;
         flex-direction: column;
+    }
+}
+
+@media (max-width: 450px) {
+    header {
+        /* height: 220px; */
     }
 }

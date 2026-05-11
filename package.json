@@ -4,15 +4,19 @@
   "description": "",
   "license": "ISC",
   "author": "",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "node esbuild.mjs",
     "build": "node esbuild.mjs"
   },
   "devDependencies": {
+    "@types/animejs": "^3.1.13",
     "esbuild": "^0.28.0",
     "typescript": "^6.0.3",
     "vite": "^8.0.11"
+  },
+  "dependencies": {
+    "animejs": "^4.4.1"
   }
 }

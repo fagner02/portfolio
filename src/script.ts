@@ -83,22 +83,91 @@ for (let j = 0; j < carrouselsData.length; j++) {
 
     requestAnimationFrame(animate);
 }
+const stars = document.querySelector(".stars") as HTMLElement;
+const nav = document.querySelector("nav") as HTMLElement;
+const header = document.querySelector("header") as HTMLElement;
 document.addEventListener("scroll", (e) => {
     const scroll = (document.scrollingElement as HTMLElement).scrollTop;
-    const stars = document.querySelector(".stars") as HTMLElement;
-    const nav = document.querySelector("nav") as HTMLElement;
-    const header = document.querySelector("header") as HTMLElement;
 
     let value = scroll / header.clientHeight;
     if (value > 1) value = 1;
 
     const blur = Math.round(value * 10);
 
+    stars.style.filter = `blur(${blur}px) var(--shadow)`;
+
     nav.style.setProperty("--pad-h", value.toPrecision(4));
     nav.style.setProperty("--pad-v", value.toPrecision(4));
+    nav.style.setProperty("--blur", `${blur}px`);
+    nav.style.setProperty("--background", `hsl(0,0%,100%,${value * 0.5})`);
+    nav.style.borderBottom = `2px solid hsl(0, 0%, 0%, ${value * 0.2})`;
+});
 
-    nav.style.backdropFilter = `blur(${blur}px)`;
-    nav.style.borderBottom = `1px solid hsl(0, 0%, 0%, ${value * 0.2})`;
-    nav.style.backgroundColor = `hsl(0,0%,100%,${value * 0.5})`;
-    stars.style.filter = `blur(${blur}px) var(--shadow)`;
+import("animejs").then((animejs) => {
+    const { animate, svg, createTimeline } = animejs;
+    const links = document.querySelectorAll(".link");
+    for (const link of links) {
+        const path = link.querySelector("svg>path") as SVGElement;
+        const className = path.classList.values().next().value;
+
+        const tl = createTimeline({ loop: true, autoplay: false });
+
+        tl.add(path, {
+            d: svg.morphTo("#collapsed"),
+            duration: 500,
+        });
+        tl.add(path, {
+            d: svg.morphTo("#collapsedh"),
+            duration: 1000,
+        });
+        tl.add(path, {
+            d: svg.morphTo(`#${className}`),
+            duration: 1000,
+        });
+        tl.add(path, {
+            d: svg.morphTo("#circle"),
+            duration: 500,
+        });
+        tl.add(path, {
+            d: svg.morphTo("#collapsed"),
+            duration: 500,
+        });
+        tl.add(path, {
+            d: svg.morphTo("#collapsedh"),
+            duration: 1000,
+        });
+        tl.add(path, {
+            d: svg.morphTo(`#${className}`),
+            duration: 1000,
+        });
+        tl.add(path, {
+            d: svg.morphTo("#flower"),
+            duration: 1000,
+        });
+        tl.add(path, {
+            d: svg.morphTo("#collapsedh"),
+            duration: 1000,
+        });
+        tl.add(path, {
+            d: svg.morphTo(`#${className}`),
+            duration: 500,
+        });
+
+        const initial = document
+            .querySelector(`#${className}`)
+            ?.getAttribute("d");
+        if (initial) path.setAttribute("d", initial);
+
+        (link as HTMLElement).addEventListener("mouseenter", () => {
+            tl.restart();
+        });
+        link.addEventListener("mouseleave", () => {
+            console.log("out");
+            tl.pause();
+            animate(path, {
+                duration: 500,
+                d: svg.morphTo(`#${className}`),
+            });
+        });
+    }
 });
