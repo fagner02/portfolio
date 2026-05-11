@@ -83,3 +83,22 @@ for (let j = 0; j < carrouselsData.length; j++) {
 
     requestAnimationFrame(animate);
 }
+document.addEventListener("scroll", (e) => {
+    const scroll = (document.scrollingElement as HTMLElement).scrollTop;
+    const stars = document.querySelector(".stars") as HTMLElement;
+    const nav = document.querySelector("nav") as HTMLElement;
+    const header = document.querySelector("header") as HTMLElement;
+
+    let value = scroll / header.clientHeight;
+    if (value > 1) value = 1;
+
+    const blur = Math.round(value * 10);
+
+    nav.style.setProperty("--pad-h", value.toPrecision(4));
+    nav.style.setProperty("--pad-v", value.toPrecision(4));
+
+    nav.style.backdropFilter = `blur(${blur}px)`;
+    nav.style.borderBottom = `1px solid hsl(0, 0%, 0%, ${value * 0.2})`;
+    nav.style.backgroundColor = `hsl(0,0%,100%,${value * 0.5})`;
+    stars.style.filter = `blur(${blur}px) var(--shadow)`;
+});
