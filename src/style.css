@@ -128,11 +128,18 @@ header {
     object-fit: contain;
     max-height: 39dvh;
     width: 50dvw;
-    position: fixed;
-    place-self: center;
     z-index: 0;
     --shadow: drop-shadow(0px 40px 60px hsl(250, 50%, 50%));
     filter: blur(0px) var(--shadow);
+    position: fixed;
+    place-self: center;
+}
+#clouds {
+    position: fixed;
+}
+.cloud {
+    position: fixed;
+    animation: cloud 5s infinite linear;
 }
 .card > img {
     height: 200px;
@@ -196,5 +203,14 @@ header {
     nav > div {
         display: flex;
         flex-direction: column;
+    }
+}
+
+@keyframes cloud {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
     }
 }
