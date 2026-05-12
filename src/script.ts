@@ -89,7 +89,7 @@ const header = document.querySelector("header") as HTMLElement;
 document.addEventListener("scroll", (e) => {
     const scroll = (document.scrollingElement as HTMLElement).scrollTop;
 
-    let value = scroll / header.clientHeight;
+    let value = scroll / (header.clientHeight * 0.9);
     if (value > 1) value = 1;
 
     const blur = Math.round(value * 10);
@@ -100,7 +100,7 @@ document.addEventListener("scroll", (e) => {
     nav.style.setProperty("--pad-v", value.toPrecision(4));
     nav.style.setProperty("--blur", `${blur}px`);
     nav.style.setProperty("--background", `hsl(0,0%,100%,${value * 0.5})`);
-    nav.style.borderBottom = `2px solid hsl(0, 0%, 0%, ${value * 0.2})`;
+    nav.style.borderBottom = `1px solid hsl(0, 0%, 0%, ${value * 0.2})`;
 });
 
 import("animejs").then((animejs) => {
@@ -133,20 +133,28 @@ import("animejs").then((animejs) => {
             duration: 500,
         });
         tl.add(path, {
-            d: svg.morphTo("#collapsedh"),
-            duration: 1000,
+            d: svg.morphTo("#peacock"),
+            duration: 500,
         });
         tl.add(path, {
             d: svg.morphTo(`#${className}`),
-            duration: 1000,
+            duration: 500,
         });
         tl.add(path, {
             d: svg.morphTo("#flower"),
             duration: 1000,
         });
         tl.add(path, {
-            d: svg.morphTo("#collapsedh"),
+            d: svg.morphTo(`#${className}`),
+            duration: 500,
+        });
+        tl.add(path, {
+            d: svg.morphTo("#violin"),
             duration: 1000,
+        });
+        tl.add(path, {
+            d: svg.morphTo("#circle"),
+            duration: 500,
         });
         tl.add(path, {
             d: svg.morphTo(`#${className}`),
