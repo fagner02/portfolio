@@ -41,7 +41,7 @@ const updateClouds = () => {
 updateClouds();
 
 type Card = {
-    style: CSSStyleDeclaration;
+    elem: HTMLElement;
     y: number;
     x: number;
 };
@@ -62,7 +62,7 @@ for (let i = 0; i < carrousels.length; i++) {
         elems[i]!.style.willChange = "transform, opacity";
 
         cards[i]! = {
-            style: elems[i]!.style,
+            elem: elems[i]!,
             y: Math.random(),
             x: Math.random(),
         };
@@ -142,7 +142,7 @@ for (let j = 0; j < carrouselsData.length; j++) {
         }
 
         for (let i = 0; i < cards.length; i++) {
-            const style = cards[i]!.style;
+            const elem = cards[i]!.elem;
 
             const proportion = elapsed / duration + i / cards.length;
             const slide = slideElapsed / slideDuration + i / cards.length;
@@ -156,14 +156,14 @@ for (let j = 0; j < carrouselsData.length; j++) {
                 Math.cos((proportion * 2 + cards[i]!.x) * Math.PI * 2) *
                 (5 * cards[i]!.y + 2);
 
-            const h = sin * 350;
+            const h = sin * elem.clientWidth * 1;
             const scale = (cos * 0.5 + 0.5) * 0.5 + 0.5;
-            style.zIndex = Math.round(scale * 100).toString();
+            elem.style.zIndex = Math.round(scale * 100).toString();
 
-            style.opacity = (cos * 0.5 + 0.5).toString();
-            style.filter = `blur(${(1 - scale) * 10}px)`;
+            elem.style.opacity = (cos * 0.5 + 0.5).toString();
+            elem.style.filter = `blur(${(1 - scale) * 10}px)`;
 
-            style.transform =
+            elem.style.transform =
                 `perspective(15cm) ` +
                 `translateX(${h}px)` +
                 `rotateY(${ry}deg) ` +
