@@ -1,4 +1,5 @@
 const stars = document.querySelector(".stars") as HTMLImageElement;
+const bgContainer = document.querySelector(".bg") as HTMLElement;
 
 let selected: HTMLElement | null = null;
 
@@ -87,7 +88,7 @@ const blinks: {
 for (let i = 0; i < blinkCount; i++) {
     const blink = document.createElement("img");
     blink.src = "./assets/blink.webp";
-    document.body.appendChild(blink);
+    bgContainer.appendChild(blink);
     blink.classList.add("blink");
 
     blinks[i] = {
@@ -193,7 +194,7 @@ for (let j = 0; j < carrouselsData.length; j++) {
                 blink.elem.style.left = `${stars.offsetLeft + gap + x}px`;
                 blink.elem.style.top = `${stars.offsetTop + y}px`;
 
-                blink.elem.style.width = `${(Math.random() * 0.5 + 0.5) * 15}px`;
+                blink.elem.style.width = `${(Math.random() * 0.5 + 0.5) * 0.02 * width}px`;
                 if (
                     Math.pow(x - h, 2) / Math.pow(h, 2) +
                         Math.pow(y, 2) / Math.pow(v, 2) >
@@ -228,7 +229,7 @@ document.addEventListener("scroll", (e) => {
 
     const blur = Math.round(value * 10);
 
-    stars.style.filter = `blur(${blur}px) var(--shadow)`;
+    bgContainer.style.filter = `blur(${blur}px)`;
 
     nav.style.setProperty("--pad-h", value.toPrecision(4));
     nav.style.setProperty("--pad-v", value.toPrecision(4));

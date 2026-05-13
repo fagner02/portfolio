@@ -23,6 +23,7 @@ section {
     border: 1px solid var(--border-color);
     border-radius: 10px;
     margin: 0 30px;
+    margin-bottom: 30px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -44,7 +45,7 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
-    /* width: stretch; */
+    width: stretch;
     width: -webkit-fill-available;
     display: flex;
     justify-content: space-between;
@@ -126,29 +127,42 @@ header {
 }
 .stars {
     object-fit: contain;
-    max-height: 39dvh;
-    width: 50dvw;
     z-index: 0;
     --shadow: drop-shadow(0px 40px 60px hsl(250, 50%, 50%));
     filter: blur(0px) var(--shadow);
+    place-self: center;
+    max-height: 39dvh;
+    width: 50dvw;
+}
+
+.bg {
+    display: grid;
     position: fixed;
+    grid-template-areas: "unit";
     place-self: center;
 }
-#clouds {
-    position: fixed;
+.bg > * {
+    grid-area: unit;
 }
 .cloud {
-    position: fixed;
+    position: absolute;
     animation: cloud 5s infinite linear;
 }
 .blink {
-    position: fixed;
+    /* position: fixed; */
+    grid-area: unit;
     will-change: transform;
     transform-origin: 0 0;
+    position: relative;
 }
 
-.card > img {
+.card {
+    width: fit-content;
     height: 200px;
+    grid-area: unit;
+}
+.card > img {
+    height: 100%;
     position: relative;
     border-radius: 10px;
     border: 2px solid rgb(139, 139, 139);
@@ -173,12 +187,6 @@ header {
     filter: blur(15px);
 }
 
-.card {
-    width: fit-content;
-    height: fit-content;
-    grid-area: unit;
-}
-
 @media (max-width: 850px) {
     nav {
         padding: calc(20px - calc(10px * var(--pad-v)))
@@ -197,6 +205,7 @@ header {
         right: 0;
         width: fit-content;
         height: stretch;
+        height: -webkit-fill-available;
         flex-direction: column;
         justify-content: start;
         text-align: end;
