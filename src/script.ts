@@ -127,14 +127,6 @@ window.onresize = () => {
     updateHeader();
 };
 
-document.onvisibilitychange = () => {
-    if (document.visibilityState === "hidden") return;
-
-    for (let i = 0; i < blinkCount; i++) {
-        blinks[i]!.start = performance.now() + Math.random() * blinkDuration;
-    }
-};
-
 for (let j = 0; j < carrouselsData.length; j++) {
     let { cards, start, slideStart, slideDuration, duration } =
         carrouselsData[j]!;
@@ -189,7 +181,14 @@ for (let j = 0; j < carrouselsData.length; j++) {
             const blinkElapsed = performance.now() - blink.start;
 
             if (blinkElapsed > blinkDuration || !blink.started) {
-                if (blink.started) blink.start = performance.now();
+                if (blink.started) {
+                    const diff = blinkElapsed - blinkDuration;
+                    blink.start = performance.now();
+                    if (diff > 10) {
+                        console.log(diff);
+                        blink.start += diff;
+                    }
+                }
                 blink.started = true;
 
                 blink.x = Math.random();
