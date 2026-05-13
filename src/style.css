@@ -141,6 +141,10 @@ header {
     position: fixed;
     animation: cloud 5s infinite linear;
 }
+.blink {
+    position: absolute;
+}
+
 .card > img {
     height: 200px;
     position: relative;

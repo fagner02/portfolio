@@ -1,4 +1,4 @@
-const stars = document.querySelector(".stars") as HTMLElement;
+const stars = document.querySelector(".stars") as HTMLImageElement;
 
 let selected: HTMLElement | null = null;
 
@@ -24,6 +24,8 @@ for (let i = 0; i < cloudData.length; i++) {
     cloudContainer.appendChild(cloud);
     cloudData[i]!.elem = cloud;
 }
+
+const ratio = stars.naturalWidth / stars.naturalHeight;
 
 const updateClouds = () => {
     for (let i = 0; i < cloudData.length; i++) {
@@ -74,6 +76,29 @@ for (let i = 0; i < carrousels.length; i++) {
     };
 }
 
+const blinkCount = 30;
+const blinkDuration = 5000;
+const blinks: { elem: HTMLImageElement; start: number; started: boolean }[] =
+    Array(blinkCount);
+for (let i = 0; i < blinkCount; i++) {
+    const blink = document.createElement("img");
+    blink.src = "./assets/blink.webp";
+    document.body.appendChild(blink);
+    blink.classList.add("blink");
+
+    blinks[i] = {
+        elem: blink,
+        start: performance.now() + Math.random() * blinkDuration,
+        started: false,
+    };
+}
+document.onvisibilitychange = () => {
+    if (document.visibilityState === "hidden") return;
+
+    for (let i = 0; i < blinkCount; i++) {
+        blinks[i]!.start = performance.now() + Math.random() * blinkDuration;
+    }
+};
 for (let j = 0; j < carrouselsData.length; j++) {
     let { cards, start, slideStart, slideDuration, duration } =
         carrouselsData[j]!;
@@ -86,6 +111,7 @@ for (let j = 0; j < carrouselsData.length; j++) {
         if (slideElapsed > slideDuration) {
             slideStart = now;
         }
+
         for (let i = 0; i < cards.length; i++) {
             const style = cards[i]!.style;
 
@@ -116,6 +142,43 @@ for (let j = 0; j < carrouselsData.length; j++) {
                 `rotateZ(${(cos * 0.5 + cards[i]!.x - 1) * 10}deg) ` +
                 `scale(${scale}) `;
         }
+
+        const height = stars.clientHeight * 0.3;
+        let width = stars.clientHeight * ratio * 0.92;
+        const gap = (stars.clientWidth - width) / 2;
+        width = width;
+        const h = width / 2;
+        const v = height;
+        for (let i = 0; i < blinkCount; i++) {
+            const blink = blinks[i]!;
+            const blinkElapsed = performance.now() - blink.start;
+
+            if (blinkElapsed > blinkDuration || !blink.started) {
+                if (blink.started) blink.start = performance.now();
+                blink.started = true;
+                const x = Math.random() * width;
+                const y = Math.random() * height;
+
+                blink.elem.style.left = `${stars.offsetLeft + gap + x}px`;
+                blink.elem.style.top = `${stars.offsetTop + y}px`;
+                blink.elem.style.width = `${(Math.random() * 0.5 + 0.5) * 10}px`;
+                if (
+                    Math.pow(x - h, 2) / Math.pow(h, 2) +
+                        Math.pow(y, 2) / Math.pow(v, 2) >
+                    1
+                ) {
+                    blink.elem.style.filter = "invert()";
+                } else {
+                    blink.elem.style.filter = "none";
+                }
+                continue;
+            }
+            const sin = Math.abs(
+                Math.sin((Math.PI * blinkElapsed) / blinkDuration),
+            );
+            blink.elem.style.transform = `scale(${sin})`;
+        }
+
         requestAnimationFrame(animate);
     };
 
@@ -207,7 +270,6 @@ import("animejs").then((animejs) => {
             tl.restart();
         });
         link.addEventListener("mouseleave", () => {
-            console.log("out");
             tl.pause();
             animate(path, {
                 duration: 500,
