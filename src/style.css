@@ -87,6 +87,7 @@ header {
 .stack {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 .stack > div {
     display: flex;
@@ -99,23 +100,25 @@ header {
     padding-right: 15px;
 }
 
-.rbox {
+.sec-links {
     display: flex;
     align-items: end;
     flex-direction: column;
     gap: 10px;
 }
-.rbox > div {
+.sec-links > div {
     display: flex;
     height: fit-content;
     align-items: center;
     gap: 20px;
+    overflow-wrap: anywhere;
 }
 .sec-info {
-    display: flex;
-}
-.sec-info > div {
-    flex: 1;
+    display: grid;
+    grid-template-areas:
+        "title links"
+        "left right";
+    grid-template-columns: 1fr 1fr;
 }
 .sec-decor > svg {
     width: 20px;
@@ -191,6 +194,21 @@ header {
     filter: blur(15px);
 }
 
+@media (max-width: 950px) {
+    .sec-info {
+        grid-template-areas:
+            "title"
+            "left"
+            "right"
+            "links";
+        grid-template-columns: 1fr;
+    }
+
+    .sec-links {
+        margin-top: 20px;
+    }
+}
+
 @media (max-width: 850px) {
     nav {
         padding: calc(20px - calc(10px * var(--pad-v)))
@@ -200,8 +218,8 @@ header {
 
 @media (max-width: 700px) {
     .stars {
-        width: 80%;
-        left: 10%;
+        width: 96%;
+        left: 2%;
     }
 
     .card {
@@ -219,6 +237,7 @@ header {
         margin: 10px;
         place-self: end;
         z-index: 1;
+        position: fixed;
     }
 
     nav {
