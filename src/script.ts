@@ -251,6 +251,8 @@ document.addEventListener("scroll", (e) => {
     const blur = Math.round(value * 10);
 
     bgContainer.style.filter = `blur(${blur}px)`;
+    bgContainer.style.transform = `scale(${1 + value * 0.2})`;
+    bgContainer.style.opacity = `${1 - value}`;
 
     nav.style.setProperty("--pad-h", value.toPrecision(4));
     nav.style.setProperty("--pad-v", value.toPrecision(4));
