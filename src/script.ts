@@ -38,7 +38,6 @@ const updateClouds = () => {
 };
 
 updateClouds();
-window.onresize = updateClouds;
 
 type Card = {
     style: CSSStyleDeclaration;
@@ -78,8 +77,13 @@ for (let i = 0; i < carrousels.length; i++) {
 
 const blinkCount = 30;
 const blinkDuration = 5000;
-const blinks: { elem: HTMLImageElement; start: number; started: boolean }[] =
-    Array(blinkCount);
+const blinks: {
+    elem: HTMLImageElement;
+    start: number;
+    started: boolean;
+    x: number;
+    y: number;
+}[] = Array(blinkCount);
 for (let i = 0; i < blinkCount; i++) {
     const blink = document.createElement("img");
     blink.src = "./assets/blink.webp";
@@ -90,8 +94,31 @@ for (let i = 0; i < blinkCount; i++) {
         elem: blink,
         start: performance.now() + Math.random() * blinkDuration,
         started: false,
+        x: 0,
+        y: 0,
     };
 }
+
+const updateBlinks = () => {
+    const height = stars.clientHeight * 0.3;
+    let width = stars.clientHeight * ratio * 0.92;
+    const gap = (stars.clientWidth - width) / 2;
+    for (let i = 0; i < blinkCount; i++) {
+        const blink = blinks[i]!;
+
+        const x = blink.x * width;
+        const y = blink.y * height;
+
+        blink.elem.style.left = `${stars.offsetLeft + gap + x}px`;
+        blink.elem.style.top = `${stars.offsetTop + y}px`;
+    }
+};
+
+window.onresize = () => {
+    updateClouds();
+    updateBlinks();
+};
+
 document.onvisibilitychange = () => {
     if (document.visibilityState === "hidden") return;
 
@@ -99,6 +126,7 @@ document.onvisibilitychange = () => {
         blinks[i]!.start = performance.now() + Math.random() * blinkDuration;
     }
 };
+
 for (let j = 0; j < carrouselsData.length; j++) {
     let { cards, start, slideStart, slideDuration, duration } =
         carrouselsData[j]!;
@@ -146,7 +174,6 @@ for (let j = 0; j < carrouselsData.length; j++) {
         const height = stars.clientHeight * 0.3;
         let width = stars.clientHeight * ratio * 0.92;
         const gap = (stars.clientWidth - width) / 2;
-        width = width;
         const h = width / 2;
         const v = height;
         for (let i = 0; i < blinkCount; i++) {
@@ -156,11 +183,16 @@ for (let j = 0; j < carrouselsData.length; j++) {
             if (blinkElapsed > blinkDuration || !blink.started) {
                 if (blink.started) blink.start = performance.now();
                 blink.started = true;
-                const x = Math.random() * width;
-                const y = Math.random() * height;
+
+                blink.x = Math.random();
+                blink.y = Math.random();
+
+                const x = blink.x * width;
+                const y = blink.y * height;
 
                 blink.elem.style.left = `${stars.offsetLeft + gap + x}px`;
                 blink.elem.style.top = `${stars.offsetTop + y}px`;
+
                 blink.elem.style.width = `${(Math.random() * 0.5 + 0.5) * 10}px`;
                 if (
                     Math.pow(x - h, 2) / Math.pow(h, 2) +
