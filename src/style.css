@@ -65,7 +65,12 @@ header {
     flex-direction: column;
     height: 40dvh;
 }
-
+.menu {
+    display: none;
+}
+.menu > img {
+    width: 100%;
+}
 .links {
     display: flex;
     gap: 10px;
@@ -204,6 +209,19 @@ header {
         height: 150px;
     }
 
+    .menu {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: white;
+        border: 1px solid var(--border-color);
+        padding: 5px;
+        margin: 10px;
+        place-self: end;
+        z-index: 1;
+    }
+
     nav {
         place-self: end;
         right: 0;
@@ -217,6 +235,9 @@ header {
         backdrop-filter: blur(5px);
         border-left: 1px solid var(--border-color);
         padding: 30px;
+        --nav-open: 100%;
+        transform: translateX(var(--nav-open));
+        transition: transform 0.3s;
     }
 
     nav > div {

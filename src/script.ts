@@ -221,6 +221,21 @@ for (let j = 0; j < carrouselsData.length; j++) {
 }
 const nav = document.querySelector("nav") as HTMLElement;
 const header = document.querySelector("header") as HTMLElement;
+const menuBtn = document.querySelector(".menu") as HTMLButtonElement;
+
+const closeNav = (e: Event) => {
+    if ((e.target as HTMLElement).closest("nav") === null) {
+        nav.style.setProperty("--nav-open", "100%");
+        document.removeEventListener("click", closeNav);
+    }
+};
+menuBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    nav.style.setProperty("--nav-open", "0%");
+    document.addEventListener("click", closeNav);
+});
+
 document.addEventListener("scroll", (e) => {
     const scroll = (document.scrollingElement as HTMLElement).scrollTop;
 
