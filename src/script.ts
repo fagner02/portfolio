@@ -193,7 +193,7 @@ for (let j = 0; j < carrouselsData.length; j++) {
                 blink.elem.style.left = `${stars.offsetLeft + gap + x}px`;
                 blink.elem.style.top = `${stars.offsetTop + y}px`;
 
-                blink.elem.style.width = `${(Math.random() * 0.5 + 0.5) * 10}px`;
+                blink.elem.style.width = `${(Math.random() * 0.5 + 0.5) * 15}px`;
                 if (
                     Math.pow(x - h, 2) / Math.pow(h, 2) +
                         Math.pow(y, 2) / Math.pow(v, 2) >
@@ -208,7 +208,9 @@ for (let j = 0; j < carrouselsData.length; j++) {
             const sin = Math.abs(
                 Math.sin((Math.PI * blinkElapsed) / blinkDuration),
             );
-            blink.elem.style.transform = `scale(${sin})`;
+
+            // translateZ is specific for firefox optimization, dont delete it
+            blink.elem.style.transform = `scale(${sin}) translate(-50%, -50%) translateZ(1px)`;
         }
 
         requestAnimationFrame(animate);

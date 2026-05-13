@@ -142,7 +142,9 @@ header {
     animation: cloud 5s infinite linear;
 }
 .blink {
-    position: absolute;
+    position: fixed;
+    will-change: transform;
+    transform-origin: 0 0;
 }
 
 .card > img {
