@@ -4,27 +4,28 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
-        <script type="module" src="/script.ts"></script>
-        <link rel="stylesheet" href="/style.css" />
+        <script type="module" src="./src/scripts/script.ts"></script>
+        <script type="module" src="./src/scripts/linkSvgAnimation.ts"></script>
+        <link rel="stylesheet" href="./src/style.css" />
     </head>
     <body>
         <header>
             <div class="bg">
                 <img
                     fetchpriority="high"
-                    src="./assets/stars-back.webp"
+                    src="./src/assets/banner/stars-back.webp"
                     class="stars"
                     alt="starry sky"
                 />
                 <div id="clouds"></div>
                 <img
-                    src="./assets/stars-front.webp"
+                    src="./src/assets/banner/stars-front.webp"
                     class="stars"
                     aria-disabled
                 />
             </div>
             <button class="menu">
-                <img src="./assets/menu.svg" alt="menu icon" />
+                <img src="./src/assets/icons/menu.svg" alt="menu icon" />
             </button>
             <nav class="nav">
                 <div class="links">
@@ -93,7 +94,7 @@
                         <div>
                             <img
                                 height="30px"
-                                src="./assets/stack/svelte-out.png"
+                                src="./src/assets/stack/svelte.png"
                                 alt="svelte logo"
                             />
                             Svelte
@@ -101,7 +102,7 @@
                         <div>
                             <img
                                 height="30px"
-                                src="./assets/stack/supabase.png"
+                                src="./src/assets/stack/supabase.png"
                                 alt=""
                             />
                             Supabase
@@ -113,10 +114,12 @@
                 <div style="grid-area: links" class="sec-links">
                     <div>
                         https://github.com/fagner02/parsers-svelte
-                        <img src="./assets/git.svg" alt="" />
+                        <img src="./src/assets/icons/git.svg" alt="" />
                     </div>
                     <div>
-                        https://vansi.netlify.app<img src="./assets/web.svg" />
+                        https://vansi.netlify.app<img
+                            src="./src/assets/icons/web.svg"
+                        />
                     </div>
                 </div>
                 <div style="grid-area: right">
@@ -133,23 +136,23 @@
             <div class="carrousel">
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
             </div>
         </section>
@@ -183,7 +186,7 @@
                         <div>
                             <img
                                 height="30px"
-                                src="./assets/stack/svelte-out.png"
+                                src="./src/assets/stack/svelte.png"
                                 alt="svelte logo"
                             />
                             Svelte
@@ -191,7 +194,7 @@
                         <div>
                             <img
                                 height="30px"
-                                src="./assets/stack/supabase.png"
+                                src="./src/assets/stack/supabase.png"
                                 alt=""
                             />
                             Supabase
@@ -201,33 +204,35 @@
                 <div class="rbox">
                     <div>
                         https://github.com/fagner02/parsers-svelte
-                        <img src="./assets/git.svg" alt="" />
+                        <img src="./src/assets/icons/git.svg" alt="" />
                     </div>
                     <div>
-                        https://vansi.netlify.app<img src="./assets/web.svg" />
+                        https://vansi.netlify.app<img
+                            src="./src/assets/icons/web.svg"
+                        />
                     </div>
                 </div>
             </div>
             <div class="carrousel">
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
                 <div class="card">
                     <div class="shadow"></div>
-                    <img src="./assets/s.png" />
+                    <img src="./src/assets/s.png" />
                 </div>
             </div>
         </section>
