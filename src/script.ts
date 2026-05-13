@@ -1,5 +1,6 @@
 const stars = document.querySelector(".stars") as HTMLImageElement;
 const bgContainer = document.querySelector(".bg") as HTMLElement;
+const header = document.querySelector("header") as HTMLElement;
 
 let selected: HTMLElement | null = null;
 
@@ -115,9 +116,15 @@ const updateBlinks = () => {
     }
 };
 
+const updateHeader = () => {
+    header.style.height = `${stars.clientHeight + 20}px`;
+};
+updateHeader();
+
 window.onresize = () => {
     updateClouds();
     updateBlinks();
+    updateHeader();
 };
 
 document.onvisibilitychange = () => {
@@ -220,7 +227,6 @@ for (let j = 0; j < carrouselsData.length; j++) {
     requestAnimationFrame(animate);
 }
 const nav = document.querySelector("nav") as HTMLElement;
-const header = document.querySelector("header") as HTMLElement;
 const menuBtn = document.querySelector(".menu") as HTMLButtonElement;
 
 const closeNav = (e: Event) => {
