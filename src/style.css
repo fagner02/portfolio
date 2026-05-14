@@ -108,8 +108,11 @@ header {
     display: grid;
     grid-template-areas:
         "title links"
+        "carrousel carrousel"
         "left right";
     grid-template-columns: 1fr 1fr;
+
+    row-gap: 10px;
 }
 .sec-links {
     display: flex;
@@ -201,6 +204,7 @@ header {
     background-size: 800px;
     border: 1px solid var(--border-color);
     border-radius: 10px;
+    grid-area: carrousel;
 }
 
 .shadow {
@@ -219,6 +223,7 @@ header {
     .sec-info {
         grid-template-areas:
             "title"
+            "carrousel"
             "left"
             "right"
             "links";
