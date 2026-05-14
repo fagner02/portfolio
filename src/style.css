@@ -98,14 +98,25 @@ header {
     padding: 7px;
     border: 1px solid var(--border-color);
     border-radius: 18px;
-    padding-right: 15px;
+    padding-right: 10px;
+}
+.stack > div > img {
+    height: 30px;
 }
 
+.sec-info {
+    display: grid;
+    grid-template-areas:
+        "title links"
+        "left right";
+    grid-template-columns: 1fr 1fr;
+}
 .sec-links {
     display: flex;
     align-items: end;
     flex-direction: column;
     gap: 10px;
+    grid-area: links;
 }
 .sec-links > div {
     display: flex;
@@ -114,12 +125,17 @@ header {
     gap: 20px;
     overflow-wrap: anywhere;
 }
-.sec-info {
-    display: grid;
-    grid-template-areas:
-        "title links"
-        "left right";
-    grid-template-columns: 1fr 1fr;
+.sec-title {
+    grid-area: title;
+}
+.sec-left {
+    grid-area: left;
+}
+.sec-right {
+    grid-area: right;
+}
+.sec-right {
+    text-align: right;
 }
 .sec-decor > svg {
     width: 20px;
