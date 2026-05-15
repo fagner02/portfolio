@@ -219,6 +219,13 @@ header {
     filter: blur(15px);
 }
 
+.words,
+.letters {
+    display: inline-block;
+}
+.letters {
+}
+
 @media (max-width: 950px) {
     .sec-info {
         grid-template-areas:
