@@ -11,10 +11,11 @@ export const blinks: {
     x: number;
     y: number;
 }[] = Array(blinkCount);
+const frag = document.createDocumentFragment();
 for (let i = 0; i < blinkCount; i++) {
     const blink = document.createElement("img");
     blink.src = urlMap["blink.webp"]!;
-    bgContainer.appendChild(blink);
+    frag.appendChild(blink);
     blink.classList.add("blink");
 
     blinks[i] = {
@@ -25,6 +26,7 @@ for (let i = 0; i < blinkCount; i++) {
         y: 0,
     };
 }
+bgContainer.append(frag);
 
 export const updateBlinks = () => {
     const height = stars.clientHeight * 0.3;

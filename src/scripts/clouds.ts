@@ -20,13 +20,15 @@ export const cloudData: {
     { x: 0.89, y: 0.2, width: 0.19 },
 ];
 
+const frag = document.createDocumentFragment();
 for (let i = 0; i < cloudData.length; i++) {
     const cloud = document.createElement("img");
     cloud.src = urlMap[`c${i + 1}.webp`]!;
     cloud.classList.add("cloud");
-    cloudContainer.appendChild(cloud);
+    frag.append(cloud);
     cloudData[i]!.elem = cloud;
 }
+cloudContainer.append(frag);
 
 export const updateClouds = () => {
     for (let i = 0; i < cloudData.length; i++) {
