@@ -47,6 +47,8 @@ for (let i = 0; i < textElems.length; i++) {
         let wordFrag = document.createDocumentFragment();
 
         const addToText = () => {
+            if (wordFrag.childElementCount === 0) return;
+
             if (node.nodeType === Node.TEXT_NODE) {
                 const wordSpan = document.createElement("span");
                 wordSpan.classList.add("words");
@@ -98,8 +100,9 @@ export const updateLetters = () => {
         for (let j = 0; j < letters.length; j++) {
             const letter = letters[j]!;
             const rect = letter!.elem.getBoundingClientRect();
-            letter.left = rect.x + rect.width / 2;
-            letter.top = rect.y + rect.height / 2;
+            const bodyRect = document.body.getBoundingClientRect();
+            letter.left = rect.x - bodyRect.x + rect.width / 2;
+            letter.top = rect.y - bodyRect.y + rect.height / 2;
         }
     }
 };
