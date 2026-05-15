@@ -1,3 +1,4 @@
+import { updateCarrousel } from "./carrousel.js";
 import { updateClouds } from "./clouds.js";
 import { updateHeader } from "./header.js";
 import { updateLetters } from "./letters.js";
@@ -8,4 +9,5 @@ window.onresize = () => {
     updateBlinks();
     updateHeader();
     updateLetters();
+    updateCarrousel();
 };

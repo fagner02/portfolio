@@ -4,6 +4,7 @@ export type Card = {
     elem: HTMLElement;
     y: number;
     x: number;
+    width: number;
 };
 export const carrousels = document.querySelectorAll<HTMLElement>(".carrousel");
 export const carrouselsData: {
@@ -25,6 +26,7 @@ for (let i = 0; i < carrousels.length; i++) {
             elem: elems[i]!,
             y: Math.random(),
             x: Math.random(),
+            width: elems[i]!.clientWidth,
         };
     }
     carrouselsData[i] = {
@@ -36,6 +38,17 @@ for (let i = 0; i < carrousels.length; i++) {
     };
 }
 
+export const updateCarrousel = () => {
+    for (let j = 0; j < carrouselsData.length; j++) {
+        const cards = carrouselsData[j]!.cards;
+
+        for (let i = 0; i < cards.length; i++) {
+            cards[i]!.width = cards[i]!.elem.clientWidth;
+        }
+    }
+};
+
+const PI2 = Math.PI * 2;
 const animateCarrousel = (now: number) => {
     for (let j = 0; j < carrouselsData.length; j++) {
         const carrousel = carrouselsData[j]!;
@@ -50,25 +63,21 @@ const animateCarrousel = (now: number) => {
         }
 
         for (let i = 0; i < cards.length; i++) {
-            const elem = cards[i]!.elem;
+            const { elem, x, y, width } = cards[i]!;
 
-            const proportion = elapsed / duration + i / cards.length;
+            const proportion2 = (elapsed / duration + i / cards.length) * 2;
             const slide = slideElapsed / slideDuration + i / cards.length;
-            const sin = Math.sin(slide * Math.PI * 2);
-            const cos = Math.cos(slide * Math.PI * 2);
+            const sin = Math.sin(slide * PI2);
+            const coshalf = Math.cos(slide * PI2) * 0.5;
 
-            const ry =
-                Math.sin((proportion * 2 + cards[i]!.y) * Math.PI * 2) *
-                (5 * cards[i]!.x + 2);
-            const rx =
-                Math.cos((proportion * 2 + cards[i]!.x) * Math.PI * 2) *
-                (5 * cards[i]!.y + 2);
+            const ry = Math.sin((proportion2 + y) * PI2) * (5 * x + 2);
+            const rx = Math.cos((proportion2 + x) * PI2) * (5 * y + 2);
 
-            const h = sin * elem.clientWidth * 1;
-            const scale = (cos * 0.5 + 0.5) * 0.5 + 0.5;
+            const h = sin * width * 1;
+            const scale = coshalf * 0.5 + 0.75;
             elem.style.zIndex = Math.round(scale * 100).toString();
 
-            elem.style.opacity = (cos * 0.5 + 0.5).toString();
+            elem.style.opacity = (coshalf + 0.5).toString();
             elem.style.filter = `blur(${(1 - scale) * 10}px)`;
 
             elem.style.transform =
@@ -76,7 +85,7 @@ const animateCarrousel = (now: number) => {
                 `translateX(${h}px)` +
                 `rotateY(${ry}deg) ` +
                 `rotateX(${rx}deg) ` +
-                `rotateZ(${(cos * 0.5 + cards[i]!.x - 1) * 10}deg) ` +
+                `rotateZ(${(coshalf + x - 1) * 10}deg) ` +
                 `scale(${scale}) `;
         }
     }
