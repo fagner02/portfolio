@@ -13,11 +13,21 @@ export const carrouselsData: {
     slideStart: number;
     slideDuration: number;
     duration: number;
+    visible: boolean;
 }[] = Array(carrousels.length);
+
+const observer = new IntersectionObserver((entries) => {
+    for (let e of entries) {
+        const index = parseInt(e.target.getAttribute("index") ?? "0");
+        carrouselsData[index]!.visible = e.isIntersecting;
+        console.log(index, e.isIntersecting);
+    }
+});
 
 for (let i = 0; i < carrousels.length; i++) {
     const elems = carrousels[i]!.querySelectorAll<HTMLElement>(".card");
-
+    carrousels[i]?.setAttribute("index", i.toString());
+    observer.observe(carrousels[i]!);
     const cards: Card[] = Array(elems.length);
     for (let i = 0; i < cards.length; i++) {
         elems[i]!.style.willChange = "transform, opacity";
@@ -35,6 +45,7 @@ for (let i = 0; i < carrousels.length; i++) {
         slideStart: performance.now(),
         slideDuration: 20000,
         duration: 5000,
+        visible: true,
     };
 }
 
@@ -52,6 +63,8 @@ const PI2 = Math.PI * 2;
 const animateCarrousel = (now: number) => {
     for (let j = 0; j < carrouselsData.length; j++) {
         const carrousel = carrouselsData[j]!;
+        if (!carrousel.visible) continue;
+
         let { cards, slideDuration, duration } = carrousel;
         const elapsed = now - carrousel.start;
         const slideElapsed = now - carrousel.slideStart;
