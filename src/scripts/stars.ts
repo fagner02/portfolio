@@ -1,5 +1,5 @@
 import { animateCalls } from "./animate.js";
-import { bgContainer, stars } from "./elements.js";
+import { bgContainer, stars, starsData } from "./elements.js";
 import { urlMap } from "./imageImport.js";
 
 export const ratio = stars.naturalWidth / stars.naturalHeight;
@@ -29,27 +29,28 @@ for (let i = 0; i < blinkCount; i++) {
 }
 bgContainer.append(frag);
 
+let height = starsData.clientHeight * 0.3;
+let width = starsData.clientHeight * ratio * 0.92;
+let gap = (starsData.clientWidth - width) / 2;
+let halfWidth = width / 2;
+
 export const updateBlinks = () => {
-    const height = stars.clientHeight * 0.3;
-    let width = stars.clientHeight * ratio * 0.92;
-    const gap = (stars.clientWidth - width) / 2;
+    height = starsData.clientHeight * 0.3;
+    width = starsData.clientHeight * ratio * 0.92;
+    gap = (starsData.clientWidth - width) / 2;
+    halfWidth = width / 2;
     for (let i = 0; i < blinkCount; i++) {
         const blink = blinks[i]!;
 
         const x = blink.x * width;
         const y = blink.y * height;
 
-        blink.elem.style.left = `${stars.offsetLeft + gap + x}px`;
-        blink.elem.style.top = `${stars.offsetTop + y}px`;
+        blink.elem.style.left = `${starsData.offsetLeft + gap + x}px`;
+        blink.elem.style.top = `${starsData.offsetTop + y}px`;
     }
 };
 
 const animateStars = (now: number) => {
-    const height = stars.clientHeight * 0.3;
-    let width = stars.clientHeight * ratio * 0.92;
-    const gap = (stars.clientWidth - width) / 2;
-    const h = width / 2;
-    const v = height;
     for (let i = 0; i < blinkCount; i++) {
         const blink = blinks[i]!;
         const blinkElapsed = now - blink.start;
@@ -70,13 +71,13 @@ const animateStars = (now: number) => {
             const x = blink.x * width;
             const y = blink.y * height;
 
-            blink.elem.style.left = `${stars.offsetLeft + gap + x}px`;
-            blink.elem.style.top = `${stars.offsetTop + y}px`;
+            blink.elem.style.left = `${starsData.offsetLeft + gap + x}px`;
+            blink.elem.style.top = `${starsData.offsetTop + y}px`;
 
             blink.elem.style.width = `${(Math.random() * 0.5 + 0.5) * 0.02 * width}px`;
             if (
-                Math.pow(x - h, 2) / Math.pow(h, 2) +
-                    Math.pow(y, 2) / Math.pow(v, 2) >
+                Math.pow(x - halfWidth, 2) / Math.pow(halfWidth, 2) +
+                    Math.pow(y, 2) / Math.pow(height, 2) >
                 1
             ) {
                 blink.elem.style.filter = "invert()";
