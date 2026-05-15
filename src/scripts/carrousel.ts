@@ -20,7 +20,6 @@ const observer = new IntersectionObserver((entries) => {
     for (let e of entries) {
         const index = parseInt(e.target.getAttribute("index") ?? "0");
         carrouselsData[index]!.visible = e.isIntersecting;
-        console.log(index, e.isIntersecting);
     }
 });
 
