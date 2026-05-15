@@ -1,5 +1,5 @@
 import { urlMap } from "./imageImport.js";
-import { stars } from "./elements.js";
+import { stars, starsData } from "./elements.js";
 
 const cloudContainer = document.querySelector("#clouds") as HTMLElement;
 
@@ -34,9 +34,9 @@ export const updateClouds = () => {
     for (let i = 0; i < cloudData.length; i++) {
         const cloud = cloudData[i]?.elem;
         if (!cloud) continue;
-        cloud.style.left = `${stars.offsetLeft + cloudData[i]!.x * stars.clientWidth}px`;
-        cloud.style.top = `${stars.offsetTop + cloudData[i]!.y * stars.clientHeight * 0.35}px`;
-        cloud.style.width = `${stars.clientWidth * cloudData[i]!.width}px`;
+        cloud.style.left = `${starsData.offsetLeft + cloudData[i]!.x * starsData.clientWidth}px`;
+        cloud.style.top = `${starsData.offsetTop + cloudData[i]!.y * starsData.clientHeight * 0.35}px`;
+        cloud.style.width = `${starsData.clientWidth * cloudData[i]!.width}px`;
     }
 };
 
