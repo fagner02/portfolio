@@ -29,10 +29,10 @@ for (let i = 0; i < blinkCount; i++) {
 }
 bgContainer.append(frag);
 
-let height = starsData.clientHeight * 0.3;
-let width = starsData.clientHeight * ratio * 0.92;
-let gap = (starsData.clientWidth - width) / 2;
-let halfWidth = width / 2;
+let height = 0;
+let width = 0;
+let gap = 0;
+let halfWidth = 0;
 
 export const updateBlinks = () => {
     height = starsData.clientHeight * 0.3;
@@ -49,6 +49,8 @@ export const updateBlinks = () => {
         blink.elem.style.top = `${starsData.offsetTop + y}px`;
     }
 };
+
+updateBlinks();
 
 const animateStars = (now: number) => {
     for (let i = 0; i < blinkCount; i++) {
