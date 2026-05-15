@@ -93,7 +93,7 @@ header {
 .stack > div {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 3px;
     width: fit-content;
     padding: 7px;
     border: 1px solid var(--border-color);
@@ -224,6 +224,7 @@ header {
     display: inline-block;
 }
 .letters {
+    transform-origin: bottom;
 }
 
 @media (max-width: 950px) {

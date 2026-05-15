@@ -1,30 +1,27 @@
 import { animateCalls } from "./animate.js";
 
 const mousePos = { x: 0, y: 0 };
-let changed = false;
-const ps = document.querySelectorAll("p,h2");
-export const lettersData: { visible: boolean; elem: HTMLElement }[] = Array(
-    ps.length,
+const textElems = document.querySelectorAll("p,h2");
+export const textNodeData: { visible: boolean; elem: HTMLElement }[] = Array(
+    textElems.length,
 );
-export let lettersProcessed = false;
 
 const callback = (entries: IntersectionObserverEntry[]) => {
     for (let e of entries) {
-        const index = parseInt(e.target.getAttribute("pindex") ?? "0");
-        lettersData[index]!.visible = e.isIntersecting;
+        const index = parseInt(e.target.getAttribute("index") ?? "0");
+        textNodeData[index]!.visible = e.isIntersecting;
     }
 };
 
 const observer = new IntersectionObserver(callback);
 
-for (let i = 0; i < ps.length; i++) {
-    const p = ps[i]!;
-    p.setAttribute("pindex", i.toString());
-    lettersData[i] = { visible: false, elem: p as HTMLElement };
-    // if (p.tagName === "H2") {
+for (let i = 0; i < textElems.length; i++) {
+    const textElem = textElems[i]!;
+    textElem.setAttribute("index", i.toString());
+    textNodeData[i] = { visible: false, elem: textElem as HTMLElement };
     const frag = document.createDocumentFragment();
-    for (let j = 0; j < p.childNodes.length; j++) {
-        let node = p.childNodes[j]!;
+    for (let j = 0; j < textElem.childNodes.length; j++) {
+        let node = textElem.childNodes[j]!;
         if (node.nodeType === Node.TEXT_NODE) {
             let letters = node.nodeValue;
             if (!letters) continue;
@@ -49,43 +46,24 @@ for (let i = 0; i < ps.length; i++) {
                 } else {
                     lastEmpty = false;
                 }
-                const span = document.createElement("span");
-                span.innerText = char;
-                wordFrag.append(span);
+                const letterSpan = document.createElement("span");
+                letterSpan.classList.add("letters");
+                letterSpan.innerText = char;
+                wordFrag.append(letterSpan);
             }
             frag.append(textFrag);
         } else {
             frag.append(node);
         }
     }
-    p.replaceChildren(frag);
-    // }
-    observer.observe(p);
+    textElem.replaceChildren(frag);
+    observer.observe(textElem);
 }
 
-const point1 = document.createElement("div");
-point1.style.width = "10px";
-point1.style.height = "10px";
-point1.style.background = "blue";
-point1.style.position = "absolute";
-document.body.appendChild(point1);
+const p0 = [0, -0.5, 1.5];
 
-const point2 = document.createElement("div");
-point2.style.width = "10px";
-point2.style.height = "10px";
-point2.style.background = "red";
-point2.style.position = "absolute";
-document.body.appendChild(point2);
-
-const p0 = [
-    [0, 0],
-    [40, 80],
-    [375, -290],
-];
-
-(" (1-t)²P0 + 2(1-t)tP1 + t²P2");
 const animateLetters = () => {
-    for (let p of lettersData) {
+    for (let p of textNodeData) {
         if (!p.visible) {
             continue;
         }
@@ -94,31 +72,25 @@ const animateLetters = () => {
         for (let word of words) {
             for (let l of word.children) {
                 const rect = l.getBoundingClientRect();
-                // \  console.log(rect);
-                const d = Math.sqrt(
-                    Math.pow(mousePos.x - rect.left, 2) +
-                        Math.pow(mousePos.y - rect.top, 2),
-                );
+                const left = rect.left + rect.width / 2;
+                const top = rect.top + rect.height / 2;
+                const dx = mousePos.x - left;
+                const dy = mousePos.y - top;
+                const d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
                 if (d < 100) {
                     const t = (100 - d) / 100;
-                    (l as HTMLElement).style.transform =
-                        `scale(${((100 - d) / 100) * 0.5 + 1})`;
-                    (l as HTMLElement).style.display = "inline-block";
-                    (l as HTMLElement).style.verticalAlign = "bottom";
-                    (l as HTMLElement).style.height = "stretch";
-                    (l as HTMLElement).style.transformOrigin = "bottom";
                     const tsub = 1 - t;
                     const v1 = [Math.pow(tsub, 2), 2 * tsub * t, t * t];
                     let res = { x: 0, y: 0 };
                     for (let i = 0; i < 3; i++) {
-                        res.x += v1[i]! * p0[i]![0]!;
-                        res.y += v1[i]! * p0[i]![1]!;
+                        res.x += v1[i]! * p0[i]!;
+                        res.y += v1[i]! * p0[i]!;
                     }
+                    (l as HTMLElement).style.transform =
+                        `translate(${(dx / 100) * 1}px,${(1 - dy / 100) * 1}px) scale(${res.y * 0.5 + 1})`;
                 } else {
                     (l as HTMLElement).style.transform = "scale(1)";
                 }
-
-                // console.log(d);
             }
         }
     }
@@ -127,7 +99,6 @@ const animateLetters = () => {
 document.addEventListener("mousemove", (e) => {
     mousePos.x = e.clientX;
     mousePos.y = e.clientY;
-    changed = true;
     console.log("move");
 });
 
