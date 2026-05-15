@@ -38,15 +38,15 @@ for (let i = 0; i < carrousels.length; i++) {
 
 const animateCarrousel = (now: number) => {
     for (let j = 0; j < carrouselsData.length; j++) {
-        let { cards, start, slideStart, slideDuration, duration } =
-            carrouselsData[j]!;
-        const elapsed = now - start;
-        const slideElapsed = now - slideStart;
+        const carrousel = carrouselsData[j]!;
+        let { cards, slideDuration, duration } = carrousel;
+        const elapsed = now - carrousel.start;
+        const slideElapsed = now - carrousel.slideStart;
         if (elapsed > duration) {
-            start = now;
+            carrousel.start = now;
         }
         if (slideElapsed > slideDuration) {
-            slideStart = now;
+            carrousel.slideStart = now;
         }
 
         for (let i = 0; i < cards.length; i++) {
