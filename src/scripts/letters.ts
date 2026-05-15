@@ -2,9 +2,18 @@ import { animateCalls } from "./animate.js";
 
 const mousePos = { x: 0, y: 0 };
 const textElems = document.querySelectorAll("p,h2,section a");
-export const textNodeData: { visible: boolean; elem: HTMLElement }[] = Array(
-    textElems.length,
-);
+
+type Letter = {
+    left: number;
+    top: number;
+    elem: HTMLElement;
+};
+
+export const textNodeData: {
+    visible: boolean;
+    elem: HTMLElement;
+    letters: Letter[];
+}[] = Array(textElems.length);
 
 const callback = (entries: IntersectionObserverEntry[]) => {
     for (let e of entries) {
@@ -18,7 +27,11 @@ const observer = new IntersectionObserver(callback);
 for (let i = 0; i < textElems.length; i++) {
     const textElem = textElems[i]!;
     textElem.setAttribute("index", i.toString());
-    textNodeData[i] = { visible: false, elem: textElem as HTMLElement };
+    textNodeData[i] = {
+        visible: false,
+        elem: textElem as HTMLElement,
+        letters: [],
+    };
     const frag = document.createDocumentFragment();
     for (let j = 0; j < textElem.childNodes.length; j++) {
         let node = textElem.childNodes[j]!;
@@ -64,6 +77,11 @@ for (let i = 0; i < textElems.length; i++) {
             letterSpan.classList.add("letters");
             letterSpan.innerText = char;
             wordFrag.append(letterSpan);
+            textNodeData[i]?.letters.push({
+                elem: letterSpan,
+                left: 0,
+                top: 0,
+            });
         }
         addToText();
 
@@ -74,37 +92,46 @@ for (let i = 0; i < textElems.length; i++) {
     observer.observe(textElem);
 }
 
+export const updateLetters = () => {
+    for (let i = 0; i < textNodeData.length; i++) {
+        const letters = textNodeData[i]?.letters!;
+        for (let j = 0; j < letters.length; j++) {
+            const letter = letters[j]!;
+            const rect = letter!.elem.getBoundingClientRect();
+            letter.left = rect.x + rect.width / 2;
+            letter.top = rect.y + rect.height / 2;
+        }
+    }
+};
+
+updateLetters();
+
 const ps = [0, -0.5, 1.5];
 const lim = 100;
 
 const animateLetters = () => {
-    for (let data of textNodeData) {
+    for (let i = 0; i < textNodeData.length; i++) {
+        const data = textNodeData[i]!;
         if (!data.visible) {
             continue;
         }
 
-        const words = data.elem.children;
-        for (let word of words) {
-            for (let letter of word.children) {
-                const rect = letter.getBoundingClientRect();
-                const left = rect.left + rect.width / 2;
-                const top = rect.top + rect.height / 2;
-                const dx = mousePos.x - left;
-                const dy = mousePos.y - top;
-                const d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-                if (d < lim) {
-                    const t = (lim - d) / lim;
-                    const tsub = 1 - t;
-                    const vs = [Math.pow(tsub, 2), 2 * tsub * t, t * t];
-                    let res = 0;
-                    for (let i = 0; i < 3; i++) {
-                        res += vs[i]! * ps[i]!;
-                    }
-                    (letter as HTMLElement).style.transform =
-                        `translate(${(1.5 * dx) / lim}px,${(1.5 * dy) / lim}px) scale(${res * 0.5 + 1})`;
-                } else {
-                    (letter as HTMLElement).style.transform = "scale(1)";
+        for (let j = 0; j < data.letters.length; j++) {
+            const letter = data.letters[j]!;
+            const dx = mousePos.x - letter.left;
+            const dy = mousePos.y - (letter.top - window.scrollY);
+            const d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+            if (d < lim) {
+                const t = (lim - d) / lim;
+                const tsub = 1 - t;
+                const vs = [Math.pow(tsub, 2), 2 * tsub * t, t * t];
+                let res = 0;
+                for (let i = 0; i < 3; i++) {
+                    res += vs[i]! * ps[i]!;
                 }
+                letter.elem.style.transform = `translate(${(1.5 * dx) / lim}px,${(1.5 * dy) / lim}px) scale(${res * 0.5 + 1})`;
+            } else {
+                letter.elem.style.transform = "scale(1)";
             }
         }
     }
@@ -113,6 +140,16 @@ const animateLetters = () => {
 document.addEventListener("mousemove", (e) => {
     mousePos.x = e.clientX;
     mousePos.y = e.clientY;
+});
+
+document.addEventListener("touchmove", (e) => {
+    mousePos.x = e.touches[0]!.clientX;
+    mousePos.y = e.touches[0]!.clientY;
+});
+
+document.addEventListener("touchend", () => {
+    mousePos.x = 0;
+    mousePos.y = 0;
 });
 
 animateCalls.push(animateLetters);
