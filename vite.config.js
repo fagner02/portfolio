@@ -9,6 +9,7 @@ const __dirname = fileURLToPath(new URL(".", import.meta.url));
 function discoverPages(dir) {
     if (!fs.existsSync(dir)) return [];
     return fs.readdirSync(dir).filter((name) => {
+        if (name === "dist") return false;
         const pageDir = join(dir, name);
         return (
             fs.statSync(pageDir).isDirectory() &&

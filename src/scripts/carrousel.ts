@@ -1,3 +1,5 @@
+import { animateCalls } from "./animate.js";
+
 export type Card = {
     elem: HTMLElement;
     y: number;
@@ -33,3 +35,51 @@ for (let i = 0; i < carrousels.length; i++) {
         duration: 5000,
     };
 }
+
+const animateCarrousel = (now: number) => {
+    for (let j = 0; j < carrouselsData.length; j++) {
+        let { cards, start, slideStart, slideDuration, duration } =
+            carrouselsData[j]!;
+        const elapsed = now - start;
+        const slideElapsed = now - slideStart;
+        if (elapsed > duration) {
+            start = now;
+        }
+        if (slideElapsed > slideDuration) {
+            slideStart = now;
+        }
+
+        for (let i = 0; i < cards.length; i++) {
+            const elem = cards[i]!.elem;
+
+            const proportion = elapsed / duration + i / cards.length;
+            const slide = slideElapsed / slideDuration + i / cards.length;
+            const sin = Math.sin(slide * Math.PI * 2);
+            const cos = Math.cos(slide * Math.PI * 2);
+
+            const ry =
+                Math.sin((proportion * 2 + cards[i]!.y) * Math.PI * 2) *
+                (5 * cards[i]!.x + 2);
+            const rx =
+                Math.cos((proportion * 2 + cards[i]!.x) * Math.PI * 2) *
+                (5 * cards[i]!.y + 2);
+
+            const h = sin * elem.clientWidth * 1;
+            const scale = (cos * 0.5 + 0.5) * 0.5 + 0.5;
+            elem.style.zIndex = Math.round(scale * 100).toString();
+
+            elem.style.opacity = (cos * 0.5 + 0.5).toString();
+            elem.style.filter = `blur(${(1 - scale) * 10}px)`;
+
+            elem.style.transform =
+                `perspective(15cm) ` +
+                `translateX(${h}px)` +
+                `rotateY(${ry}deg) ` +
+                `rotateX(${rx}deg) ` +
+                `rotateZ(${(cos * 0.5 + cards[i]!.x - 1) * 10}deg) ` +
+                `scale(${scale}) `;
+        }
+    }
+};
+
+animateCalls.push(animateCarrousel);
