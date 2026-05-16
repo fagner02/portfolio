@@ -105,10 +105,13 @@ export const updateLetters = () => {
 
 updateLetters();
 
+let changed = false;
 const ps = [0, -0.5, 1.5];
 const lim = 100;
 
 const animateLetters = () => {
+    if (!changed) return;
+    changed = false;
     for (let i = 0; i < textNodeData.length; i++) {
         const data = textNodeData[i]!;
         if (!data.visible) {
@@ -128,7 +131,7 @@ const animateLetters = () => {
                 for (let i = 0; i < 3; i++) {
                     res += vs[i]! * ps[i]!;
                 }
-                letter.elem.style.transform = `translate(${1.5 * ((1 - dx) / lim)}px,${1.5 * ((1 - dy) / lim)}px) scale(${res * 0.5 + 1})`;
+                letter.elem.style.transform = `scale(${res * 0.5 + 1}) translate(${1.2 * ((1 - dx) / lim)}px,${1.2 * ((1 - dy) / lim)}px)`;
             } else {
                 letter.elem.style.transform = "scale(1)";
             }
@@ -139,16 +142,24 @@ const animateLetters = () => {
 document.addEventListener("mousemove", (e) => {
     mousePos.x = e.clientX;
     mousePos.y = e.clientY;
+    changed = true;
 });
 
 document.addEventListener("touchmove", (e) => {
     mousePos.x = e.touches[0]!.clientX;
     mousePos.y = e.touches[0]!.clientY;
+    changed = true;
 });
 
 document.addEventListener("touchend", () => {
     mousePos.x = 0;
     mousePos.y = 0;
+    changed = true;
+});
+document.addEventListener("mouseup", () => {
+    mousePos.x = 0;
+    mousePos.y = 0;
+    changed = true;
 });
 
 animateCalls.push(animateLetters);

@@ -213,20 +213,6 @@ header {
     transform-origin: 0 0;
     position: relative;
 }
-
-.card {
-    width: fit-content;
-    height: 200px;
-    grid-area: unit;
-    backface-visibility: hidden;
-}
-.card > img {
-    height: 100%;
-    position: relative;
-    border-radius: 10px;
-    border: 2px solid rgb(139, 139, 139);
-}
-
 .carrousel {
     display: grid;
     grid-template-areas: "unit";
@@ -237,6 +223,22 @@ header {
     border: 1px solid var(--border-color);
     border-radius: 10px;
     grid-area: carrousel;
+    --card-height: 250px;
+    height: var(--card-height);
+}
+.card {
+    width: fit-content;
+    height: var(--card-height);
+    grid-area: unit;
+    backface-visibility: hidden;
+    position: absolute;
+    place-self: center;
+}
+.card > img {
+    height: 100%;
+    position: relative;
+    border-radius: 10px;
+    border: 2px solid rgb(139, 139, 139);
 }
 
 .shadow {
@@ -257,6 +259,7 @@ header {
 }
 .letters {
     transform-origin: bottom;
+    will-change: transform;
 }
 
 @media (max-width: 950px) {
@@ -288,8 +291,10 @@ header {
         left: 2%;
     }
 
-    .card {
-        height: 150px;
+    .carrousel {
+        /* height: 200px; */
+
+        --card-height: 200px;
     }
 
     .menu {
