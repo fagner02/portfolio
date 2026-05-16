@@ -57,20 +57,21 @@ h3,
 p {
     font-size: 15px;
 }
-#features > div {
+.features > div {
     min-width: 160px;
     flex: 1;
 }
-#features {
+.features,
+.models {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
-
-p {
-    column-wrap: revert;
-    overflow-wrap: revert;
-    text-wrap: revert;
+.models > div {
+    flex: 1;
+}
+.models > div > p {
+    text-wrap: nowrap;
 }
 nav {
     position: fixed;

@@ -77,7 +77,7 @@
                 <div class="sec-title">
                     <h2>
                         VANSI - (Visualização de Algoritmos de Análise
-                        Sintática)<i>hi</i>
+                        Sintática)
                     </h2>
                     <p>
                         VANSI (Visualização de Algoritmos de Análise Sintática)
@@ -95,14 +95,14 @@
                                 src="./src/assets/stack/svelte.webp"
                                 alt="svelte logo"
                             />
-                            Svelte
+                            <p>Svelte</p>
                         </div>
                         <div>
                             <img
                                 src="./src/assets/stack/supabase.webp"
                                 alt="supabase logo"
                             />
-                            Supabase
+                            <p>Supabase</p>
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="sec-right">
                     <h2>Features</h2>
-                    <div id="features">
+                    <div class="features">
                         <div>
                             <p>
                                 Step-by-step visualization with animations
@@ -203,7 +203,7 @@
                                 src="./src/assets/stack/vue.webp"
                                 alt="svelte logo"
                             />
-                            Vue
+                            <p>Vue</p>
                         </div>
                         <div>
                             <img
@@ -211,7 +211,7 @@
                                 src="./src/assets/stack/vuetify.webp"
                                 alt=""
                             />
-                            Vuetify
+                            <p>Vuetify</p>
                         </div>
                         <div>
                             <img
@@ -219,7 +219,7 @@
                                 src="./src/assets/stack/typescript.webp"
                                 alt=""
                             />
-                            TypeScript
+                            <p>TypeScript</p>
                         </div>
                         <div>
                             <img
@@ -227,7 +227,7 @@
                                 src="./src/assets/stack/java.webp"
                                 alt=""
                             />
-                            Java
+                            <p>Java</p>
                         </div>
                         <div>
                             <img
@@ -235,22 +235,38 @@
                                 src="./src/assets/stack/springboot.webp"
                                 alt=""
                             />
-                            SprinBoot
+                            <p>SprinBoot</p>
                         </div>
                     </div>
                     <h2>Models</h2>
-                    <h3 style="font-size: 15px">Product</h3>
-                    <div dir="auto">
-                        <p><code>id: </code> Long</p>
-                        <p><code>name: </code> String, required</p>
-                        <p><code>description: </code>String</p>
-                        <p><code>price: </code>Double, required, &gt;0</p>
-                        <p>
-                            <code>quantity: </code> Integer, required,
-                            &GreaterEqual;0
-                        </p>
-                        <p><code>category: </code>Category, nullable</p>
-                        <p><code>image: </code>byte[ ], nullable</p>
+                    <div class="models">
+                        <div>
+                            <h3>Product</h3>
+                            <p><code>id: </code> Long</p>
+                            <p><code>name: </code> String, required</p>
+                            <p><code>description: </code>String</p>
+                            <p><code>price: </code>Double, required, &gt;0</p>
+                            <p>
+                                <code>quantity: </code> Integer, required,
+                                &GreaterEqual;0
+                            </p>
+                            <p><code>category: </code>Category, nullable</p>
+                            <p><code>image: </code>byte[ ], nullable</p>
+                        </div>
+                        <div>
+                            <h3>Category</h3>
+                            <p><code>id: </code> Long</p>
+                            <p><code>name: </code> String, required, unique</p>
+                            <p><code>description: </code>String</p>
+                            <p><code>products: </code> List</p>
+                        </div>
+                        <div>
+                            <h3>User</h3>
+                            <p><code>id: </code> Long</p>
+                            <p><code>username: </code> String, required</p>
+                            <p><code>email: </code>String, required</p>
+                            <p><code>password: </code>String, required</p>
+                        </div>
                     </div>
                 </div>
                 <div class="sec-links">
@@ -284,7 +300,7 @@
                 </div>
                 <div class="sec-right">
                     <h2>Features</h2>
-                    <div id="features">
+                    <div class="features">
                         <div>
                             <h3>1. Product Management</h3>
                             <p>
