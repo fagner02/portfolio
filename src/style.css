@@ -233,6 +233,8 @@ header {
     backface-visibility: hidden;
     position: absolute;
     place-self: center;
+    user-select: none;
+    pointer-events: none;
 }
 .card > img {
     height: 100%;

@@ -14,6 +14,11 @@ export const carrouselsData: {
     slideDuration: number;
     duration: number;
     visible: boolean;
+    clientWidth: number;
+    moving: boolean;
+    newElapsed: number;
+    oldElapsed: number;
+    mousePos: number;
 }[] = Array(carrousels.length);
 
 const observer = new IntersectionObserver((entries) => {
@@ -51,12 +56,46 @@ for (let i = 0; i < carrousels.length; i++) {
         slideDuration: 30000,
         duration: 10000,
         visible: true,
+        clientWidth: carrousels[i]!.clientWidth,
+        mousePos: 0,
+        moving: false,
+        newElapsed: 0,
+        oldElapsed: 0,
     };
+    carrousels[i]?.addEventListener("mousedown", (e) => {
+        const carrousel = carrouselsData[i]!;
+        carrousel.moving = true;
+        carrousel.mousePos = e.clientX;
+        carrousel.oldElapsed = performance.now() - carrousel.slideStart;
+        carrousel.newElapsed =
+            ((e.clientX - carrousel.mousePos) / carrousel.clientWidth) *
+            carrousel.slideDuration;
+    });
+    carrousels[i]?.addEventListener("mousemove", (e) => {
+        const carrousel = carrouselsData[i]!;
+        if (!carrousel.moving) {
+            return;
+        }
+        carrousel.newElapsed =
+            ((e.clientX - carrousel.mousePos) / carrousel.clientWidth) *
+            carrousel.slideDuration;
+    });
+    carrousels[i]?.addEventListener("mouseup", (e) => {
+        const carrousel = carrouselsData[i]!;
+        if (carrousel.moving) {
+            carrousel.slideStart =
+                performance.now() -
+                ((carrousel.oldElapsed + carrousel.newElapsed) %
+                    carrousel.slideDuration);
+            carrousel.moving = false;
+        }
+    });
 }
 
 export const updateCarrousel = () => {
     for (let j = 0; j < carrouselsData.length; j++) {
         const cards = carrouselsData[j]!.cards;
+        carrouselsData[j]!.clientWidth = carrousels[j]!.clientWidth;
 
         for (let i = 0; i < cards.length; i++) {
             cards[i]!.width = cards[i]!.elem.clientWidth * 0.18 * cards.length;
@@ -73,12 +112,15 @@ const animateCarrousel = (now: number) => {
         if (!carrousel.visible) continue;
 
         let { cards, slideDuration, duration } = carrousel;
+
         const elapsed = now - carrousel.start;
-        const slideElapsed = now - carrousel.slideStart;
+        const slideElapsed = carrousel.moving
+            ? carrousel.oldElapsed + carrousel.newElapsed
+            : now - carrousel.slideStart;
         if (elapsed > duration) {
             carrousel.start = now;
         }
-        if (slideElapsed > slideDuration) {
+        if (slideElapsed > slideDuration && !carrousel.moving) {
             carrousel.slideStart = now;
         }
 
