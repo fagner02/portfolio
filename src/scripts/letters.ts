@@ -128,7 +128,7 @@ const animateLetters = () => {
                 for (let i = 0; i < 3; i++) {
                     res += vs[i]! * ps[i]!;
                 }
-                letter.elem.style.transform = `translate(${(1.5 * dx) / lim}px,${(1.5 * dy) / lim}px) scale(${res * 0.5 + 1})`;
+                letter.elem.style.transform = `translate(${1.5 * ((1 - dx) / lim)}px,${1.5 * ((1 - dy) / lim)}px) scale(${res * 0.5 + 1})`;
             } else {
                 letter.elem.style.transform = "scale(1)";
             }
