@@ -37,11 +37,41 @@ a {
 }
 
 p,
-h2 {
+h2,
+h3 {
     margin: 7px 0;
-    font-size: 16px;
+    font-size: inherit;
 }
 
+code {
+    background: hsl(0, 0%, 85%);
+    border-radius: 6px;
+    padding: 3px 5px;
+    font-size: 14px;
+}
+
+h2 {
+    font-size: 17px;
+}
+h3,
+p {
+    font-size: 15px;
+}
+#features > div {
+    min-width: 160px;
+    flex: 1;
+}
+#features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+p {
+    column-wrap: revert;
+    overflow-wrap: revert;
+    text-wrap: revert;
+}
 nav {
     position: fixed;
     top: 0;
@@ -187,6 +217,7 @@ header {
     width: fit-content;
     height: 200px;
     grid-area: unit;
+    backface-visibility: hidden;
 }
 .card > img {
     height: 100%;

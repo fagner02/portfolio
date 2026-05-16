@@ -105,8 +105,6 @@
                             Supabase
                         </div>
                     </div>
-                    <h2>Models</h2>
-                    <p>Produto: <code>model</code></p>
                 </div>
                 <div class="sec-links">
                     <div>
@@ -124,11 +122,30 @@
                 </div>
                 <div class="sec-right">
                     <h2>Features</h2>
-                    <p>Syntax tree visualization</p>
-
-                    <p>Syntax tree visualization</p>
-
-                    <p>Syntax tree visualization</p>
+                    <div id="features">
+                        <div>
+                            <p>
+                                Step-by-step visualization with animations
+                                <b>.1</b>
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                Interactive automata, parse trees, and parsing
+                                tables
+                                <b>.2</b>
+                            </p>
+                        </div>
+                        <div>
+                            <p>Pseudocode with breakpoints <b>.3</b></p>
+                        </div>
+                        <div>
+                            <p>Grammar input and string analysis <b>.4</b></p>
+                        </div>
+                        <div>
+                            <p>Copy results to clipboard <b>.5</b></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="carrousel">
                     <div class="card">
@@ -221,6 +238,20 @@
                             SprinBoot
                         </div>
                     </div>
+                    <h2>Models</h2>
+                    <h3 style="font-size: 15px">Product</h3>
+                    <div dir="auto">
+                        <p><code>id: </code> Long</p>
+                        <p><code>name: </code> String, required</p>
+                        <p><code>description: </code>String</p>
+                        <p><code>price: </code>Double, required, &gt;0</p>
+                        <p>
+                            <code>quantity: </code> Integer, required,
+                            &GreaterEqual;0
+                        </p>
+                        <p><code>category: </code>Category, nullable</p>
+                        <p><code>image: </code>byte[ ], nullable</p>
+                    </div>
                 </div>
                 <div class="sec-links">
                     <div>
@@ -253,6 +284,48 @@
                 </div>
                 <div class="sec-right">
                     <h2>Features</h2>
+                    <div id="features">
+                        <div>
+                            <h3>1. Product Management</h3>
+                            <p>
+                                Create, read, update, delete products with name,
+                                description, price, quantity, category, and
+                                image
+                            </p>
+                        </div>
+                        <div>
+                            <h3>2. Category Management</h3>
+                            <p>
+                                Organize products into categories with full CRUD
+                                operations
+                            </p>
+                        </div>
+                        <div>
+                            <h3>3. User Authentication</h3>
+                            <p>Register and login with JWT tokens</p>
+                        </div>
+                        <div>
+                            <h3>4. Image Upload</h3>
+                            <p>
+                                Upload and retrieve product images via multipart
+                                file requests
+                            </p>
+                        </div>
+                        <div>
+                            <h3>5. Pagination & Search</h3>
+                            <p>
+                                Paginated listing with optional name filtering
+                                for products, categories, and users
+                            </p>
+                        </div>
+                        <div>
+                            <h3>6. Input Validation</h3>
+                            <p>
+                                Jakarta Bean Validation with custom error
+                                responses
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="carrousel">
                     <div class="card">

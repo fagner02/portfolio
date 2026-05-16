@@ -1,7 +1,7 @@
 import { animateCalls } from "./animate.js";
 
 const mousePos = { x: 0, y: 0 };
-const textElems = document.querySelectorAll("p,h2,section a");
+const textElems = document.querySelectorAll("p,h2,h3,section a");
 
 type Letter = {
     left: number;
@@ -45,10 +45,8 @@ for (let i = 0; i < textElems.length; i++) {
         const textFrag = document.createDocumentFragment();
         let lastEmpty = true;
         let wordFrag = document.createDocumentFragment();
-
         const addToText = () => {
             if (wordFrag.childElementCount === 0) return;
-
             if (node.nodeType === Node.TEXT_NODE) {
                 const wordSpan = document.createElement("span");
                 wordSpan.classList.add("words");
@@ -86,10 +84,8 @@ for (let i = 0; i < textElems.length; i++) {
             });
         }
         addToText();
-
         frag.append(textFrag);
     }
-
     textElem.replaceChildren(frag);
     observer.observe(textElem);
 }
