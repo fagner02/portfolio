@@ -70,8 +70,6 @@ for (let i = 0; i < carrousels.length; i++) {
                 .map((x) => parseFloat(x));
 
             clone = elem;
-            selecting = true;
-            console.log(values);
             const viewport = window.visualViewport!;
             const width = (100 * rect.width) / viewport.width;
 
@@ -94,6 +92,7 @@ for (let i = 0; i < carrousels.length; i++) {
             elem.id = "clone";
             document.body.append(elem);
             selectStart = performance.now();
+            selecting = true;
         });
     }
     carrouselsData[i] = {
@@ -163,11 +162,12 @@ const animateCarrousel = (now: number) => {
             values[i] =
                 value * (targets[i]! - initialValues[i]!) + initialValues[i]!;
         }
-        let quarter = Math.pow(value * 1, 2);
-        if (quarter > 1) quarter = 1;
+        let fastValue = Math.pow(value * 1, 2);
+        if (fastValue > 1) fastValue = 1;
         for (let i = 3; i < initialValues.length; i++) {
             values[i] =
-                quarter * (targets[i]! - initialValues[i]!) + initialValues[i]!;
+                fastValue * (targets[i]! - initialValues[i]!) +
+                initialValues[i]!;
         }
 
         cover.style.opacity = `${value * 4}`;
@@ -175,7 +175,7 @@ const animateCarrousel = (now: number) => {
         clone.style.top = `${values[3]}%`;
         clone.style.left = `${values[4]}%`;
         clone.style.opacity = `${value * 4}`;
-        const pos = quarter * -50;
+        const pos = fastValue * -50;
         clone.style.transform =
             `perspective(15cm) ` +
             `translate(${pos}%,${pos}%) ` +
