@@ -27,7 +27,8 @@ section {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: hsl(0, 0%, 100%, 0.2);
+    box-shadow: 0 0 40px hsl(250, 50%, 50%, 0.2);
     gap: 20px;
 }
 
