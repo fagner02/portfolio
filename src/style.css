@@ -251,15 +251,18 @@ header {
     position: absolute;
     place-self: center;
     user-select: none;
+    box-shadow: 0 0 20px 0 hsl(0, 0%, 0%, 0.1);
+    border-radius: 10px;
+    display: flex;
+    border: 1px solid hsl(0, 0%, 0%, 0.6);
 }
 .card > img {
     height: 100%;
     position: relative;
     border-radius: 10px;
-    border: 2px solid rgb(139, 139, 139);
 }
 
-.shadow {
+.card::before {
     content: "";
     position: absolute;
     width: 78%;
