@@ -17,6 +17,10 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
 }
+body {
+    background-image: url(./assets/pattern.webp);
+    background-size: 900px;
+}
 
 section {
     padding: 20px;
@@ -27,8 +31,9 @@ section {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: hsl(0, 0%, 100%, 0.2);
+    background-color: hsl(0, 0%, 100%, 0.5);
     box-shadow: 0 0 40px hsl(250, 50%, 50%, 0.2);
+    backdrop-filter: blur(10px);
     gap: 20px;
 }
 
@@ -218,13 +223,12 @@ header {
     grid-template-areas: "unit";
     place-content: center;
     padding: 30px 0px;
-    background-image: url("./assets/pattern.webp");
-    background-size: 800px;
     border: 1px solid var(--border-color);
     border-radius: 10px;
     grid-area: carrousel;
     --card-height: 250px;
     height: var(--card-height);
+    background-color: hsl(0, 0%, 100%);
 }
 
 .blackcover {
