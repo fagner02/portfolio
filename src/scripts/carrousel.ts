@@ -54,7 +54,8 @@ for (let i = 0; i < carrousels.length; i++) {
     const cards: Card[] = Array(elems.length);
     for (let j = 0; j < cards.length; j++) {
         elems[j]!.style.willChange = "transform, opacity";
-
+        elems[j]!.draggable = false;
+        (elems[j]!.firstElementChild as HTMLElement).draggable = false;
         cards[j]! = {
             elem: elems[j]!,
             y: Math.random(),
