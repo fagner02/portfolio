@@ -19,6 +19,7 @@ export const carrouselsData: {
     newElapsed: number;
     oldElapsed: number;
     mousePos: number;
+    moveInitiated: boolean;
 }[] = Array(carrousels.length);
 
 const observer = new IntersectionObserver((entries) => {
@@ -60,9 +61,13 @@ for (let i = 0; i < carrousels.length; i++) {
             x: Math.random(),
             width: 0,
         };
-
+        elems[j]!.addEventListener("mousedown", () => {
+            carrouselsData[i]!.moveInitiated = false;
+        });
         elems[j]!.addEventListener("click", () => {
-            console.log("clicked");
+            if (carrouselsData[i]?.moveInitiated) {
+                return;
+            }
             const elem = elems[j]!.cloneNode(true)! as HTMLElement;
             const rect = elems[j]!.getBoundingClientRect();
             const values = elems[j]!.style.transform.replace(/[A-Za-z()]/g, "")
@@ -73,13 +78,12 @@ for (let i = 0; i < carrousels.length; i++) {
             const viewport = window.visualViewport!;
             const width = (100 * rect.width) / viewport.width;
 
-            console.log(width);
             initialValues = [
                 values[2]!,
                 values[3]!,
                 values[4]!,
-                (100 * rect.y) / viewport.height,
-                (100 * rect.x) / viewport.width,
+                (100 * rect.top) / viewport.height,
+                (100 * rect.left) / viewport.width,
                 width,
             ];
             elem.style.zIndex = "1000000";
@@ -107,6 +111,7 @@ for (let i = 0; i < carrousels.length; i++) {
         moving: false,
         newElapsed: 0,
         oldElapsed: 0,
+        moveInitiated: false,
     };
     carrousels[i]?.addEventListener("mousedown", (e) => {
         const carrousel = carrouselsData[i]!;
@@ -122,6 +127,7 @@ for (let i = 0; i < carrousels.length; i++) {
         if (!carrousel.moving) {
             return;
         }
+        carrouselsData[i]!.moveInitiated = true;
         carrousel.newElapsed =
             ((e.clientX - carrousel.mousePos) / carrousel.clientWidth) *
             carrousel.slideDuration;
