@@ -120,10 +120,13 @@ const animateLetters = () => {
 
         for (let j = 0; j < data.letters.length; j++) {
             const letter = data.letters[j]!;
-            const dx = mousePos.x - letter.left;
             const dy = mousePos.y - (letter.top - window.scrollY);
-            const d = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-            if (d < lim) {
+            const dy2 = dy * dy;
+            const dx = mousePos.x - letter.left;
+            const disdx = mousePos.x - (letter.left + dy2 * 0.1);
+            const trued = Math.sqrt(dx * dx + dy2);
+            const d = Math.sqrt(disdx * disdx + dy2);
+            if (d < lim && trued < lim) {
                 const t = (lim - d) / lim;
                 const tsub = 1 - t;
                 const vs = [Math.pow(tsub, 2), 2 * tsub * t, t * t];
@@ -131,7 +134,7 @@ const animateLetters = () => {
                 for (let i = 0; i < 3; i++) {
                     res += vs[i]! * ps[i]!;
                 }
-                letter.elem.style.transform = `scale(${res * 0.5 + 1}) translate(${1.2 * ((1 - dx) / lim)}px,${1.2 * ((1 - dy) / lim)}px)`;
+                letter.elem.style.transform = `scale(${res * 0.5 + 1}) translate(${1.2 * ((1 - disdx) / lim)}px,${1.2 * ((1 - dy) / lim)}px)`;
             } else {
                 letter.elem.style.transform = "scale(1)";
             }
@@ -157,6 +160,11 @@ document.addEventListener("touchend", () => {
     changed = true;
 });
 document.addEventListener("mouseup", () => {
+    mousePos.x = 0;
+    mousePos.y = 0;
+    changed = true;
+});
+window.addEventListener("scroll", () => {
     mousePos.x = 0;
     mousePos.y = 0;
     changed = true;
