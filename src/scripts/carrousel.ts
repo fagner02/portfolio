@@ -1,13 +1,13 @@
 import { animateCalls } from "./animate.js";
 
-export type Card = {
+type Card = {
     elem: HTMLElement;
     y: number;
     x: number;
     width: number;
 };
-export const carrousels = document.querySelectorAll<HTMLElement>(".carrousel");
-export const carrouselsData: {
+const carrousels = document.querySelectorAll<HTMLElement>(".carrousel");
+const carrouselsData: {
     cards: Card[];
     start: number;
     slideStart: number;
@@ -53,7 +53,6 @@ for (let i = 0; i < carrousels.length; i++) {
     observer.observe(carrousels[i]!);
     const cards: Card[] = Array(elems.length);
     for (let j = 0; j < cards.length; j++) {
-        elems[j]!.style.willChange = "transform, opacity";
         elems[j]!.draggable = false;
         (elems[j]!.firstElementChild as HTMLElement).draggable = false;
         cards[j]! = {

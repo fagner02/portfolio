@@ -2,10 +2,10 @@ import { animateCalls } from "./animate.js";
 import { bgContainer, stars, starsData } from "./elements.js";
 import { urlMap } from "./imageImport.js";
 
-export const ratio = stars.naturalWidth / stars.naturalHeight;
-export const blinkCount = 30;
-export const blinkDuration = 5000;
-export const blinks: {
+const ratio = stars.naturalWidth / stars.naturalHeight;
+const blinkCount = 30;
+const blinkDuration = 5000;
+const blinks: {
     elem: HTMLImageElement;
     start: number;
     started: boolean;

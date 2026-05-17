@@ -9,7 +9,7 @@ type Letter = {
     elem: HTMLElement;
 };
 
-export const textNodeData: {
+const textNodeData: {
     visible: boolean;
     elem: HTMLElement;
     letters: Letter[];

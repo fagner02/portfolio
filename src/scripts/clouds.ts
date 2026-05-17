@@ -1,9 +1,9 @@
 import { urlMap } from "./imageImport.js";
-import { stars, starsData } from "./elements.js";
+import { starsData } from "./elements.js";
 
 const cloudContainer = document.querySelector("#clouds") as HTMLElement;
 
-export const cloudData: {
+const cloudData: {
     x: number;
     y: number;
     width: number;
