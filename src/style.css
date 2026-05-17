@@ -272,7 +272,6 @@ header {
 }
 .letters {
     transform-origin: bottom;
-    will-change: transform;
 }
 
 @media (max-width: 950px) {
