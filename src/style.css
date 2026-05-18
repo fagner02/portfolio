@@ -174,9 +174,8 @@ header {
 }
 .sec-right {
     grid-area: right;
-}
-.sec-right {
     text-align: right;
+    position: relative;
 }
 .sec-decor > svg {
     width: 20px;
@@ -310,6 +309,13 @@ header {
     position: absolute;
     left: -33px;
     top: 32px;
+}
+.gear-decor {
+    width: 65px;
+    position: absolute;
+    right: -53px;
+    top: -70px;
+    scale: 1 -1;
 }
 @keyframes gear {
     0% {
