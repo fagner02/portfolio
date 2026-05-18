@@ -1,5 +1,4 @@
 import { bgContainer, stars } from "./elements.js";
-
 const nav = document.querySelector("nav") as HTMLElement;
 const menuBtn = document.querySelector(".menu") as HTMLButtonElement;
 const header = document.querySelector("header") as HTMLElement;
@@ -22,7 +21,7 @@ menuBtn.addEventListener("click", (e) => {
     document.addEventListener("click", closeNav);
 });
 
-document.addEventListener("scroll", (e) => {
+const setStyle = () => {
     const scroll = (document.scrollingElement as HTMLElement).scrollTop;
 
     let value = scroll / (header.clientHeight * 0.9);
@@ -39,4 +38,9 @@ document.addEventListener("scroll", (e) => {
     nav.style.setProperty("--blur", `${blur}px`);
     nav.style.setProperty("--background", `hsl(0,0%,100%,${value * 0.5})`);
     nav.style.borderBottom = `1px solid hsl(0, 0%, 0%, ${value * 0.2})`;
+};
+setStyle();
+
+document.addEventListener("scroll", () => {
+    setStyle();
 });
