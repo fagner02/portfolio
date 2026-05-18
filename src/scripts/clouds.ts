@@ -1,5 +1,16 @@
-import { urlMap } from "./imageImport.js";
 import { starsData } from "./elements.js";
+const images: Record<string, string> = import.meta.glob(
+    ["/src/assets/banner/clouds/*.webp"],
+    {
+        eager: true,
+        query: "?url",
+        import: "default",
+    },
+);
+
+const urlMap: Record<string, string> = Object.fromEntries(
+    Object.entries(images).map((x) => [x[0].split("/").at(-1), x[1]]),
+);
 
 const cloudContainer = document.querySelector("#clouds") as HTMLElement;
 

@@ -1,6 +1,5 @@
 import { animateCalls } from "./animate.js";
 import { bgContainer, stars, starsData } from "./elements.js";
-import { urlMap } from "./imageImport.js";
 
 const ratio = stars.naturalWidth / stars.naturalHeight;
 const blinkCount = 30;
@@ -15,7 +14,7 @@ const blinks: {
 const frag = document.createDocumentFragment();
 for (let i = 0; i < blinkCount; i++) {
     const blink = document.createElement("img");
-    blink.src = urlMap["blink.webp"]!;
+    blink.src = new URL("../assets/banner/blink.webp", import.meta.url).href;
     frag.appendChild(blink);
     blink.classList.add("blink");
 
