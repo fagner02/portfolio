@@ -4,7 +4,54 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
-        <script type="module" src="./index.ts"></script>
+        <script
+            type="module"
+            src="./src/scripts/header.ts"
+            async
+            fetchpriority="high"
+            blocking="render"
+        ></script>
+        <script
+            type="module"
+            src="./src/scripts/animate.ts"
+            fetchpriority="medium"
+        ></script>
+        <script
+            type="module"
+            src="./src/scripts/clouds.ts"
+            blocking="render"
+            fetchpriority="high"
+        ></script>
+        <script
+            type="module"
+            src="./src/scripts/stars.ts"
+            blocking="render"
+            fetchpriority="high"
+        ></script>
+        <script
+            type="module"
+            src="./src/scripts/carrousel.ts"
+            fetchpriority="low"
+            defer
+        ></script>
+        <script
+            type="module"
+            src="./src/scripts/letters.ts"
+            fetchpriority="low"
+            defer
+        ></script>
+        <script
+            type="module"
+            src="./src/scripts/linkSvgAnimation.ts"
+            fetchpriority="low"
+            defer
+        ></script>
+        <script
+            type="module"
+            src="./src/scripts/windowResize.ts"
+            fetchpriority="low"
+            defer
+        ></script>
         <link rel="stylesheet" href="./src/style.css" />
     </head>
     <body>
