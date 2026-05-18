@@ -5,7 +5,7 @@ import { updateHeader } from "./header.js";
 import { updateLetters } from "./letters.js";
 import { updateBlinks } from "./stars.js";
 
-window.onresize = () => {
+const updateAll = () => {
     updateStarsData();
     updateClouds();
     updateBlinks();
@@ -13,3 +13,8 @@ window.onresize = () => {
     updateLetters();
     updateCarrousel();
 };
+window.onresize = async () => {
+    updateAll();
+};
+
+updateAll();
