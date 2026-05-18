@@ -298,6 +298,7 @@ header {
     max-width: 300px;
     margin-top: 80px;
     margin-left: 60px;
+    opacity: 0;
 }
 
 .catchphrase > h1 {
@@ -310,6 +311,17 @@ header {
     left: -33px;
     top: 32px;
 }
+
+.catchphrase-word {
+    text-wrap-mode: nowrap;
+}
+
+.catchphrase-word > span {
+    animation: catchphrase 1s forwards;
+    opacity: 0;
+    display: inline-block;
+}
+
 .gear-decor {
     width: 65px;
     position: absolute;
@@ -317,6 +329,27 @@ header {
     top: -70px;
     scale: 1 -1;
 }
+
+@keyframes catchphrase {
+    0% {
+        transform: translate(0, -100%) rotate(45deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0, 0%) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes catchphrase-svg {
+    0% {
+        translate: -52px 0;
+    }
+    100% {
+        translate: 0 0;
+    }
+}
+
 @keyframes gear {
     0% {
         rotate: 0deg;

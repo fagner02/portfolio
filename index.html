@@ -11,6 +11,19 @@
             fetchpriority="high"
             blocking="render"
         ></script>
+
+        <script
+            type="module"
+            src="./src/scripts/loadDefs.ts"
+            fetchpriority="high"
+            blocking="render"
+        ></script>
+        <script
+            type="module"
+            src="./src/scripts/phrase.ts"
+            fetchpriority="high"
+            blocking="render"
+        ></script>
         <script
             type="module"
             src="./src/scripts/animate.ts"
@@ -113,7 +126,7 @@
                         clip-path="url(#gear-clip)"
                         transform="translate(90,88) rotate(180)"
                     >
-                        <use class="gear gear2" href="#gear3"></use>
+                        <use href="#gear3"></use>
                     </g>
                 </svg>
             </div>
