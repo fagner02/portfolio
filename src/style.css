@@ -85,6 +85,8 @@ nav {
 header {
     display: flex;
     flex-direction: column;
+    --header-height: 250px;
+    min-height: var(--header-height);
 }
 .menu {
     display: none;
@@ -282,6 +284,42 @@ header {
     transform-origin: bottom;
 }
 
+.gear {
+    animation: gear 20s infinite linear;
+    transform-origin: 45px 44px;
+}
+.gear2 {
+    animation: gear 20s infinite reverse linear;
+}
+
+.catchphrase {
+    position: relative;
+    border-radius: 10px;
+    padding: 0px 10px;
+    max-width: 300px;
+    margin-top: 80px;
+    margin-left: 60px;
+}
+
+.catchphrase > h1 {
+    font-weight: 300;
+}
+
+.catchphrase > svg {
+    width: 65px;
+    position: absolute;
+    left: -33px;
+    top: 32px;
+}
+@keyframes gear {
+    0% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 360deg;
+    }
+}
+
 @media (max-width: 950px) {
     .sec-info {
         grid-template-areas:
@@ -312,9 +350,12 @@ header {
     }
 
     .carrousel {
-        /* height: 200px; */
-
         --card-height: 200px;
+    }
+
+    .catchphrase {
+        margin-top: calc(var(--header-height) - 50px);
+        margin-bottom: 20px;
     }
 
     .menu {

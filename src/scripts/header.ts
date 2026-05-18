@@ -4,7 +4,7 @@ const menuBtn = document.querySelector(".menu") as HTMLButtonElement;
 const header = document.querySelector("header") as HTMLElement;
 
 export const updateHeader = () => {
-    header.style.height = `${stars.clientHeight + 20}px`;
+    header.style.setProperty("--header-height", `${stars.clientHeight + 20}px`);
 };
 updateHeader();
 
