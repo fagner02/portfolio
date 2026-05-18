@@ -303,6 +303,8 @@ header {
 
 .catchphrase > h1 {
     font-weight: 300;
+    position: absolute;
+    opacity: 0;
 }
 
 .catchphrase > svg {
@@ -317,7 +319,6 @@ header {
 }
 
 .catchphrase-word > span {
-    animation: catchphrase 1s forwards;
     opacity: 0;
     display: inline-block;
 }
@@ -328,26 +329,6 @@ header {
     right: -53px;
     top: -70px;
     scale: 1 -1;
-}
-
-@keyframes catchphrase {
-    0% {
-        transform: translate(0, -100%) rotate(45deg);
-        opacity: 0;
-    }
-    100% {
-        transform: translate(0, 0%) rotate(0deg);
-        opacity: 1;
-    }
-}
-
-@keyframes catchphrase-svg {
-    0% {
-        translate: -52px 0;
-    }
-    100% {
-        translate: 0 0;
-    }
 }
 
 @keyframes gear {
