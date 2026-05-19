@@ -37,7 +37,6 @@ const callback = () => {
                 continue;
             }
             spans[spans.length - 1]?.push(span);
-            console.log(spans);
             wordFrag.append(span);
         }
         addToText();
@@ -49,7 +48,6 @@ const callback = () => {
     });
 
     for (let i = 0; i < spans.length; i++) {
-        console.log(spans[i]);
         lettersTimeline
             .set(h1s[i]!, { autoAlpha: 1 })
             .fromTo(
