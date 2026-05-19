@@ -1,3 +1,4 @@
+import gsap from "gsap";
 import { animateCalls } from "./animate.js";
 
 type Card = {
@@ -29,23 +30,27 @@ const observer = new IntersectionObserver((entries) => {
         if (!e.isIntersecting) {
             const cards = carrouselsData[index]!.cards;
             for (let i = 0; i < cards.length; i++) {
-                cards[i]!.elem.style.willChange = "none";
+                cards[i]!.elem.style.willChange = "transform,opacity,";
             }
         }
     }
 });
 
-let initialValues = [0, 0, 0, 0];
-let selectStart = 0;
-let selectDuration = 500;
 let clone: HTMLElement | null = null;
-let selecting: boolean = false;
-let deselecting: boolean = false;
 const cover = document.querySelector(".blackcover")! as HTMLElement;
 
 cover.addEventListener("click", () => {
-    selectStart = performance.now();
-    deselecting = true;
+    const tl = gsap.timeline({
+        onComplete: () => {
+            clone?.remove();
+            clone = null;
+            cover.style.display = "none";
+        },
+    });
+    tl.to(clone, {
+        top: "-100%",
+        opacity: 0,
+    }).to(cover, { opacity: 0 }, "<");
 });
 for (let i = 0; i < carrousels.length; i++) {
     const elems = carrousels[i]!.querySelectorAll<HTMLElement>(".card");
@@ -70,33 +75,37 @@ for (let i = 0; i < carrousels.length; i++) {
             }
             const elem = elems[j]!.cloneNode(true)! as HTMLElement;
             const rect = elems[j]!.getBoundingClientRect();
-            const values = elems[j]!.style.transform.replace(/[A-Za-z()]/g, "")
-                .split(" ")
-                .map((x) => parseFloat(x));
 
             clone = elem;
             const viewport = window.visualViewport!;
             const width = (100 * rect.width) / viewport.width;
 
-            initialValues = [
-                values[2]!,
-                values[3]!,
-                values[4]!,
-                (100 * rect.top) / viewport.height,
-                (100 * rect.left) / viewport.width,
-                width,
-            ];
-            elem.style.zIndex = "1000000";
-            elem.style.position = "fixed";
-            elem.style.filter = "";
-            cover.style.opacity = "1";
+            cover.style.opacity = "0";
             cover.style.display = "flex";
-            (elem.firstElementChild as HTMLElement).style.width = "100%";
 
             elem.id = "clone";
             document.body.append(elem);
-            selectStart = performance.now();
-            selecting = true;
+            const tl = gsap.timeline();
+            tl.set(elem, {
+                width: `${width}%`,
+                top: `${(100 * rect.top) / viewport.height}%`,
+                left: `${(100 * rect.left) / viewport.width}%`,
+                translateX: 0,
+            })
+                .to(elem, {
+                    transformOrigin: "center",
+                    translateX: "-50%",
+                    translateY: "-50%",
+                    translateZ: 0,
+                    scale: 1,
+                    rotateX: 0,
+                    rotateY: 0,
+                    rotateZ: 0,
+                    top: "50%",
+                    left: "50%",
+                    width: "90%",
+                })
+                .to(cover, { opacity: 1 }, "<");
         });
     }
     carrouselsData[i] = {
@@ -113,6 +122,7 @@ for (let i = 0; i < carrousels.length; i++) {
         oldElapsed: 0,
         moveInitiated: false,
     };
+
     carrousels[i]?.addEventListener("mousedown", (e) => {
         const carrousel = carrouselsData[i]!;
         carrousel.moving = true;
@@ -158,55 +168,7 @@ export const updateCarrousel = () => {
 updateCarrousel();
 
 const PI2 = Math.PI * 2;
-const targets = [0, 0, 0, 50, 50, 90];
-let values = Array(targets.length);
 const animateCarrousel = (now: number) => {
-    if (selecting && clone) {
-        let value = (now - selectStart) / selectDuration;
-        if (value > 1) value = 1;
-        for (let i = 0; i < 3; i++) {
-            values[i] =
-                value * (targets[i]! - initialValues[i]!) + initialValues[i]!;
-        }
-        let fastValue = Math.pow(value * 1, 2);
-        if (fastValue > 1) fastValue = 1;
-        for (let i = 3; i < initialValues.length; i++) {
-            values[i] =
-                fastValue * (targets[i]! - initialValues[i]!) +
-                initialValues[i]!;
-        }
-
-        cover.style.opacity = `${value * 4}`;
-        clone.style.width = `${values[5]}%`;
-        clone.style.top = `${values[3]}%`;
-        clone.style.left = `${values[4]}%`;
-        clone.style.opacity = `${value * 4}`;
-        const pos = fastValue * -50;
-        clone.style.transform =
-            `perspective(15cm) ` +
-            `translate(${pos}%,${pos}%) ` +
-            `rotateX(${values[0]!}deg) ` +
-            `rotateY(${values[1]!}deg) ` +
-            `rotateZ(${values[2]!}deg)`;
-        if (value === 1) {
-            selecting = false;
-        }
-    }
-    if (deselecting && clone) {
-        let value = Math.pow((now - selectStart) / selectDuration, 2);
-        if (value > 1) value = 1;
-        const subvalue = 1 - value;
-
-        cover.style.opacity = `${subvalue}`;
-        clone.style.opacity = `${subvalue}`;
-        clone.style.top = `${value * -150 + 50}%`;
-
-        if (value === 1) {
-            deselecting = false;
-            clone.remove();
-            cover.style.display = "none";
-        }
-    }
     for (let j = 0; j < carrouselsData.length; j++) {
         const carrousel = carrouselsData[j]!;
         if (!carrousel.visible) continue;
@@ -237,22 +199,16 @@ const animateCarrousel = (now: number) => {
                 Math.cos((proportion2 + cards[i]!.x) * PI2) *
                 (2 * cards[i]!.y + 2);
 
-            const h = sin * cards[i]!.width;
+            const h = sin * cards[i]!.width * 0.9;
             const scale = coshalf * 0.5 + 0.75;
-            cards[i]!.elem.style.zIndex = Math.round(
-                scale * cards.length,
-            ).toString();
-
-            cards[i]!.elem.style.filter =
-                `blur(${Math.pow(1 - scale, 2) * 20}px)`;
 
             cards[i]!.elem.style.transform =
-                `perspective(15cm) ` +
                 `translateX(${h}px)` +
+                `translateZ(${Math.pow(scale, 2) * 100}px) ` +
                 `rotateY(${ry}deg) ` +
                 `rotateX(${rx}deg) ` +
                 `rotateZ(${(coshalf + cards[i]!.x - 1) * 5}deg) ` +
-                `scale(${scale}) `;
+                `scale(${scale * 0.9}) `;
         }
     }
 };

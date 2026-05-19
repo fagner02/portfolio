@@ -230,6 +230,8 @@ header {
     --card-height: 250px;
     height: var(--card-height);
     background-color: hsl(0, 0%, 100%);
+    perspective: 15cm;
+    transform-style: preserve-3d;
 }
 
 .blackcover {
@@ -273,6 +275,16 @@ header {
     background: black;
     border-radius: 50%;
     filter: blur(15px);
+}
+
+#clone {
+    z-index: 10000000;
+    position: fixed;
+    filter: none;
+}
+
+#clone > img {
+    width: 100%;
 }
 
 .words,
@@ -329,6 +341,7 @@ header {
     right: -53px;
     top: -70px;
     scale: 1 -1;
+    z-index: 1;
 }
 
 @keyframes gear {
