@@ -33,5 +33,18 @@
         <path id="gear-clip-path2"
             d="M83 0C86.866 0 90 3.13401 90 7V81C90 84.866 86.866 88 83 88H44C40.134 88 37 84.866 37 81V55.4893C39.2678 57.0713 42.0252 58 45 58C52.732 58 59 51.732 59 44C59 36.268 52.732 30 45 30C42.0254 30 39.2677 30.9279 37 32.5098V7C37 3.13401 40.134 0 44 0H83Z" />
 
+
+        <g id="gear-decor">
+            <g clip-path="url(#gear-clip)" transform="translate(14,45)">
+                <use class="gear2" href="#gear3"></use>
+            </g>
+            <g clip-path="url(#gear-clip)" transform="translate(90,88) rotate(180)">
+                <use class="gear" href="#gear3"></use>
+            </g>
+        </g>
+
+        <g id="single-gear" clip-path="url(#gear-clip)" transform="translate(90,88) rotate(180)">
+            <use class="gear" href="#gear3"></use>
+        </g>
     </defs>
 </svg>

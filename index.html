@@ -110,15 +110,13 @@
                 <h1>If you're interested in my work access the contact page</h1>
                 <svg viewBox="0 0 105 133">
                     <clipPath id="gear-clip">
-                        <use href="#gear-clip-path"></use>
+                        <use href="#gear-clip-path" />
                     </clipPath>
 
-                    <g
-                        clip-path="url(#gear-clip)"
-                        transform="translate(90,88) rotate(180)"
-                    >
-                        <use href="#gear3"></use>
-                    </g>
+                    <clipPath id="gear-clip2">
+                        <use href="#gear-clip-path2"></use>
+                    </clipPath>
+                    <use href="#single-gear"></use>
                 </svg>
             </div>
         </header>
@@ -183,18 +181,7 @@
                 </div>
                 <div class="sec-right">
                     <svg viewBox="0 0 105 133" class="gear-decor">
-                        <g
-                            clip-path="url(#gear-clip)"
-                            transform="translate(14,45)"
-                        >
-                            <use class="gear gear2" href="#gear3"></use>
-                        </g>
-                        <g
-                            clip-path="url(#gear-clip)"
-                            transform="translate(90,88) rotate(180)"
-                        >
-                            <use class="gear" href="#gear3"></use>
-                        </g>
+                        <use href="#gear-decor"></use>
                     </svg>
                     <h2>Features</h2>
                     <div class="features">
@@ -262,6 +249,9 @@
                     </p>
                 </div>
                 <div class="sec-left">
+                    <svg viewBox="0 0 105 133" class="gear-decor2">
+                        <use href="#gear-decor"></use>
+                    </svg>
                     <h2>Tech Stack</h2>
                     <div class="stack">
                         <div>

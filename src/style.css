@@ -171,6 +171,7 @@ header {
 }
 .sec-left {
     grid-area: left;
+    position: relative;
 }
 .sec-right {
     grid-area: right;
@@ -296,9 +297,12 @@ header {
     transform-origin: bottom;
 }
 
+.gear,
+.gear2 {
+    transform-origin: 45px 44px;
+}
 .gear {
     animation: gear 20s infinite linear;
-    transform-origin: 45px 44px;
 }
 .gear2 {
     animation: gear 20s infinite reverse linear;
@@ -338,13 +342,20 @@ header {
     display: inline-block;
 }
 
-.gear-decor {
+.gear-decor,
+.gear-decor2 {
     width: 65px;
     position: absolute;
-    right: -53px;
-    top: -70px;
-    scale: 1 -1;
     z-index: 1;
+}
+.gear-decor {
+    right: -53px;
+    scale: 1 -1;
+    top: -70px;
+}
+.gear-decor2 {
+    left: -53px;
+    top: 0;
 }
 
 @keyframes gear {
