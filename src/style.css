@@ -131,7 +131,8 @@ header {
     flex: 1;
 }
 .features,
-.models {
+.models,
+.algorithms {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -141,6 +142,15 @@ header {
 }
 .models > div > p {
     text-wrap: nowrap;
+}
+.algorithms {
+    gap: 10px;
+}
+.algorithms > p {
+    background: hsl(0, 0%, 85%);
+    border-radius: 8px;
+    padding: 3px 10px;
+    margin: 0;
 }
 .sec-info {
     display: grid;
@@ -163,7 +173,7 @@ header {
     display: flex;
     height: fit-content;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     overflow-wrap: anywhere;
 }
 .sec-title {
