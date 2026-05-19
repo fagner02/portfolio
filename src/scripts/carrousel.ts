@@ -54,6 +54,18 @@ cover.addEventListener("click", () => {
         opacity: 0,
     }).to(cover, { opacity: 0 }, "<");
 });
+
+const resizeObserver = new ResizeObserver((entries) => {
+    for (let e of entries) {
+        const [i, j] = e.target
+            .getAttribute("indexes")!
+            .split("-")
+            .map((x) => parseInt(x));
+        const card = carrouselsData[i!]?.cards[j!]!;
+        card.spacing = card.spacing =
+            e.contentRect.width * 0.18 * carrouselsData[i!]!.cards!.length;
+    }
+});
 for (let i = 0; i < carrousels.length; i++) {
     const elems = carrousels[i]!.querySelectorAll<HTMLElement>(".card");
     carrousels[i]?.setAttribute("index", i.toString());
@@ -61,7 +73,11 @@ for (let i = 0; i < carrousels.length; i++) {
     const cards: Card[] = Array(elems.length);
     for (let j = 0; j < cards.length; j++) {
         elems[j]!.draggable = false;
-        (elems[j]!.firstElementChild as HTMLElement).draggable = false;
+        const img = elems[j]?.firstElementChild as HTMLElement;
+        img.draggable = false;
+
+        elems[j]?.setAttribute("indexes", `${i}-${j}`);
+        resizeObserver.observe(elems[j]!);
 
         cards[j]! = {
             elem: elems[j]!,
@@ -173,13 +189,7 @@ for (let i = 0; i < carrousels.length; i++) {
 
 export const updateCarrousel = () => {
     for (let j = 0; j < carrouselsData.length; j++) {
-        const cards = carrouselsData[j]!.cards;
         carrouselsData[j]!.clientWidth = carrousels[j]!.clientWidth;
-
-        for (let i = 0; i < cards.length; i++) {
-            cards[i]!.spacing =
-                cards[i]!.elem.clientWidth * 0.18 * cards.length;
-        }
     }
 };
 
