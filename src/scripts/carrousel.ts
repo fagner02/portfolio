@@ -5,7 +5,9 @@ type Card = {
     elem: HTMLElement;
     y: number;
     x: number;
-    width: number;
+    spacing: number;
+    initialWidth: number;
+    initialHeight: number;
 };
 const carrousels = document.querySelectorAll<HTMLElement>(".carrousel");
 const carrouselsData: {
@@ -60,11 +62,14 @@ for (let i = 0; i < carrousels.length; i++) {
     for (let j = 0; j < cards.length; j++) {
         elems[j]!.draggable = false;
         (elems[j]!.firstElementChild as HTMLElement).draggable = false;
+
         cards[j]! = {
             elem: elems[j]!,
             y: Math.random(),
             x: Math.random(),
-            width: 0,
+            spacing: 0,
+            initialWidth: elems[j]!.clientHeight,
+            initialHeight: elems[j]!.clientWidth,
         };
         elems[j]!.addEventListener("mousedown", () => {
             carrouselsData[i]!.moveInitiated = false;
@@ -74,20 +79,31 @@ for (let i = 0; i < carrousels.length; i++) {
                 return;
             }
             const elem = elems[j]!.cloneNode(true)! as HTMLElement;
-            const rect = elems[j]!.getBoundingClientRect();
 
             clone = elem;
+
+            const rect = elems[j]!.getBoundingClientRect();
             const viewport = window.visualViewport!;
             const width = (100 * rect.width) / viewport.width;
+            const height = (100 * rect.height) / viewport.height;
+            let newWidth = 90;
+            let newHeight = (height / width) * newWidth;
+            if (newHeight > 80) {
+                newHeight = 80;
+                newWidth = (width / height) * newHeight;
+            }
 
             cover.style.opacity = "0";
             cover.style.display = "flex";
 
             elem.id = "clone";
+            elem.setAttribute("indexes", `${i}-${j}`);
+
             document.body.append(elem);
             const tl = gsap.timeline();
             tl.set(elem, {
                 width: `${width}%`,
+                height: `${height}%`,
                 top: `${(100 * rect.top) / viewport.height}%`,
                 left: `${(100 * rect.left) / viewport.width}%`,
                 translateX: 0,
@@ -103,7 +119,8 @@ for (let i = 0; i < carrousels.length; i++) {
                     rotateZ: 0,
                     top: "50%",
                     left: "50%",
-                    width: "90%",
+                    width: `${newWidth}%`,
+                    height: `${newHeight}%`,
                 })
                 .to(cover, { opacity: 1 }, "<");
         });
@@ -160,12 +177,38 @@ export const updateCarrousel = () => {
         carrouselsData[j]!.clientWidth = carrousels[j]!.clientWidth;
 
         for (let i = 0; i < cards.length; i++) {
-            cards[i]!.width = cards[i]!.elem.clientWidth * 0.18 * cards.length;
+            cards[i]!.spacing =
+                cards[i]!.elem.clientWidth * 0.18 * cards.length;
         }
     }
 };
 
 updateCarrousel();
+
+export const updateClone = () => {
+    if (!clone) return;
+    const [i, j] = clone
+        .getAttribute("indexes")!
+        .split("-")
+        .map((x) => parseInt(x)!);
+    if (i == undefined || j == undefined) return;
+
+    const card = carrouselsData[i]?.cards[j];
+    const viewport = window.visualViewport;
+    if (!card || !viewport) return;
+
+    const width = (100 * card.initialHeight) / viewport.width;
+    const height = (100 * card.initialWidth) / viewport.height;
+
+    let newWidth = 90;
+    let newHeight = (height / width) * newWidth;
+    if (newHeight > 80) {
+        newHeight = 80;
+        newWidth = (width / height) * newHeight;
+    }
+    clone.style.height = `${newHeight}%`;
+    clone.style.width = `${newWidth}%`;
+};
 
 const PI2 = Math.PI * 2;
 const animateCarrousel = (now: number) => {
@@ -199,7 +242,7 @@ const animateCarrousel = (now: number) => {
                 Math.cos((proportion2 + cards[i]!.x) * PI2) *
                 (2 * cards[i]!.y + 2);
 
-            const h = sin * cards[i]!.width * 0.9;
+            const h = sin * cards[i]!.spacing * 0.9;
             const scale = coshalf * 0.5 + 0.75;
 
             cards[i]!.elem.style.transform =

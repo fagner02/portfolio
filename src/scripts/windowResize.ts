@@ -1,4 +1,4 @@
-import { updateCarrousel } from "./carrousel.js";
+import { updateCarrousel, updateClone } from "./carrousel.js";
 import { updateClouds } from "./clouds.js";
 import { updateStarsData } from "./elements.js";
 import { updateHeader } from "./header.js";
@@ -12,6 +12,7 @@ const updateAll = () => {
     updateHeader();
     updateLetters();
     updateCarrousel();
+    updateClone();
 };
 window.onresize = async () => {
     updateAll();
