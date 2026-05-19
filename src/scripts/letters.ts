@@ -154,20 +154,15 @@ document.addEventListener("touchmove", (e) => {
     changed = true;
 });
 
-document.addEventListener("touchend", () => {
+const reset = () => {
     mousePos.x = 0;
     mousePos.y = 0;
     changed = true;
-});
-document.addEventListener("mouseup", () => {
-    mousePos.x = 0;
-    mousePos.y = 0;
-    changed = true;
-});
-window.addEventListener("scroll", () => {
-    mousePos.x = 0;
-    mousePos.y = 0;
-    changed = true;
-});
+};
+
+document.addEventListener("touchend", reset);
+document.addEventListener("mouseup", reset);
+window.addEventListener("scroll", reset);
+window.addEventListener("mouseout", reset);
 
 animateCalls.push(animateLetters);
