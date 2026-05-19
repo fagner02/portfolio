@@ -311,12 +311,14 @@ header {
     margin-top: 80px;
     margin-left: 60px;
     opacity: 0;
+    display: grid;
+    grid-template-areas: "unit";
 }
 
 .catchphrase > h1 {
     font-weight: 300;
-    position: absolute;
     opacity: 0;
+    grid-area: unit;
 }
 
 .catchphrase > svg {
