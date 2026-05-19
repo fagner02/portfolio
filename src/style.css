@@ -258,6 +258,7 @@ header {
     border-radius: 10px;
     display: flex;
     border: 1px solid hsl(0, 0%, 0%, 0.6);
+    background: white;
 }
 .card > img {
     height: 100%;
