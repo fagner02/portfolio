@@ -1,12 +1,10 @@
 import gsap from "gsap";
-import { defsLoadedCallbacks } from "./loadDefs.js";
-
 const catchphrase = document.querySelector(".catchphrase") as HTMLElement;
 
 const h1s = catchphrase?.querySelectorAll("h1");
 const path = catchphrase?.querySelector("svg>g>use") as SVGElement;
 
-const callback = () => {
+export const callback = () => {
     let spans: HTMLSpanElement[][] = [];
     for (const h1 of h1s) {
         const text = h1.innerText;
@@ -95,5 +93,3 @@ const callback = () => {
         lettersTimeline.play();
     }, 500);
 };
-
-defsLoadedCallbacks.push(callback);

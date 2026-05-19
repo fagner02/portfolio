@@ -1,8 +1,7 @@
 import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
-import { defsLoadedCallbacks } from "./loadDefs.js";
 
-const callback = (svgElem: HTMLElement) => {
+export const callback = (svgElem: HTMLElement) => {
     const stars = {
         star: svgElem.querySelector("#star")?.getAttribute("d"),
         star2: svgElem.querySelector("#star2")?.getAttribute("d"),
@@ -65,5 +64,3 @@ const callback = (svgElem: HTMLElement) => {
         });
     }
 };
-
-defsLoadedCallbacks.push(callback);
