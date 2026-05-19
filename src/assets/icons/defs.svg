@@ -44,7 +44,7 @@
         </g>
 
         <g id="single-gear" clip-path="url(#gear-clip)" transform="translate(90,88) rotate(180)">
-            <use class="gear" href="#gear3"></use>
+            <use href="#gear3"></use>
         </g>
     </defs>
 </svg>
