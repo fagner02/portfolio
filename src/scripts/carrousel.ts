@@ -79,6 +79,19 @@ for (let i = 0; i < carrousels.length; i++) {
         elems[j]?.setAttribute("indexes", `${i}-${j}`);
         resizeObserver.observe(elems[j]!);
 
+        elems[j]!.style.visibility = "hidden";
+        const makeVisible = () => {
+            elems[j]!.style.visibility = "visible";
+        };
+        img.onloadeddata = makeVisible;
+        img.onload = makeVisible;
+        if (
+            (img as HTMLImageElement).complete ||
+            (img as HTMLVideoElement).readyState >= 2
+        ) {
+            makeVisible();
+        }
+
         cards[j]! = {
             elem: elems[j]!,
             y: Math.random(),
@@ -98,16 +111,19 @@ for (let i = 0; i < carrousels.length; i++) {
 
             clone = elem;
 
-            const rect = elems[j]!.getBoundingClientRect();
+            const rect = (
+                elems[j]!.firstElementChild as HTMLElement
+            ).getBoundingClientRect();
             const viewport = window.visualViewport!;
-            const width = (100 * rect.width) / viewport.width;
-            const height = (100 * rect.height) / viewport.height;
+            const width = (100 * elems[j]!.clientWidth) / viewport.width;
+            const height = (100 * elems[j]!.clientHeight) / viewport.height;
             let newWidth = 90;
             let newHeight = (height / width) * newWidth;
             if (newHeight > 80) {
                 newHeight = 80;
                 newWidth = (width / height) * newHeight;
             }
+            (clone.firstElementChild as HTMLElement).style.width = "100%";
 
             cover.style.opacity = "0";
             cover.style.display = "flex";
