@@ -229,6 +229,7 @@ header {
     will-change: transform;
     transform-origin: 0 0;
     position: relative;
+    max-width: 20px;
 }
 .carrousel {
     display: grid;

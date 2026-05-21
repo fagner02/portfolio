@@ -1,7 +1,6 @@
 import { animateCalls } from "./animate.js";
 import { bgContainer, stars, starsData } from "./elements.js";
 
-const ratio = stars.naturalWidth / stars.naturalHeight;
 const blinkCount = 30;
 const blinkDuration = 5000;
 const blinks: {
@@ -34,6 +33,7 @@ let gap = 0;
 let halfWidth = 0;
 
 export const updateBlinks = () => {
+    const ratio = stars.naturalWidth / stars.naturalHeight;
     height = starsData.clientHeight * 0.3;
     width = starsData.clientHeight * ratio * 0.92;
     gap = (starsData.clientWidth - width) / 2;
@@ -48,7 +48,6 @@ export const updateBlinks = () => {
         blink.elem.style.top = `${starsData.offsetTop + y}px`;
     }
 };
-
 updateBlinks();
 
 const animateStars = (now: number) => {

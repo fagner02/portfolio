@@ -4,59 +4,81 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+
         <script
             type="module"
-            src="./src/scripts/header.ts"
+            src="/src/scripts/header.ts"
             async
-            fetchpriority="high"
             blocking="render"
-        ></script>
-
-        <script
-            type="module"
-            src="./src/scripts/loadDefs.ts"
             fetchpriority="high"
-            blocking="render"
-        ></script>
-
-        <script type="module" src="./src/scripts/video.ts"></script>
-
-        <script
-            type="module"
-            src="./src/scripts/animate.ts"
-            fetchpriority="medium"
         ></script>
         <script
             type="module"
             src="./src/scripts/clouds.ts"
+            async
             blocking="render"
             fetchpriority="high"
         ></script>
         <script
             type="module"
             src="./src/scripts/stars.ts"
+            async
             blocking="render"
             fetchpriority="high"
         ></script>
         <script
             type="module"
-            src="./src/scripts/carrousel.ts"
-            fetchpriority="low"
+            src="./src/scripts/low_priority/index.ts"
             defer
         ></script>
         <script
             type="module"
-            src="./src/scripts/letters.ts"
-            fetchpriority="low"
-            defer
+            src="./src/scripts/loadDefs.ts"
+            fetchpriority="high"
+            blocking="render"
+            async
         ></script>
-
         <script
             type="module"
             src="./src/scripts/windowResize.ts"
-            fetchpriority="low"
-            defer
+            async
+            fetchpriority="medium"
+            blocking="render"
         ></script>
+        <script
+            type="module"
+            src="./src/scripts/starsResize.ts"
+            async
+            fetchpriority="high"
+            blocking="render"
+        ></script>
+
+        <script type="module" src="./src/scripts/animate.ts"></script>
+
+        <link
+            rel="preload"
+            href="./src/assets/banner/stars-back.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/banner/stars-front.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/banner/blink.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/pattern.webp"
+            as="image"
+            fetchpriority="high"
+        />
         <link rel="stylesheet" href="./src/style.css" />
     </head>
     <body>

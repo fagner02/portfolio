@@ -1,66 +1,122 @@
-import { resolve, join } from "path";
+import { resolve, join, dirname, basename, extname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import { defineConfig } from "vite";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-// Auto-discover pages
+/* ------------------------------------------------------------------ */
+/* 1. Parse HTML to find <script type="module" src="..."> + attribs   */
+/* ------------------------------------------------------------------ */
+function discoverScriptsFromHtml(htmlPath) {
+    const html = fs.readFileSync(htmlPath, "utf-8");
+    const scripts = [];
+    const rx = /<script([^>]*)>/g;
+    let m;
+
+    while ((m = rx.exec(html)) !== null) {
+        let block = m[1];
+        const content = block.replace(/(type|src)="[^"]*"/g, "");
+        const src = /src="([^"]*)"/.exec(block)[1];
+        const attribsRgx = /\s*(\w+="[^"]*")|\s*(\w+)\s*\b/g;
+        let attribs = "";
+        let attrib;
+        while ((attrib = attribsRgx.exec(content))) {
+            attribs += ` ${attrib[1] ?? attrib[2]}`;
+        }
+
+        scripts.push({
+            attribs,
+            entryName: /.*\/src\/(.*)\.\w+/.exec(src)[1],
+            src: resolve(htmlPath.replace("index.html", ""), src),
+        });
+    }
+    return scripts;
+}
+
+/* ------------------------------------------------------------------ */
+/* 2. Auto-discover MPA pages                                         */
+/* ------------------------------------------------------------------ */
 function discoverPages(dir) {
     if (!fs.existsSync(dir)) return [];
     return fs.readdirSync(dir).filter((name) => {
         if (name === "dist") return false;
-        const pageDir = join(dir, name);
+        const d = join(dir, name);
         return (
-            fs.statSync(pageDir).isDirectory() &&
-            fs.existsSync(join(pageDir, "index.html"))
+            fs.statSync(d).isDirectory() && fs.existsSync(join(d, "index.html"))
         );
     });
 }
+
+/* ------------------------------------------------------------------ */
+/* 3. Build inputs & attribute map                                    */
+/* ------------------------------------------------------------------ */
 const pageNames = discoverPages(__dirname);
 
-const input = {
-    main: resolve(__dirname, "index.html"),
-};
+const htmlInputs = { main: resolve(__dirname, "index.html") };
+for (const p of pageNames) htmlInputs[p] = resolve(__dirname, p, "index.html");
 
-for (const page of pageNames) {
-    input[page] = resolve(__dirname, page, "index.html");
+const srcToAttrs = new Map();
+const jsInputs = {};
+
+for (const htmlPath of Object.values(htmlInputs)) {
+    for (const s of discoverScriptsFromHtml(htmlPath)) {
+        srcToAttrs.set(s.entryName, s.attribs);
+
+        jsInputs[s.entryName] = s.src;
+    }
 }
-console.log(input);
 
+/* ------------------------------------------------------------------ */
+/* 4. Vite config                                                     */
+/* ------------------------------------------------------------------ */
 export default defineConfig({
     appType: "mpa",
+    build: {
+        rollupOptions: {
+            input: {
+                ...htmlInputs,
+                ...jsInputs,
+            },
+            output: {
+                preserveModules: true,
+            },
+        },
+        emptyOutDir: true,
+    },
     plugins: [
         {
-            configureServer: (server) => {
-                const pageSet = new Set(pageNames);
-                server.middlewares.use((req, res, next) => {
-                    if (!req.url || req.method !== "GET") return next();
+            name: "preserve-script-attrs",
+            enforce: "post",
+            transformIndexHtml(html, ctx) {
+                if (!ctx.bundle) return html;
 
-                    const url = new URL(req.url, `http://${req.headers.host}`);
-                    const cleanPath = url.pathname
-                        .replace(/^\//, "")
-                        .replace(/\/$/, "");
+                const rx =
+                    /<script type="module" crossorigin src="([^"]+)"><\/script>/g;
+                let out = html;
+                let m;
 
-                    if (pageSet.has(cleanPath) && !url.pathname.endsWith("/")) {
-                        url.pathname += "/";
-                        res.writeHead(301, {
-                            Location: url.pathname + url.search,
-                        });
-                        res.end();
-                        return;
+                while ((m = rx.exec(html)) !== null) {
+                    const tag = m[0];
+                    const src = m[1];
+                    const fileName = src.replace(/^\//, "");
+
+                    const chunk = Object.values(ctx.bundle).find(
+                        (b) => b.type === "chunk" && b.fileName == fileName,
+                    );
+                    if (!chunk?.facadeModuleId) continue;
+
+                    const attrs = srcToAttrs.get(chunk.name);
+
+                    if (attrs) {
+                        out = out.replace(
+                            tag,
+                            `<script type="module" crossorigin src="${src}" ${attrs}></script>`,
+                        );
                     }
-
-                    next();
-                });
+                }
+                return out;
             },
         },
     ],
-    build: {
-        outDir: "dist", // Default output folder
-        emptyOutDir: true, // Clean before build
-        rolldownOptions: {
-            input,
-        },
-    },
 });

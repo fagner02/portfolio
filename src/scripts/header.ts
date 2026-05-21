@@ -3,10 +3,9 @@ const nav = document.querySelector("nav") as HTMLElement;
 const menuBtn = document.querySelector(".menu") as HTMLButtonElement;
 const header = document.querySelector("header") as HTMLElement;
 
-const resizeObserver = new ResizeObserver(() => {
+export const updateHeader = () => {
     header.style.setProperty("--header-height", `${stars.clientHeight + 20}px`);
-});
-resizeObserver.observe(stars);
+};
 
 const closeNav = (e: Event) => {
     if ((e.target as HTMLElement).closest("nav") === null) {

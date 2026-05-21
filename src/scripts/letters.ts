@@ -22,6 +22,21 @@ const callback = (entries: IntersectionObserverEntry[]) => {
     }
 };
 
+export const updateLetters = () => {
+    for (let i = 0; i < textNodeData.length; i++) {
+        const letters = textNodeData[i]?.letters!;
+        for (let j = 0; j < letters.length; j++) {
+            const letter = letters[j]!;
+            const rect = letter!.elem.getBoundingClientRect();
+            const bodyRect = document.body.getBoundingClientRect();
+            letter.left = rect.x - bodyRect.x + rect.width / 2;
+            letter.top = rect.y - bodyRect.y + rect.height / 2;
+        }
+    }
+};
+
+updateLetters();
+
 const observer = new IntersectionObserver(callback);
 
 for (let i = 0; i < textElems.length; i++) {
@@ -32,6 +47,7 @@ for (let i = 0; i < textElems.length; i++) {
         elem: textElem as HTMLElement,
         letters: [],
     };
+
     const frag = document.createDocumentFragment();
     for (let j = 0; j < textElem.childNodes.length; j++) {
         let node = textElem.childNodes[j]!;
@@ -89,21 +105,6 @@ for (let i = 0; i < textElems.length; i++) {
     textElem.replaceChildren(frag);
     observer.observe(textElem);
 }
-
-export const updateLetters = () => {
-    for (let i = 0; i < textNodeData.length; i++) {
-        const letters = textNodeData[i]?.letters!;
-        for (let j = 0; j < letters.length; j++) {
-            const letter = letters[j]!;
-            const rect = letter!.elem.getBoundingClientRect();
-            const bodyRect = document.body.getBoundingClientRect();
-            letter.left = rect.x - bodyRect.x + rect.width / 2;
-            letter.top = rect.y - bodyRect.y + rect.height / 2;
-        }
-    }
-};
-
-updateLetters();
 
 let changed = false;
 const ps = [0, -0.5, 1.5];
