@@ -1,0 +1,43 @@
+.icon {
+    background-image: url("/src/assets/stack/icons.webp");
+    background-size: 160px 96px;
+    width: 32px;
+    height: 32px;
+}
+.icon-svelte {
+    background-position: -64px 0px;
+}
+.icon-supabase {
+    background-position: -32px 0px;
+}
+.icon-vue {
+    background-position: 0 0;
+}
+.icon-java {
+    background-position: -98px 0;
+}
+.icon-springboot {
+    background-position: -128px 0;
+}
+.icon-sfml {
+    background-position: 0px -32px;
+}
+.icon-opengl {
+    background-position: -35px -32px;
+    width: 55px;
+}
+.icon-imgui {
+    background-position: -96px -32px;
+}
+.icon-assimp {
+    background-position: -128px -32px;
+}
+.icon-typescript {
+    background-position: 0px -64px;
+}
+.icon-vuetify {
+    background-position: -32px -64px;
+}
+.icon-cpp {
+    background-position: -64px -64px;
+}

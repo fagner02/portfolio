@@ -12,13 +12,13 @@
             blocking="render"
             fetchpriority="high"
         ></script>
-        <script
+        <!-- <script
             type="module"
             src="./src/scripts/clouds.ts"
             async
             blocking="render"
             fetchpriority="high"
-        ></script>
+        ></script> -->
         <script
             type="module"
             src="./src/scripts/stars.ts"
@@ -52,10 +52,74 @@
             fetchpriority="high"
             blocking="render"
         ></script>
+        <script
+            type="module"
+            src="./src/scripts/linkSvgAnimation.ts"
+            fetchpriority="high"
+            blocking="render"
+            async
+        ></script>
 
         <script type="module" src="./src/scripts/animate.ts"></script>
 
+        <!-- <link
+            rel="preload"
+            href="./src/assets/banner/clouds/c1.webp"
+            as="image"
+            fetchpriority="high"
+        />
+
         <link
+            rel="preload"
+            href="./src/assets/banner/clouds/c2.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/banner/clouds/c3.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/banner/clouds/c4.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/banner/clouds/c5.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/banner/clouds/c6.webp"
+            as="image"
+            fetchpriority="high"
+        />
+
+        <link
+            rel="preload"
+            href="./src/assets/banner/clouds/c7.webp"
+            as="image"
+            fetchpriority="high"
+        />
+
+        <link
+            rel="preload"
+            href="./src/assets/banner/clouds/c8.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/banner/clouds/c9.webp"
+            as="image"
+            fetchpriority="high"
+        /> -->
+        <!-- <link
             rel="preload"
             href="./src/assets/banner/stars-back.webp"
             as="image"
@@ -78,10 +142,16 @@
             href="./src/assets/pattern.webp"
             as="image"
             fetchpriority="high"
-        />
+        /> -->
         <link rel="stylesheet" href="./src/style.css" />
+
+        <link rel="stylesheet" href="./src/styles/icons.css" />
     </head>
     <body>
+        <object
+            data="./src/assets/icons/defs.svg"
+            type="image/svg+xml"
+        ></object>
         <div class="blackcover"></div>
         <header>
             <div class="bg">
@@ -99,7 +169,7 @@
                 />
             </div>
             <button class="menu">
-                <img src="./src/assets/icons/menu.svg" alt="menu icon" />
+                <svg width="24" height="24"><use href="#menu-icon"></use></svg>
             </button>
             <nav class="nav">
                 <div class="links">
@@ -174,17 +244,11 @@
                     <h2>Tech Stack</h2>
                     <div class="stack">
                         <div>
-                            <img
-                                src="./src/assets/stack/svelte.webp"
-                                alt="svelte logo"
-                            />
+                            <div class="icon icon-svelte"></div>
                             <p>Svelte</p>
                         </div>
                         <div>
-                            <img
-                                src="./src/assets/stack/supabase.webp"
-                                alt="supabase logo"
-                            />
+                            <div class="icon icon-supabase"></div>
                             <p>Supabase</p>
                         </div>
                     </div>
@@ -194,11 +258,11 @@
                         <a href="https://github.com/fagner02/parsers-svelte"
                             >Github Repository</a
                         >
-                        <img src="./src/assets/icons/git.svg" alt="" />
+                        <svg><use href="#git-icon"></use></svg>
                     </div>
                     <div>
                         <a href="https://vansi.netlify.app">Live Demo</a>
-                        <img src="./src/assets/icons/web.svg" />
+                        <svg><use href="#web-icon"></use></svg>
                     </div>
                 </div>
                 <div class="sec-right">
@@ -233,16 +297,28 @@
                 </div>
                 <div class="carrousel">
                     <div class="card">
-                        <img src="./src/assets/vansi/vansi1.png" />
+                        <img
+                            loading="lazy"
+                            src="./src/assets/vansi/vansi1.png"
+                        />
                     </div>
                     <div class="card">
-                        <img src="./src/assets/vansi/vansi2.png" />
+                        <img
+                            loading="lazy"
+                            src="./src/assets/vansi/vansi2.png"
+                        />
                     </div>
                     <div class="card">
-                        <img src="./src/assets/vansi/vansi3.png" />
+                        <img
+                            loading="lazy"
+                            src="./src/assets/vansi/vansi3.png"
+                        />
                     </div>
                     <div class="card">
-                        <img src="./src/assets/vansi/vansi4.png" />
+                        <img
+                            loading="lazy"
+                            src="./src/assets/vansi/vansi4.png"
+                        />
                     </div>
                 </div>
             </div>
@@ -277,43 +353,23 @@
                     <h2>Tech Stack</h2>
                     <div class="stack">
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/vue.webp"
-                                alt="svelte logo"
-                            />
+                            <div class="icon icon-vue"></div>
                             <p>Vue</p>
                         </div>
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/vuetify.webp"
-                                alt=""
-                            />
+                            <div class="icon icon-vuetify"></div>
                             <p>Vuetify</p>
                         </div>
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/typescript.webp"
-                                alt=""
-                            />
+                            <div class="icon icon-typescript"></div>
                             <p>TypeScript</p>
                         </div>
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/java.webp"
-                                alt=""
-                            />
+                            <div class="icon icon-java"></div>
                             <p>Java</p>
                         </div>
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/springboot.webp"
-                                alt=""
-                            />
+                            <div class="icon icon-springboot"></div>
                             <p>SprinBoot</p>
                         </div>
                     </div>
@@ -353,26 +409,20 @@
                         <a href="https://github.com/fagner02/npi"
                             >Frontend Repository</a
                         >
-                        <img
-                            src="./src/assets/icons/git.svg"
-                            alt="github logo"
-                        />
+
+                        <svg><use href="#git-icon"></use></svg>
                     </div>
                     <div>
                         <a href="https://github.com/fagner02/npi-back"
                             >Backend Repository</a
                         >
-                        <img
-                            src="./src/assets/icons/git.svg"
-                            alt="github logo"
-                        />
+
+                        <svg><use href="#git-icon"></use></svg>
                     </div>
                     <div>
                         <a href="https://npi-alpha.vercel.app"> Live Demo </a>
-                        <img
-                            src="./src/assets/icons/web.svg"
-                            alt="world wide web icon"
-                        />
+
+                        <svg><use href="#web-icon"></use></svg>
                     </div>
                 </div>
                 <div class="sec-right">
@@ -422,19 +472,19 @@
                 </div>
                 <div class="carrousel">
                     <div class="card">
-                        <img src="./src/assets/npi/npi.png" />
+                        <img loading="lazy" src="./src/assets/npi/npi.png" />
                     </div>
                     <div class="card">
-                        <img src="./src/assets/npi/npi2.png" />
+                        <img loading="lazy" src="./src/assets/npi/npi2.png" />
                     </div>
                     <div class="card">
-                        <img src="./src/assets/npi/npi3.png" />
+                        <img loading="lazy" src="./src/assets/npi/npi3.png" />
                     </div>
                     <div class="card">
-                        <img src="./src/assets/npi/npi4.png" />
+                        <img loading="lazy" src="./src/assets/npi/npi4.png" />
                     </div>
                     <div class="card">
-                        <img src="./src/assets/npi/npi5.png" />
+                        <img loading="lazy" src="./src/assets/npi/npi5.png" />
                     </div>
                 </div>
             </div>
@@ -468,19 +518,11 @@
                     <h2>Tech Stack</h2>
                     <div class="stack">
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/cpp.webp"
-                                alt="svelte logo"
-                            />
+                            <div class="icon icon-cpp"></div>
                             <p>C++</p>
                         </div>
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/sfml.webp"
-                                alt=""
-                            />
+                            <div class="icon icon-sfml"></div>
                             <p>SFML</p>
                         </div>
                     </div>
@@ -499,20 +541,15 @@
                     >
                         <a href="">Github Repository</a>
 
-                        <img
-                            src="./src/assets/icons/git.svg"
-                            alt="github logo"
-                        />
+                        <svg><use href="#git-icon"></use></svg>
                     </div>
                     <div>
                         <a
                             href="https://github.com/fagner02/Path-Finding-AI-Basics/releases/tag/0.1.0"
                             >Linux Executable
                         </a>
-                        <img
-                            src="./src/assets/icons/pc.svg"
-                            alt="program icon"
-                        />
+
+                        <svg><use href="#pc-icon"></use></svg>
                     </div>
                 </div>
                 <div class="sec-right">
@@ -551,16 +588,30 @@
                 </div>
                 <div class="carrousel">
                     <div class="card">
-                        <img src="./src/assets/pathfinding/pfind.gif" />
+                        <video
+                            loading="lazy"
+                            src="./src/assets/pathfinding/pathf.mp4"
+                            type="video/mp4"
+                        ></video>
                     </div>
                     <div class="card">
-                        <img src="./src/assets/pathfinding/pfind2.png" />
+                        <img
+                            loading="lazy"
+                            src="./src/assets/pathfinding/pfind2.png"
+                        />
                     </div>
                     <div class="card">
-                        <img src="./src/assets/pathfinding/pfind2.gif" />
+                        <video
+                            loading="lazy"
+                            src="./src/assets/pathfinding/pathf2.mp4"
+                            type="video/mp4"
+                        ></video>
                     </div>
                     <div class="card">
-                        <img src="./src/assets/pathfinding/pfind3.png" />
+                        <img
+                            loading="lazy"
+                            src="./src/assets/pathfinding/pfind3.png"
+                        />
                     </div>
                 </div>
             </div>
@@ -595,35 +646,19 @@
                     <h2>Tech Stack</h2>
                     <div class="stack">
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/cpp.webp"
-                                alt="C++ logo"
-                            />
+                            <div class="icon icon-cpp"></div>
                             <p>C++</p>
                         </div>
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/opengl.webp"
-                                alt="opengl logo"
-                            />
+                            <div class="icon icon-opengl"></div>
                             <p>OpenGL</p>
                         </div>
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/imgui.webp"
-                                alt="imgui logo"
-                            />
+                            <div class="icon icon-imgui"></div>
                             <p>Dear ImGui</p>
                         </div>
                         <div>
-                            <img
-                                height="30px"
-                                src="./src/assets/stack/assimp.webp"
-                                alt="assimp logo"
-                            />
+                            <div class="icon icon-assimp"></div>
                             <p>Assimp</p>
                         </div>
                     </div>
@@ -637,25 +672,18 @@
                     </div>
                 </div>
                 <div class="sec-links">
-                    <div
-                        href="https://github.com/fagner02/Path-Finding-AI-Basics"
-                    >
-                        <a href="">Github Repository</a>
-
-                        <img
-                            src="./src/assets/icons/git.svg"
-                            alt="github logo"
-                        />
+                    <div>
+                        <a href="https://github.com/fagner02/3DOpenGL"
+                            >Github Repository</a
+                        >
+                        <svg><use href="#git-icon"></use></svg>
                     </div>
                     <div>
-                        <a
-                            href="https://github.com/fagner02/Path-Finding-AI-Basics/releases/tag/0.1.0"
+                        <a href="https://github.com/fagner02/3DOpenGL"
                             >Linux Executable
                         </a>
-                        <img
-                            src="./src/assets/icons/pc.svg"
-                            alt="program icon"
-                        />
+
+                        <svg><use href="#pc-icon"></use></svg>
                     </div>
                 </div>
                 <div class="sec-right">
@@ -689,7 +717,7 @@
                 </div>
                 <div class="carrousel">
                     <div class="card">
-                        <video autoplay muted>
+                        <video loading="lazy">
                             <source
                                 src="./src/assets/modelloader/3d.mp4"
                                 type="video/mp4"
@@ -697,7 +725,7 @@
                         </video>
                     </div>
                     <div class="card">
-                        <video autoplay muted>
+                        <video loading="lazy">
                             <source
                                 src="./src/assets/modelloader/3d2.mp4"
                                 type="video/mp4"
@@ -705,7 +733,7 @@
                         </video>
                     </div>
                     <div class="card">
-                        <video autoplay muted>
+                        <video loading="lazy">
                             <source
                                 src="./src/assets/modelloader/3d3.mp4"
                                 type="video/mp4"
@@ -713,7 +741,7 @@
                         </video>
                     </div>
                     <div class="card">
-                        <video autoplay muted>
+                        <video loading="lazy">
                             <source
                                 src="./src/assets/modelloader/3d4.mp4"
                                 type="video/mp4"
