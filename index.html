@@ -10,11 +10,37 @@
             crossorigin
             href="./src/assets/Roboto_Slab/RobotoSlab.woff2"
             as="font"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/banner/stars-back.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/pattern.webp"
+            as="image"
+            fetchpriority="high"
+        />
+        <link
+            rel="preload"
+            href="./src/assets/banner/stars-front.webp"
+            as="image"
+            fetchpriority="high"
         />
 
         <script
             type="module"
             src="/src/scripts/header.ts"
+            async
+            blocking="render"
+            fetchpriority="high"
+        ></script>
+        <script
+            type="module"
+            src="/src/scripts/stars.ts"
             async
             blocking="render"
             fetchpriority="high"
@@ -67,19 +93,20 @@
         ></object>
         <div class="blackcover"></div>
         <header>
-            <div class="bg">
-                <img
-                    fetchpriority="high"
-                    src="./src/assets/banner/stars-back.webp"
-                    class="stars"
-                    alt="starry sky"
-                />
-                <div id="clouds"></div>
-                <img
-                    src="./src/assets/banner/stars-front.webp"
-                    class="stars"
-                    aria-disabled
-                />
+            <div class="bg-parent">
+                <div class="bg">
+                    <img
+                        src="./src/assets/banner/stars-back.webp"
+                        class="stars"
+                        alt="starry sky"
+                    />
+                    <div id="clouds"></div>
+                    <img
+                        src="./src/assets/banner/stars-front.webp"
+                        class="stars"
+                        aria-disabled
+                    />
+                </div>
             </div>
             <button class="menu">
                 <svg width="24" height="24"><use href="#menu-icon"></use></svg>

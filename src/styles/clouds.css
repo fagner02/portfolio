@@ -1,9 +1,9 @@
 .cloud {
     position: absolute;
     animation: cloud 5s infinite linear;
-    transition: all 0.5s;
-    /* opacity: 0;
-    scale: 0.8; */
+    transition:
+        scale 0.5s,
+        opacity 0.5s;
     transform-origin: center;
     background-image: url(/src/assets/banner/clouds.webp);
     background-size: 246px 246px;

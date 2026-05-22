@@ -225,9 +225,15 @@ object {
     opacity: 0;
     filter: blur(5px);
     transition: all 0.5s;
+    translate: 0 50%;
 }
 .bg > * {
     grid-area: unit;
+}
+.bg-parent {
+    opacity: 0;
+    filter: blur(10px);
+    transition: all 2s;
 }
 
 .blink {

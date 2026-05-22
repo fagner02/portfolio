@@ -1,10 +1,16 @@
 export const stars = document.querySelector(".stars") as HTMLImageElement;
 export const bgContainer = document.querySelector(".bg") as HTMLElement;
 
-stars.onload = () => {
-    bgContainer.style.opacity = "1";
-    bgContainer.style.filter = "blur(0px)";
+const onLoad = () => {
+    const parent = bgContainer.parentElement as HTMLElement;
+
+    parent.style.opacity = "1";
+    parent.style.filter = "blur(0px)";
 };
+stars.onload = onLoad;
+if (stars.complete) {
+    onLoad();
+}
 
 export const starsData = {
     offsetLeft: 0,
