@@ -1,0 +1,49 @@
+.cloud {
+    position: absolute;
+    animation: cloud 5s infinite linear;
+    transition: all 0.5s;
+    /* opacity: 0;
+    scale: 0.8; */
+    transform-origin: center;
+    background-image: url(/src/assets/banner/clouds.webp);
+    background-size: 246px 246px;
+    translate: -50% -50%;
+    width: 82px;
+    height: 82px;
+}
+.c-1 {
+    background-position: 0 0;
+}
+.c-2 {
+    background-position: -82px 0;
+}
+.c-3 {
+    background-position: -164px 0;
+}
+.c-4 {
+    background-position: 0px -82px;
+}
+.c-5 {
+    background-position: -82px -82px;
+}
+.c-6 {
+    background-position: -164px -82px;
+}
+.c-7 {
+    background-position: 0px -164px;
+}
+.c-8 {
+    background-position: -82px -164px;
+}
+.c-9 {
+    background-position: -164px -164px;
+}
+
+@keyframes cloud {
+    0% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 360deg;
+    }
+}

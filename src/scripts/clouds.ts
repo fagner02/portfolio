@@ -8,29 +8,28 @@ const cloudData: {
     width: number;
     elem?: HTMLElement;
 }[] = [
-    { x: 0.42, y: 0.3, width: 0.26 },
-    { x: 0.3, y: 0.55, width: 0.17 },
-    { x: 0.15, y: 0.38, width: 0.14 },
-    { x: 0.24, y: 0.2, width: 0.13 },
-    { x: 0.58, y: 0.45, width: 0.24 },
-    { x: 0.7, y: 0.2, width: 0.13 },
-    { x: 0.75, y: 0.5, width: 0.15 },
-    { x: 0.8, y: 0.2, width: 0.11 },
-    { x: 0.89, y: 0.2, width: 0.19 },
+    { x: 0.42, y: 0.3, width: 2.3 },
+    { x: 0.3, y: 0.55, width: 1.7 },
+    { x: 0.15, y: 0.38, width: 1.7 },
+    { x: 0.24, y: 0.2, width: 1.9 },
+    { x: 0.58, y: 0.45, width: 2.1 },
+    { x: 0.7, y: 0.2, width: 1.6 },
+    { x: 0.74, y: 0.55, width: 1.8 },
+    { x: 0.8, y: 0.2, width: 1.8 },
+    { x: 0.89, y: 0.2, width: 1.6 },
 ];
 
 const frag = document.createDocumentFragment();
 for (let i = 0; i < cloudData.length; i++) {
-    const cloud = document.createElement("img");
+    const cloud = document.createElement("div");
     cloud.onload = () => {
         cloud.style.opacity = "1";
         cloud.style.scale = "1";
     };
-    cloud.src = new URL(
-        `../assets/banner/clouds/c${i + 1}.webp`,
-        import.meta.url,
-    ).href;
+
+    cloud.classList.add(`c-${i + 1}`);
     cloud.classList.add("cloud");
+
     frag.append(cloud);
     cloudData[i]!.elem = cloud;
 }
@@ -42,7 +41,7 @@ export const updateClouds = () => {
         if (!cloud) continue;
         cloud.style.left = `${starsData.offsetLeft + cloudData[i]!.x * starsData.clientWidth}px`;
         cloud.style.top = `${starsData.offsetTop + cloudData[i]!.y * starsData.clientHeight * 0.35}px`;
-        cloud.style.width = `${starsData.clientWidth * cloudData[i]!.width}px`;
+        cloud.style.scale = `${cloudData[i]!.width * starsData.clientWidth * 0.0015}`;
     }
 };
 
