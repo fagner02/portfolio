@@ -10,16 +10,21 @@
 html {
     font-family: Roboto Slab;
 }
+.background {
+    background-image: url(./assets/pattern.webp);
+    background-size: 900px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
 
 html,
 body {
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
-}
-body {
-    background-image: url(./assets/pattern.webp);
-    background-size: 900px;
 }
 
 section {
@@ -221,11 +226,10 @@ object {
     display: grid;
     position: fixed;
     grid-template-areas: "unit";
-    place-self: center;
     opacity: 0;
     filter: blur(5px);
     transition: all 0.5s;
-    translate: 0 50%;
+    translate: -50% 0%;
 }
 .bg > * {
     grid-area: unit;
@@ -234,6 +238,8 @@ object {
     opacity: 0;
     filter: blur(10px);
     transition: all 2s;
+    position: fixed;
+    place-self: center;
 }
 
 .blink {
