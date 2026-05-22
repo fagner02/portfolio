@@ -88,6 +88,11 @@ header {
     --header-height: 250px;
     min-height: var(--header-height);
 }
+object {
+    width: 0;
+    height: 0;
+    display: block;
+}
 .menu {
     display: none;
 }
@@ -122,9 +127,6 @@ header {
     border: 1px solid var(--border-color);
     border-radius: 18px;
     padding-right: 10px;
-}
-.stack > div > img {
-    height: 30px;
 }
 .features > div {
     min-width: 160px;
@@ -175,6 +177,10 @@ header {
     align-items: center;
     gap: 10px;
     overflow-wrap: anywhere;
+}
+.sec-links > div > svg {
+    width: 24px;
+    height: 24px;
 }
 .sec-title {
     grid-area: title;
@@ -229,7 +235,7 @@ header {
     will-change: transform;
     transform-origin: 0 0;
     position: relative;
-    max-width: 20px;
+    width: 0px;
 }
 .carrousel {
     display: grid;

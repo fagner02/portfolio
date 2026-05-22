@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 
-export const callback = (svgElem: HTMLElement) => {
+export const callbackLinkSvg = (svgElem: SVGSVGElement) => {
     const stars = {
         star: svgElem.querySelector("#star")?.getAttribute("d"),
         star2: svgElem.querySelector("#star2")?.getAttribute("d"),

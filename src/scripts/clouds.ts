@@ -1,16 +1,4 @@
 import { starsData } from "./elements.js";
-const images: Record<string, string> = import.meta.glob(
-    ["/src/assets/banner/clouds/*.webp"],
-    {
-        eager: true,
-        query: "?url",
-        import: "default",
-    },
-);
-
-const urlMap: Record<string, string> = Object.fromEntries(
-    Object.entries(images).map((x) => [x[0].split("/").at(-1), x[1]]),
-);
 
 const cloudContainer = document.querySelector("#clouds") as HTMLElement;
 
@@ -34,7 +22,10 @@ const cloudData: {
 const frag = document.createDocumentFragment();
 for (let i = 0; i < cloudData.length; i++) {
     const cloud = document.createElement("img");
-    cloud.src = urlMap[`c${i + 1}.webp`]!;
+    cloud.src = new URL(
+        `../assets/banner/clouds/c${i + 1}.webp`,
+        import.meta.url,
+    ).href;
     cloud.classList.add("cloud");
     frag.append(cloud);
     cloudData[i]!.elem = cloud;

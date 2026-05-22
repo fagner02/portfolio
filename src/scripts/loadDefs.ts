@@ -1,13 +1,19 @@
-const imageUrl = new URL("/src/assets/icons/defs.svg", import.meta.url).href;
+import { callbackLinkSvg } from "./linkSvgAnimation.js";
+import { callbackPhraseSvg } from "./phrase.js";
 
-fetch(imageUrl)
-    .then((response) => response.text())
-    .then(async (text) => {
-        const parser = new DOMParser();
-        const svgDoc = parser.parseFromString(text, "image/svg+xml");
-        const svgElem = svgDoc.firstElementChild! as HTMLElement;
-        document.body.appendChild(svgElem);
+const obj = document.querySelector("object")! as HTMLObjectElement;
+const onLoad = () => {
+    const svgElem = obj
+        .contentDocument!.querySelector("svg")!
+        .cloneNode(true) as SVGSVGElement;
+    svgElem.id = "appended-svg";
+    document.body.append(svgElem);
+    obj.remove();
 
-        (await import("./phrase.js")).callback();
-        (await import("./linkSvgAnimation.js")).callback(svgElem);
-    });
+    callbackPhraseSvg();
+    callbackLinkSvg(svgElem);
+};
+obj.onload = onLoad;
+if (obj.contentDocument?.readyState === "complete") {
+    onLoad();
+}

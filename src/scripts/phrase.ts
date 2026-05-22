@@ -2,9 +2,9 @@ import gsap from "gsap";
 const catchphrase = document.querySelector(".catchphrase") as HTMLElement;
 
 const h1s = catchphrase?.querySelectorAll("h1");
-const path = document?.querySelector("#single-gear>use") as SVGElement;
 
-export const callback = () => {
+export const callbackPhraseSvg = () => {
+    const path = document?.querySelector("#single-gear>use") as SVGElement;
     let spans: HTMLSpanElement[][] = [];
     for (const h1 of h1s) {
         const text = h1.innerText;

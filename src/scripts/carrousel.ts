@@ -67,21 +67,26 @@ const resizeObserver = new ResizeObserver((entries) => {
     }
 });
 for (let i = 0; i < carrousels.length; i++) {
-    const elems = carrousels[i]!.querySelectorAll<HTMLElement>(".card");
+    const cardElems = carrousels[i]!.querySelectorAll<HTMLElement>(".card");
     carrousels[i]?.setAttribute("index", i.toString());
     observer.observe(carrousels[i]!);
-    const cards: Card[] = Array(elems.length);
+    const cards: Card[] = Array(cardElems.length);
     for (let j = 0; j < cards.length; j++) {
-        elems[j]!.draggable = false;
-        const img = elems[j]?.firstElementChild as HTMLElement;
+        const cardElem = cardElems[j]!;
+        cardElem.draggable = false;
+        const img = cardElem.firstElementChild as HTMLElement;
         img.draggable = false;
 
-        elems[j]?.setAttribute("indexes", `${i}-${j}`);
-        resizeObserver.observe(elems[j]!);
+        cardElem.setAttribute("indexes", `${i}-${j}`);
+        resizeObserver.observe(cardElem);
 
-        elems[j]!.style.visibility = "hidden";
+        cardElem.style.visibility = "hidden";
         const makeVisible = () => {
-            elems[j]!.style.visibility = "visible";
+            gsap.fromTo(
+                cardElem,
+                { autoAlpha: 0, height: cardElem.clientHeight * 0.9 },
+                { autoAlpha: 1, height: cardElem.clientHeight },
+            );
         };
         img.onloadeddata = makeVisible;
         img.onload = makeVisible;
@@ -93,30 +98,30 @@ for (let i = 0; i < carrousels.length; i++) {
         }
 
         cards[j]! = {
-            elem: elems[j]!,
+            elem: cardElem,
             y: Math.random(),
             x: Math.random(),
             spacing: 0,
-            initialWidth: elems[j]!.clientHeight,
-            initialHeight: elems[j]!.clientWidth,
+            initialWidth: cardElem.clientHeight,
+            initialHeight: cardElem.clientWidth,
         };
-        elems[j]!.addEventListener("mousedown", () => {
+        cardElem.addEventListener("mousedown", () => {
             carrouselsData[i]!.moveInitiated = false;
         });
-        elems[j]!.addEventListener("click", () => {
+        cardElem.addEventListener("click", () => {
             if (carrouselsData[i]?.moveInitiated) {
                 return;
             }
-            const elem = elems[j]!.cloneNode(true)! as HTMLElement;
+            const elem = cardElem.cloneNode(true)! as HTMLElement;
 
             clone = elem;
 
             const rect = (
-                elems[j]!.firstElementChild as HTMLElement
+                cardElem.firstElementChild as HTMLElement
             ).getBoundingClientRect();
             const viewport = window.visualViewport!;
-            const width = (100 * elems[j]!.clientWidth) / viewport.width;
-            const height = (100 * elems[j]!.clientHeight) / viewport.height;
+            const width = (100 * cardElem.clientWidth) / viewport.width;
+            const height = (100 * cardElem.clientHeight) / viewport.height;
             let newWidth = 90;
             let newHeight = (height / width) * newWidth;
             if (newHeight > 80) {
