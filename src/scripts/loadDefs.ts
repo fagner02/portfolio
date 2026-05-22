@@ -3,6 +3,7 @@ import { callbackPhraseSvg } from "./phrase.js";
 
 const obj = document.querySelector("object")! as HTMLObjectElement;
 const onLoad = () => {
+    console.log("loaded svg");
     const svgElem = obj
         .contentDocument!.querySelector("svg")!
         .cloneNode(true) as SVGSVGElement;
@@ -13,7 +14,8 @@ const onLoad = () => {
     callbackPhraseSvg();
     callbackLinkSvg(svgElem);
 };
-obj.onload = onLoad;
 if (obj.contentDocument?.readyState === "complete") {
     onLoad();
+} else {
+    obj.onload = onLoad;
 }
