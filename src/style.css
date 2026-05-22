@@ -235,7 +235,7 @@ object {
     will-change: transform;
     transform-origin: 0 0;
     position: relative;
-    width: 0px;
+    width: 10px;
 }
 .carrousel {
     display: grid;
