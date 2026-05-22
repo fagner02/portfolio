@@ -1,5 +1,11 @@
 export const stars = document.querySelector(".stars") as HTMLImageElement;
 export const bgContainer = document.querySelector(".bg") as HTMLElement;
+
+stars.onload = () => {
+    bgContainer.style.opacity = "1";
+    bgContainer.style.filter = "blur(0px)";
+};
+
 export const starsData = {
     offsetLeft: 0,
     clientWidth: 0,

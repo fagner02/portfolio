@@ -22,6 +22,10 @@ const cloudData: {
 const frag = document.createDocumentFragment();
 for (let i = 0; i < cloudData.length; i++) {
     const cloud = document.createElement("img");
+    cloud.onload = () => {
+        cloud.style.opacity = "1";
+        cloud.style.scale = "1";
+    };
     cloud.src = new URL(
         `../assets/banner/clouds/c${i + 1}.webp`,
         import.meta.url,

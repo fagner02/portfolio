@@ -222,6 +222,9 @@ object {
     position: fixed;
     grid-template-areas: "unit";
     place-self: center;
+    opacity: 0;
+    filter: blur(5px);
+    transition: all 0.5s;
 }
 .bg > * {
     grid-area: unit;
@@ -229,6 +232,10 @@ object {
 .cloud {
     position: absolute;
     animation: cloud 5s infinite linear;
+    transition: all 0.5s;
+    opacity: 0;
+    scale: 0.8;
+    transform-origin: center;
 }
 .blink {
     grid-area: unit;
