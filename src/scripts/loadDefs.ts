@@ -14,8 +14,7 @@ const onLoad = () => {
     callbackPhraseSvg();
     callbackLinkSvg(svgElem);
 };
+obj.onload = onLoad;
 if (obj.contentDocument?.readyState === "complete") {
     onLoad();
-} else {
-    obj.onload = onLoad;
 }
