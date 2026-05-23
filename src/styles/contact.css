@@ -1,0 +1,76 @@
+p,
+h1 {
+    margin: 0;
+}
+p {
+    font-size: 16px;
+}
+
+.info {
+    position: relative;
+    display: grid;
+    grid-template-areas:
+        "title title extra"
+        "image contact extra";
+    grid-template-columns: min-content min-content 1fr;
+    gap: 20px;
+    margin: 0 60px;
+    max-width: 900px;
+    place-self: center;
+}
+.info-title {
+    grid-area: title;
+}
+.info-extra {
+    grid-area: extra;
+}
+.info-contact {
+    grid-area: contact;
+    flex-direction: column;
+    gap: 10px;
+}
+.info-image {
+    grid-area: image;
+}
+.contacts,
+.info-contact,
+.info-contact > div {
+    display: flex;
+}
+.info-contact > div > svg {
+    width: 24px;
+    height: 24px;
+}
+.info-contact > div {
+    gap: 10px;
+}
+.info > * {
+    flex: 1;
+}
+.contacts {
+    gap: 20px;
+}
+.contacts > div {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.decor {
+    position: absolute;
+    rotate: -90deg;
+    transform-origin: center;
+    width: 90px;
+    top: -60px;
+}
+
+@media (max-width: 900px) {
+    .info {
+        display: grid;
+        grid-template-areas:
+            "title"
+            "image"
+            "contact"
+            "extra";
+        grid-template-columns: 1fr;
+    }
+}
