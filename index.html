@@ -7,7 +7,19 @@
 
         {{> head}}
 
-        <script type="module" src="/src/scripts/low_priority/index.ts" defer></script>
+        <script
+            type="module"
+            src="/src/scripts/windowResize.ts"
+            async
+            fetchpriority="medium"
+            blocking="render"
+        ></script>
+
+        <script
+            type="module"
+            src="/src/scripts/low_priority/index.ts"
+            defer
+        ></script>
         <link rel="stylesheet" href="./src/styles/home.css" />
     </head>
     <body>
@@ -62,7 +74,7 @@
             </p>
             <div class="vansi-animations">
                 <video
-                    style="border-color: hsl(20, 60%, 50%);padding-left: 5px;"
+                    style="border-color: hsl(20, 60%, 50%); padding-left: 5px"
                     src="/src/assets/vansi/tree.mp4"
                 ></video>
                 <video
@@ -112,19 +124,31 @@
                 </div>
             </div>
             <h2>The differential</h2>
-            <div style="text-align: justify;">
-                <p>There are already existing tools to teach parsers, but there a few gaps that could be filled, that's why VANSI was made. </p>
-                
+            <div style="text-align: justify">
                 <p>
-                    One feature that sets VANSI apart from others parsers teaching
-                    tools is the pseudocode line hightlight and breakpoints. You can
-                    see the pseudocode execution in a floating window synchronized
-                    with the animations execution and even add breakpoints to the
-                    pseudocode lines.
-                    <div class="vansi-animations">
-                        <video style="width: 100%;max-height: 100%;border-color: hsl(210,50%,50%);padding-bottom: 3px;padding-right: 5px;" src="/src/assets/vansi/vansiall.mp4"></video>
-                    </div>
+                    There are already existing tools to teach parsers, but there
+                    a few gaps that could be filled, that's why VANSI was made.
                 </p>
+
+                <p>
+                    One feature that sets VANSI apart from others parsers
+                    teaching tools is the pseudocode line hightlight and
+                    breakpoints. You can see the pseudocode execution in a
+                    floating window synchronized with the animations execution
+                    and even add breakpoints to the pseudocode lines.
+                </p>
+                <div class="vansi-animations">
+                    <video
+                        style="
+                            width: 100%;
+                            max-height: 100%;
+                            border-color: hsl(210, 50%, 50%);
+                            padding-bottom: 3px;
+                            padding-right: 5px;
+                        "
+                        src="/src/assets/vansi/vansiall.mp4"
+                    ></video>
+                </div>
             </div>
         </div>
         <div class="carrousel">

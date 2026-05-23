@@ -41,13 +41,17 @@ function discoverScriptsFromHtml(htmlPath: string) {
 /* ------------------------------------------------------------------ */
 function discoverPages(dir: string) {
     if (!fs.existsSync(dir)) return [];
-    return fs.readdirSync(dir).filter((name) => {
-        if (name === "dist") return false;
-        const d = join(dir, name);
-        return (
-            fs.statSync(d).isDirectory() && fs.existsSync(join(d, "index.html"))
-        );
-    });
+    return fs
+        .readdirSync(dir)
+        .filter((name) => {
+            if (name === "dist" || name === "partials") return false;
+            const d = join(dir, name);
+            return (
+                fs.statSync(d).isDirectory() &&
+                fs.readdirSync(d).some((x) => x.includes(".html"))
+            );
+        })
+        .map((x) => ({ path: x, file: fs.readdirSync(x).at(0)! }));
 }
 
 /* ------------------------------------------------------------------ */
@@ -57,10 +61,10 @@ const pageNames = discoverPages(__dirname);
 
 const htmlInputs = { main: resolve(__dirname, "index.html") };
 for (const p of pageNames)
-    htmlInputs[p as keyof typeof htmlInputs] = resolve(
+    htmlInputs[p.path as keyof typeof htmlInputs] = resolve(
         __dirname,
-        p,
-        "index.html",
+        p.path,
+        p.file,
     );
 
 const srcToAttrs = new Map();
