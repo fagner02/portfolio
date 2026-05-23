@@ -13,12 +13,26 @@ const textNodeData: {
     visible: boolean;
     elem: HTMLElement;
     letters: Letter[];
+    left: number;
+    top: number;
+    width: number;
+    height: number;
 }[] = Array(textElems.length);
 
 const callback = (entries: IntersectionObserverEntry[]) => {
     for (let e of entries) {
         const index = parseInt(e.target.getAttribute("index") ?? "0");
         textNodeData[index]!.visible = e.isIntersecting;
+        const letters = textNodeData[index]?.letters!;
+        if (e.isIntersecting) {
+            for (let i = 0; i < letters.length; i++) {
+                letters[i]!.elem.style.willChange = "transform";
+            }
+        } else {
+            for (let i = 0; i < letters.length; i++) {
+                letters[i]!.elem.style.willChange = "none";
+            }
+        }
     }
 };
 
@@ -31,6 +45,10 @@ for (let i = 0; i < textElems.length; i++) {
         visible: false,
         elem: textElem as HTMLElement,
         letters: [],
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0,
     };
 
     const frag = document.createDocumentFragment();
@@ -92,12 +110,19 @@ for (let i = 0; i < textElems.length; i++) {
 }
 
 export const updateLetters = () => {
+    const bodyRect = document.body.getBoundingClientRect();
     for (let i = 0; i < textNodeData.length; i++) {
-        const letters = textNodeData[i]?.letters!;
+        const textNode = textNodeData[i];
+        if (!textNode) continue;
+        const letters = textNode.letters;
+        const textRect = textNode.elem.getBoundingClientRect();
+        textNode.left = textRect.left - bodyRect.left + textRect.width / 2;
+        textNode.top = textRect.top - bodyRect.top + textRect.height / 2;
+        textNode.height = textRect.height * 0.5 + 50;
+        textNode.width = textRect.width * 0.5 + 50;
         for (let j = 0; j < letters.length; j++) {
             const letter = letters[j]!;
             const rect = letter!.elem.getBoundingClientRect();
-            const bodyRect = document.body.getBoundingClientRect();
             letter.left =
                 rect.left - bodyRect.left + letter.elem.clientWidth / 2;
             letter.top = rect.top - bodyRect.top + letter.elem.clientHeight / 2;
@@ -110,52 +135,47 @@ updateLetters();
 let changed = false;
 const ps = [0, -0.5, 1.5];
 const lim = 100;
-const r1 = document.createElement("div");
-r1.style.width = "10px";
-r1.style.height = "10px";
-r1.style.background = "blue";
-const r2 = document.createElement("div");
-r2.style.width = "10px";
-r2.style.height = "10px";
-r2.style.background = "red";
-r2.style.position = "fixed";
-r1.style.position = "fixed";
-
-document.body.appendChild(r1);
-document.body.appendChild(r2);
 
 const animateLetters = () => {
     if (!changed) return;
     changed = false;
-    r1.style.left = `${mousePos.x}px`;
-    r1.style.top = `${mousePos.y}px`;
+
     for (let i = 0; i < textNodeData.length; i++) {
         const data = textNodeData[i]!;
         if (!data.visible) {
             continue;
         }
 
+        const dy = mousePos.y - (data.top - window.scrollY);
+        const dx = mousePos.x - data.left;
+
+        if (Math.abs(dy) < data.height && Math.abs(dx) < data.width) {
+            for (let i = 0; i < data.letters.length; i++) {
+                data.letters[i]!.elem.style.display = "inline-block";
+            }
+        } else {
+            for (let i = 0; i < data.letters.length; i++) {
+                data.letters[i]!.elem.style.display = "inline";
+            }
+            continue;
+        }
+
         for (let j = 0; j < data.letters.length; j++) {
             const letter = data.letters[j]!;
             const dy = mousePos.y - (letter.top - window.scrollY);
-            if (i === 56 && j === 0) {
-                r2.style.left = `${letter.left}px`;
-                r2.style.top = `${letter.top - window.scrollY}px`;
-                console.log(letter.top - window.scrollY, mousePos.y);
-            }
-            const dy2 = dy * dy;
             const dx = mousePos.x - letter.left;
+            const dy2 = dy * dy;
             const disdx = mousePos.x - (letter.left + dy2 * 0.1);
             const trued = Math.sqrt(dx * dx + dy2);
             const d = Math.sqrt(disdx * disdx + dy2);
             if (d < lim && trued < lim) {
                 const t = (lim - d) / lim;
                 const tsub = 1 - t;
-                const vs = [Math.pow(tsub, 2), 2 * tsub * t, t * t];
-                let res = 0;
-                for (let i = 0; i < 3; i++) {
-                    res += vs[i]! * ps[i]!;
-                }
+                let res =
+                    tsub * tsub * ps[0]! +
+                    2 * tsub * t * ps[1]! +
+                    t * t * ps[2]!;
+
                 letter.elem.style.transform = `scale(${res * 0.5 + 1}) translate(${1.2 * ((1 - disdx) / lim)}px,${1.2 * ((1 - dy) / lim)}px)`;
             } else {
                 letter.elem.style.transform = "scale(1)";
