@@ -98,8 +98,9 @@ export const updateLetters = () => {
             const letter = letters[j]!;
             const rect = letter!.elem.getBoundingClientRect();
             const bodyRect = document.body.getBoundingClientRect();
-            letter.left = rect.x - bodyRect.x + rect.width / 2;
-            letter.top = rect.y - bodyRect.y + rect.height / 2;
+            letter.left =
+                rect.left - bodyRect.left + letter.elem.clientWidth / 2;
+            letter.top = rect.top - bodyRect.top + letter.elem.clientHeight / 2;
         }
     }
 };
@@ -109,10 +110,25 @@ updateLetters();
 let changed = false;
 const ps = [0, -0.5, 1.5];
 const lim = 100;
+const r1 = document.createElement("div");
+r1.style.width = "10px";
+r1.style.height = "10px";
+r1.style.background = "blue";
+const r2 = document.createElement("div");
+r2.style.width = "10px";
+r2.style.height = "10px";
+r2.style.background = "red";
+r2.style.position = "fixed";
+r1.style.position = "fixed";
+
+document.body.appendChild(r1);
+document.body.appendChild(r2);
 
 const animateLetters = () => {
     if (!changed) return;
     changed = false;
+    r1.style.left = `${mousePos.x}px`;
+    r1.style.top = `${mousePos.y}px`;
     for (let i = 0; i < textNodeData.length; i++) {
         const data = textNodeData[i]!;
         if (!data.visible) {
@@ -122,6 +138,11 @@ const animateLetters = () => {
         for (let j = 0; j < data.letters.length; j++) {
             const letter = data.letters[j]!;
             const dy = mousePos.y - (letter.top - window.scrollY);
+            if (i === 56 && j === 0) {
+                r2.style.left = `${letter.left}px`;
+                r2.style.top = `${letter.top - window.scrollY}px`;
+                console.log(letter.top - window.scrollY, mousePos.y);
+            }
             const dy2 = dy * dy;
             const dx = mousePos.x - letter.left;
             const disdx = mousePos.x - (letter.left + dy2 * 0.1);
