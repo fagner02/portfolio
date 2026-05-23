@@ -161,9 +161,8 @@
     width: 100%;
 }
 
-.words,
-.letters {
-    display: inline-block;
+.words {
+    text-wrap-mode: nowrap;
 }
 .letters {
     transform-origin: bottom;
@@ -211,6 +210,7 @@
     max-height: 200px;
     border-radius: 10px;
     border: 1px solid;
+    max-width: 100%;
 }
 @media (max-width: 950px) {
     .sec-info {
