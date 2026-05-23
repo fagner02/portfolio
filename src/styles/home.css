@@ -48,6 +48,7 @@
     grid-template-columns: 1fr 1fr;
 
     row-gap: 10px;
+    column-gap: 30px;
 }
 .sec-links {
     display: flex;
@@ -201,7 +202,16 @@
     opacity: 0;
     display: inline-block;
 }
-
+.vansi-animations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.vansi-animations > video {
+    max-height: 200px;
+    border-radius: 10px;
+    border: 1px solid;
+}
 @media (max-width: 950px) {
     .sec-info {
         grid-template-areas:

@@ -14,7 +14,7 @@
         <link
             rel="preload"
             crossorigin
-            href="./src/assets/Roboto_Slab/RobotoSlab.woff2"
+            href="/src/assets/Roboto_Slab/RobotoSlab.woff2"
             as="font"
             fetchpriority="high"
         />
@@ -54,12 +54,12 @@
 
         <script
             type="module"
-            src="./src/scripts/low_priority/index.ts"
+            src="/src/scripts/low_priority/index.ts"
             defer
         ></script>
         <script
             type="module"
-            src="./src/scripts/loadDefs.ts"
+            src="/src/scripts/loadDefs.ts"
             fetchpriority="high"
             blocking="render"
             async
@@ -112,534 +112,485 @@
                 </svg>
             </div>
         </header>
-        <section>
-            <div class="sec-info">
-                <div class="sec-decor">
-                    <svg viewBox="9 12 96 121">
-                        <use href="#star2"></use>
-                    </svg>
-                    <svg viewBox="9 12 96 121" style="width: 30px">
-                        <use href="#star"></use>
-                    </svg>
-                    <svg viewBox="9 12 96 121">
-                        <use href="#star2"></use>
-                    </svg>
+
+        <!-- Section -->
+        {{#> section}}
+        <div class="sec-title">
+            <h2>VANSI - (Visualização de Algoritmos de Análise Sintática)</h2>
+            <p>
+                VANSI (Visualização de Algoritmos de Análise Sintática) is an
+                interactive educational tool for teaching and learning compiler
+                parsing algorithms. Developed as a graduation thesis in Computer
+                Science at the Universidade Federal do Ceará, Campus Quixadá.
+            </p>
+        </div>
+        <div class="sec-left">
+            <h2>Tech Stack</h2>
+            <div class="stack">
+                <div>
+                    <div class="icon icon-svelte"></div>
+                    <p>Svelte</p>
                 </div>
-                <div class="sec-title">
-                    <h2>
-                        VANSI - (Visualização de Algoritmos de Análise
-                        Sintática)
-                    </h2>
-                    <p>
-                        VANSI (Visualização de Algoritmos de Análise Sintática)
-                        is an interactive educational tool for teaching and
-                        learning compiler parsing algorithms. Developed as a
-                        graduation thesis in Computer Science at the
-                        Universidade Federal do Ceará, Campus Quixadá.
-                    </p>
-                </div>
-                <div class="sec-left">
-                    <h2>Tech Stack</h2>
-                    <div class="stack">
-                        <div>
-                            <div class="icon icon-svelte"></div>
-                            <p>Svelte</p>
-                        </div>
-                        <div>
-                            <div class="icon icon-supabase"></div>
-                            <p>Supabase</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="sec-links">
-                    <div>
-                        <a href="https://github.com/fagner02/parsers-svelte"
-                            >Github Repository</a
-                        >
-                        <svg><use href="#git-icon"></use></svg>
-                    </div>
-                    <div>
-                        <a href="https://vansi.netlify.app">Live Demo</a>
-                        <svg><use href="#web-icon"></use></svg>
-                    </div>
-                </div>
-                <div class="sec-right">
-                    <svg viewBox="0 0 105 133" class="gear-decor">
-                        <use href="#gear-decor"></use>
-                    </svg>
-                    <h2>Features</h2>
-                    <div class="features">
-                        <div>
-                            <p>
-                                Step-by-step visualization with animations
-                                <b>.1</b>
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                Interactive automata, parse trees, and parsing
-                                tables
-                                <b>.2</b>
-                            </p>
-                        </div>
-                        <div>
-                            <p>Pseudocode with breakpoints <b>.3</b></p>
-                        </div>
-                        <div>
-                            <p>Grammar input and string analysis <b>.4</b></p>
-                        </div>
-                        <div>
-                            <p>Copy results to clipboard <b>.5</b></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carrousel">
-                    <div class="card">
-                        <img
-                            loading="lazy"
-                            src="./src/assets/vansi/vansi1.png"
-                        />
-                    </div>
-                    <div class="card">
-                        <img
-                            loading="lazy"
-                            src="./src/assets/vansi/vansi2.png"
-                        />
-                    </div>
-                    <div class="card">
-                        <img
-                            loading="lazy"
-                            src="./src/assets/vansi/vansi3.png"
-                        />
-                    </div>
-                    <div class="card">
-                        <img
-                            loading="lazy"
-                            src="./src/assets/vansi/vansi4.png"
-                        />
-                    </div>
+                <div>
+                    <div class="icon icon-supabase"></div>
+                    <p>Supabase</p>
                 </div>
             </div>
-        </section>
-        <section>
-            <div class="sec-info">
-                <div class="sec-decor">
-                    <svg viewBox="9 12 96 121">
-                        <use href="#star2"></use>
-                    </svg>
-                    <svg viewBox="9 12 96 121" style="width: 30px">
-                        <use href="#star"></use>
-                    </svg>
-                    <svg viewBox="9 12 96 121">
-                        <use href="#star2"></use>
-                    </svg>
-                </div>
-                <div class="sec-title">
-                    <h2>Product API</h2>
+
+            <h2>Animations</h2>
+            <p>
+                The animations were implemented with Anime.JS and CSS
+                transitions. The states are pre-calculated and then used to set
+                the step of the execution as the controls are used.
+            </p>
+            <div class="vansi-animations">
+                <video
+                    style="border-color: hsl(20, 60%, 50%);padding-left: 5px;"
+                    src="/src/assets/vansi/tree.mp4"
+                ></video>
+                <video
+                    style="border-color: hsl(210, 60%, 50%)"
+                    src="/src/assets/vansi/automata.mp4"
+                ></video>
+            </div>
+        </div>
+        <div class="sec-links">
+            <div>
+                <a href="https://github.com/fagner02/parsers-svelte"
+                    >Github Repository</a
+                >
+                <svg><use href="#git-icon"></use></svg>
+            </div>
+            <div>
+                <a href="https://vansi.netlify.app">Live Demo</a>
+                <svg><use href="#web-icon"></use></svg>
+            </div>
+        </div>
+        <div class="sec-right">
+            <svg viewBox="0 0 105 133" class="gear-decor">
+                <use href="#gear-decor"></use>
+            </svg>
+            <h2>Features</h2>
+            <div class="features">
+                <div>
                     <p>
-                        This is a frontend application for a product catalog and
-                        inventory management system. Built with Vue 3,
-                        TypeScript, and Vuetify, it provides an interactive
-                        admin dashboard for managing products, categories, and
-                        users with JWT-based authentication.
+                        Step-by-step visualization with animations
+                        <b>.1</b>
                     </p>
                 </div>
-                <div class="sec-left">
-                    <svg viewBox="0 0 105 133" class="gear-decor2">
-                        <use href="#gear-decor"></use>
-                    </svg>
-                    <h2>Tech Stack</h2>
-                    <div class="stack">
-                        <div>
-                            <div class="icon icon-vue"></div>
-                            <p>Vue</p>
-                        </div>
-                        <div>
-                            <div class="icon icon-vuetify"></div>
-                            <p>Vuetify</p>
-                        </div>
-                        <div>
-                            <div class="icon icon-typescript"></div>
-                            <p>TypeScript</p>
-                        </div>
-                        <div>
-                            <div class="icon icon-java"></div>
-                            <p>Java</p>
-                        </div>
-                        <div>
-                            <div class="icon icon-springboot"></div>
-                            <p>SprinBoot</p>
-                        </div>
-                    </div>
-                    <h2>Models</h2>
-                    <div class="models">
-                        <div>
-                            <h3>Product</h3>
-                            <p><code>id: </code> Long</p>
-                            <p><code>name: </code> String, required</p>
-                            <p><code>description: </code>String</p>
-                            <p><code>price: </code>Double, required, &gt;0</p>
-                            <p>
-                                <code>quantity: </code> Integer, required,
-                                &GreaterEqual;0
-                            </p>
-                            <p><code>category: </code>Category, nullable</p>
-                            <p><code>image: </code>byte[ ], nullable</p>
-                        </div>
-                        <div>
-                            <h3>Category</h3>
-                            <p><code>id: </code> Long</p>
-                            <p><code>name: </code> String, required, unique</p>
-                            <p><code>description: </code>String</p>
-                            <p><code>products: </code> List</p>
-                        </div>
-                        <div>
-                            <h3>User</h3>
-                            <p><code>id: </code> Long</p>
-                            <p><code>username: </code> String, required</p>
-                            <p><code>email: </code>String, required</p>
-                            <p><code>password: </code>String, required</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="sec-links">
-                    <div>
-                        <a href="https://github.com/fagner02/npi"
-                            >Frontend Repository</a
-                        >
-
-                        <svg><use href="#git-icon"></use></svg>
-                    </div>
-                    <div>
-                        <a href="https://github.com/fagner02/npi-back"
-                            >Backend Repository</a
-                        >
-
-                        <svg><use href="#git-icon"></use></svg>
-                    </div>
-                    <div>
-                        <a href="https://npi-alpha.vercel.app"> Live Demo </a>
-
-                        <svg><use href="#web-icon"></use></svg>
-                    </div>
-                </div>
-                <div class="sec-right">
-                    <h2>Features</h2>
-                    <div class="features">
-                        <div>
-                            <h3>1. Product Management</h3>
-                            <p>
-                                Create, read, update, delete products with name,
-                                description, price, quantity, category, and
-                                image
-                            </p>
-                        </div>
-                        <div>
-                            <h3>2. Category Management</h3>
-                            <p>
-                                Organize products into categories with full CRUD
-                                operations
-                            </p>
-                        </div>
-                        <div>
-                            <h3>3. User Authentication</h3>
-                            <p>Register and login with JWT tokens</p>
-                        </div>
-                        <div>
-                            <h3>4. Image Upload</h3>
-                            <p>
-                                Upload and retrieve product images via multipart
-                                file requests
-                            </p>
-                        </div>
-                        <div>
-                            <h3>5. Pagination & Search</h3>
-                            <p>
-                                Paginated listing with optional name filtering
-                                for products, categories, and users
-                            </p>
-                        </div>
-                        <div>
-                            <h3>6. Input Validation</h3>
-                            <p>
-                                Jakarta Bean Validation with custom error
-                                responses
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carrousel">
-                    <div class="card">
-                        <img loading="lazy" src="./src/assets/npi/npi.png" />
-                    </div>
-                    <div class="card">
-                        <img loading="lazy" src="./src/assets/npi/npi2.png" />
-                    </div>
-                    <div class="card">
-                        <img loading="lazy" src="./src/assets/npi/npi3.png" />
-                    </div>
-                    <div class="card">
-                        <img loading="lazy" src="./src/assets/npi/npi4.png" />
-                    </div>
-                    <div class="card">
-                        <img loading="lazy" src="./src/assets/npi/npi5.png" />
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="sec-info">
-                <div class="sec-decor">
-                    <svg viewBox="9 12 96 121">
-                        <use href="#star2"></use>
-                    </svg>
-                    <svg viewBox="9 12 96 121" style="width: 30px">
-                        <use href="#star"></use>
-                    </svg>
-                    <svg viewBox="9 12 96 121">
-                        <use href="#star2"></use>
-                    </svg>
-                </div>
-                <div class="sec-title">
-                    <h2>Path Finding</h2>
+                <div>
                     <p>
-                        This is an application showcasing a few path-finding
-                        algorithms. It was built with SFML as an AI fundamentals
-                        course's project with the objective of testing the
-                        algorithms speed.
+                        Interactive automata, parse trees, and parsing tables
+                        <b>.2</b>
                     </p>
                 </div>
-                <div class="sec-left">
-                    <svg viewBox="0 0 105 133" class="gear-decor2">
-                        <use href="#gear-decor"></use>
-                    </svg>
-                    <h2>Tech Stack</h2>
-                    <div class="stack">
-                        <div>
-                            <div class="icon icon-cpp"></div>
-                            <p>C++</p>
-                        </div>
-                        <div>
-                            <div class="icon icon-sfml"></div>
-                            <p>SFML</p>
-                        </div>
-                    </div>
-                    <h2>Algorithms Included</h2>
-                    <div class="algorithms">
-                        <p>A*</p>
-                        <p>Dijkstra</p>
-                        <p>Breadth-First Search</p>
-                        <p>Depth-First Search</p>
-                        <p>Greedy</p>
-                    </div>
+                <div>
+                    <p>Pseudocode with breakpoints <b>.3</b></p>
                 </div>
-                <div class="sec-links">
-                    <div
-                        href="https://github.com/fagner02/Path-Finding-AI-Basics"
-                    >
-                        <a href="">Github Repository</a>
-
-                        <svg><use href="#git-icon"></use></svg>
-                    </div>
-                    <div>
-                        <a
-                            href="https://github.com/fagner02/Path-Finding-AI-Basics/releases/tag/0.1.0"
-                            >Linux Executable
-                        </a>
-
-                        <svg><use href="#pc-icon"></use></svg>
-                    </div>
+                <div>
+                    <p>Grammar input and string analysis <b>.4</b></p>
                 </div>
-                <div class="sec-right">
-                    <h2>Features</h2>
-                    <div class="features">
-                        <div>
-                            <h3>1. Input Generation</h3>
-                            <p>Automatically generate random inputs</p>
-                        </div>
-                        <div>
-                            <h3>2. Algorithm Animation</h3>
-                            <p>
-                                Execute an animation for an input with the
-                                selected algorithm
-                            </p>
-                        </div>
-                        <div>
-                            <h3>3. Logs Generation</h3>
-                            <p>
-                                Generate logs with important information like
-                                speed and grid size
-                            </p>
-                        </div>
-                        <div>
-                            <h3>4. Pre-programmed Experiments</h3>
-                            <p>5 Pre-programmed experiments to be executed</p>
-                        </div>
-                        <div>
-                            <h3>5. Batch Execution</h3>
-                            <p>
-                                Have multiple executions at a time given a list
-                                of inputs file
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carrousel">
-                    <div class="card">
-                        <video
-                            loading="lazy"
-                            src="./src/assets/pathfinding/pathf.mp4"
-                            type="video/mp4"
-                        ></video>
-                    </div>
-                    <div class="card">
-                        <img
-                            loading="lazy"
-                            src="./src/assets/pathfinding/pfind2.png"
-                        />
-                    </div>
-                    <div class="card">
-                        <video
-                            loading="lazy"
-                            src="./src/assets/pathfinding/pathf2.mp4"
-                            type="video/mp4"
-                        ></video>
-                    </div>
-                    <div class="card">
-                        <img
-                            loading="lazy"
-                            src="./src/assets/pathfinding/pfind3.png"
-                        />
-                    </div>
+                <div>
+                    <p>Copy results to clipboard <b>.5</b></p>
                 </div>
             </div>
-        </section>
-        <section>
-            <div class="sec-info">
-                <div class="sec-decor">
-                    <svg viewBox="9 12 96 121">
-                        <use href="#star2"></use>
-                    </svg>
-                    <svg viewBox="9 12 96 121" style="width: 30px">
-                        <use href="#star"></use>
-                    </svg>
-                    <svg viewBox="9 12 96 121">
-                        <use href="#star2"></use>
-                    </svg>
+            <h2>The differential</h2>
+            <div style="text-align: justify;">
+                <p>There are already existing tools to teach parsers, but there a few gaps that could be filled, that's why VANSI was made. </p>
+                
+                <p>
+                    One feature that sets VANSI apart from others parsers teaching
+                    tools is the pseudocode line hightlight and breakpoints. You can
+                    see the pseudocode execution in a floating window synchronized
+                    with the animations execution and even add breakpoints to the
+                    pseudocode lines.
+                    <div class="vansi-animations">
+                        <video style="width: 100%;max-height: 100%;border-color: hsl(210,50%,50%);padding-bottom: 3px;padding-right: 5px;" src="/src/assets/vansi/vansiall.mp4"></video>
+                    </div>
+                </p>
+            </div>
+        </div>
+        <div class="carrousel">
+            <div class="card">
+                <img loading="lazy" src="./src/assets/vansi/vansi1.png" />
+            </div>
+            <div class="card">
+                <img loading="lazy" src="./src/assets/vansi/vansi2.png" />
+            </div>
+            <div class="card">
+                <img loading="lazy" src="./src/assets/vansi/vansi3.png" />
+            </div>
+            <div class="card">
+                <img loading="lazy" src="./src/assets/vansi/vansi4.png" />
+            </div>
+        </div>
+        {{/section}}
+
+        <!-- Section -->
+        {{#> section}}
+        <div class="sec-title">
+            <h2>Product API</h2>
+            <p>
+                This is a frontend application for a product catalog and
+                inventory management system. Built with Vue 3, TypeScript, and
+                Vuetify, it provides an interactive admin dashboard for managing
+                products, categories, and users with JWT-based authentication.
+            </p>
+        </div>
+        <div class="sec-left">
+            <svg viewBox="0 0 105 133" class="gear-decor2">
+                <use href="#gear-decor"></use>
+            </svg>
+            <h2>Tech Stack</h2>
+            <div class="stack">
+                <div>
+                    <div class="icon icon-vue"></div>
+                    <p>Vue</p>
                 </div>
-                <div class="sec-title">
-                    <h2>3D Model Loader</h2>
+                <div>
+                    <div class="icon icon-vuetify"></div>
+                    <p>Vuetify</p>
+                </div>
+                <div>
+                    <div class="icon icon-typescript"></div>
+                    <p>TypeScript</p>
+                </div>
+                <div>
+                    <div class="icon icon-java"></div>
+                    <p>Java</p>
+                </div>
+                <div>
+                    <div class="icon icon-springboot"></div>
+                    <p>SprinBoot</p>
+                </div>
+            </div>
+            <h2>Models</h2>
+            <div class="models">
+                <div>
+                    <h3>Product</h3>
+                    <p><code>id: </code> Long</p>
+                    <p><code>name: </code> String, required</p>
+                    <p><code>description: </code>String</p>
+                    <p><code>price: </code>Double, required, &gt;0</p>
                     <p>
-                        This application was made for a computer graphics
-                        course's project. It was built with OpenGL and is
-                        capable of basic operations on 3D models like 3D
-                        transform and camera control with a basic user interface
-                        powered by the library Dear ImGui.
+                        <code>quantity: </code> Integer, required,
+                        &GreaterEqual;0
+                    </p>
+                    <p><code>category: </code>Category, nullable</p>
+                    <p><code>image: </code>byte[ ], nullable</p>
+                </div>
+                <div>
+                    <h3>Category</h3>
+                    <p><code>id: </code> Long</p>
+                    <p><code>name: </code> String, required, unique</p>
+                    <p><code>description: </code>String</p>
+                    <p><code>products: </code> List</p>
+                </div>
+                <div>
+                    <h3>User</h3>
+                    <p><code>id: </code> Long</p>
+                    <p><code>username: </code> String, required</p>
+                    <p><code>email: </code>String, required</p>
+                    <p><code>password: </code>String, required</p>
+                </div>
+            </div>
+        </div>
+        <div class="sec-links">
+            <div>
+                <a href="https://github.com/fagner02/npi"
+                    >Frontend Repository</a
+                >
+
+                <svg><use href="#git-icon"></use></svg>
+            </div>
+            <div>
+                <a href="https://github.com/fagner02/npi-back"
+                    >Backend Repository</a
+                >
+
+                <svg><use href="#git-icon"></use></svg>
+            </div>
+            <div>
+                <a href="https://npi-alpha.vercel.app"> Live Demo </a>
+
+                <svg><use href="#web-icon"></use></svg>
+            </div>
+        </div>
+        <div class="sec-right">
+            <h2>Features</h2>
+            <div class="features">
+                <div>
+                    <h3>1. Product Management</h3>
+                    <p>
+                        Create, read, update, delete products with name,
+                        description, price, quantity, category, and image
                     </p>
                 </div>
-                <div class="sec-left">
-                    <svg viewBox="0 0 105 133" class="gear-decor2">
-                        <use href="#gear-decor"></use>
-                    </svg>
-                    <h2>Tech Stack</h2>
-                    <div class="stack">
-                        <div>
-                            <div class="icon icon-cpp"></div>
-                            <p>C++</p>
-                        </div>
-                        <div>
-                            <div class="icon icon-opengl"></div>
-                            <p>OpenGL</p>
-                        </div>
-                        <div>
-                            <div class="icon icon-imgui"></div>
-                            <p>Dear ImGui</p>
-                        </div>
-                        <div>
-                            <div class="icon icon-assimp"></div>
-                            <p>Assimp</p>
-                        </div>
-                    </div>
+                <div>
+                    <h3>2. Category Management</h3>
+                    <p>
+                        Organize products into categories with full CRUD
+                        operations
+                    </p>
                 </div>
-                <div class="sec-links">
-                    <div>
-                        <a href="https://github.com/fagner02/3DOpenGL"
-                            >Github Repository</a
-                        >
-                        <svg><use href="#git-icon"></use></svg>
-                    </div>
-                    <div>
-                        <a href="https://github.com/fagner02/3DOpenGL"
-                            >Linux Executable
-                        </a>
-
-                        <svg><use href="#pc-icon"></use></svg>
-                    </div>
+                <div>
+                    <h3>3. User Authentication</h3>
+                    <p>Register and login with JWT tokens</p>
                 </div>
-                <div class="sec-right">
-                    <h2>Features</h2>
-                    <div class="features">
-                        <div>
-                            <h3>1. Load 3D Models</h3>
-                            <p>Load 3D models of various 3D file formats</p>
-                        </div>
-                        <div>
-                            <h3>2. Add Texture</h3>
-                            <p>
-                                Apply textures to the models from a predefined
-                                set of textures
-                            </p>
-                        </div>
-                        <div>
-                            <h3>3. Orthographic & Perspective</h3>
-                            <p>
-                                Use the camera in Orthographic or Perspective
-                                mode
-                            </p>
-                        </div>
-                        <div>
-                            <h3>4. Apply Transformations</h3>
-                            <p>
-                                Apply translate, rotate and scale to the models
-                            </p>
-                        </div>
-                    </div>
+                <div>
+                    <h3>4. Image Upload</h3>
+                    <p>
+                        Upload and retrieve product images via multipart file
+                        requests
+                    </p>
                 </div>
-                <div class="carrousel">
-                    <div class="card">
-                        <video loading="lazy">
-                            <source
-                                src="./src/assets/modelloader/3d.mp4"
-                                type="video/mp4"
-                            />
-                        </video>
-                    </div>
-                    <div class="card">
-                        <video loading="lazy">
-                            <source
-                                src="./src/assets/modelloader/3d2.mp4"
-                                type="video/mp4"
-                            />
-                        </video>
-                    </div>
-                    <div class="card">
-                        <video loading="lazy">
-                            <source
-                                src="./src/assets/modelloader/3d3.mp4"
-                                type="video/mp4"
-                            />
-                        </video>
-                    </div>
-                    <div class="card">
-                        <video loading="lazy">
-                            <source
-                                src="./src/assets/modelloader/3d4.mp4"
-                                type="video/mp4"
-                            />
-                        </video>
-                    </div>
+                <div>
+                    <h3>5. Pagination & Search</h3>
+                    <p>
+                        Paginated listing with optional name filtering for
+                        products, categories, and users
+                    </p>
+                </div>
+                <div>
+                    <h3>6. Input Validation</h3>
+                    <p>Jakarta Bean Validation with custom error responses</p>
                 </div>
             </div>
-        </section>
+        </div>
+        <div class="carrousel">
+            <div class="card">
+                <img loading="lazy" src="./src/assets/npi/npi.png" />
+            </div>
+            <div class="card">
+                <img loading="lazy" src="./src/assets/npi/npi2.png" />
+            </div>
+            <div class="card">
+                <img loading="lazy" src="./src/assets/npi/npi3.png" />
+            </div>
+            <div class="card">
+                <img loading="lazy" src="./src/assets/npi/npi4.png" />
+            </div>
+            <div class="card">
+                <img loading="lazy" src="./src/assets/npi/npi5.png" />
+            </div>
+        </div>
+        {{/section}}
+
+        <!-- Section -->
+        {{#> section}}
+        <div class="sec-title">
+            <h2>Path Finding</h2>
+            <p>
+                This is an application showcasing a few path-finding algorithms.
+                It was built with SFML as an AI fundamentals course's project
+                with the objective of testing the algorithms speed.
+            </p>
+        </div>
+        <div class="sec-left">
+            <h2>Tech Stack</h2>
+            <div class="stack">
+                <div>
+                    <div class="icon icon-cpp"></div>
+                    <p>C++</p>
+                </div>
+                <div>
+                    <div class="icon icon-sfml"></div>
+                    <p>SFML</p>
+                </div>
+            </div>
+            <h2>Algorithms Included</h2>
+            <div class="algorithms">
+                <p>A*</p>
+                <p>Dijkstra</p>
+                <p>Breadth-First Search</p>
+                <p>Depth-First Search</p>
+                <p>Greedy</p>
+            </div>
+        </div>
+        <div class="sec-links">
+            <div href="https://github.com/fagner02/Path-Finding-AI-Basics">
+                <a href="">Github Repository</a>
+
+                <svg><use href="#git-icon"></use></svg>
+            </div>
+            <div>
+                <a
+                    href="https://github.com/fagner02/Path-Finding-AI-Basics/releases/tag/0.1.0"
+                    >Linux Executable
+                </a>
+
+                <svg><use href="#pc-icon"></use></svg>
+            </div>
+        </div>
+        <div class="sec-right">
+            <svg viewBox="0 0 105 133" class="gear-decor">
+                <use href="#gear-decor"></use>
+            </svg>
+            <h2>Features</h2>
+            <div class="features">
+                <div>
+                    <h3>1. Input Generation</h3>
+                    <p>Automatically generate random inputs</p>
+                </div>
+                <div>
+                    <h3>2. Algorithm Animation</h3>
+                    <p>
+                        Execute an animation for an input with the selected
+                        algorithm
+                    </p>
+                </div>
+                <div>
+                    <h3>3. Logs Generation</h3>
+                    <p>
+                        Generate logs with important information like speed and
+                        grid size
+                    </p>
+                </div>
+                <div>
+                    <h3>4. Pre-programmed Experiments</h3>
+                    <p>5 Pre-programmed experiments to be executed</p>
+                </div>
+                <div>
+                    <h3>5. Batch Execution</h3>
+                    <p>
+                        Have multiple executions at a time given a list of
+                        inputs file
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="carrousel">
+            <div class="card">
+                <video
+                    loading="lazy"
+                    src="./src/assets/pathfinding/pathf.mp4"
+                    type="video/mp4"
+                ></video>
+            </div>
+            <div class="card">
+                <img loading="lazy" src="./src/assets/pathfinding/pfind2.png" />
+            </div>
+            <div class="card">
+                <video
+                    loading="lazy"
+                    src="./src/assets/pathfinding/pathf2.mp4"
+                    type="video/mp4"
+                ></video>
+            </div>
+            <div class="card">
+                <img loading="lazy" src="./src/assets/pathfinding/pfind3.png" />
+            </div>
+        </div>
+        {{/section}}
+
+        <!-- Section -->
+        {{#> section}}
+        <div class="sec-title">
+            <h2>3D Model Loader</h2>
+            <p>
+                This application was made for a computer graphics course's
+                project. It was built with OpenGL and is capable of basic
+                operations on 3D models like 3D transform and camera control
+                with a basic user interface powered by the library Dear ImGui.
+            </p>
+        </div>
+        <div class="sec-left">
+            <svg viewBox="0 0 105 133" class="gear-decor2">
+                <use href="#gear-decor"></use>
+            </svg>
+            <h2>Tech Stack</h2>
+            <div class="stack">
+                <div>
+                    <div class="icon icon-cpp"></div>
+                    <p>C++</p>
+                </div>
+                <div>
+                    <div class="icon icon-opengl"></div>
+                    <p>OpenGL</p>
+                </div>
+                <div>
+                    <div class="icon icon-imgui"></div>
+                    <p>Dear ImGui</p>
+                </div>
+                <div>
+                    <div class="icon icon-assimp"></div>
+                    <p>Assimp</p>
+                </div>
+            </div>
+        </div>
+        <div class="sec-links">
+            <div>
+                <a href="https://github.com/fagner02/3DOpenGL"
+                    >Github Repository</a
+                >
+                <svg><use href="#git-icon"></use></svg>
+            </div>
+            <div>
+                <a href="https://github.com/fagner02/3DOpenGL"
+                    >Linux Executable
+                </a>
+
+                <svg><use href="#pc-icon"></use></svg>
+            </div>
+        </div>
+        <div class="sec-right">
+            <h2>Features</h2>
+            <div class="features">
+                <div>
+                    <h3>1. Load 3D Models</h3>
+                    <p>Load 3D models of various 3D file formats</p>
+                </div>
+                <div>
+                    <h3>2. Add Texture</h3>
+                    <p>
+                        Apply textures to the models from a predefined set of
+                        textures
+                    </p>
+                </div>
+                <div>
+                    <h3>3. Orthographic & Perspective</h3>
+                    <p>Use the camera in Orthographic or Perspective mode</p>
+                </div>
+                <div>
+                    <h3>4. Apply Transformations</h3>
+                    <p>Apply translate, rotate and scale to the models</p>
+                </div>
+            </div>
+        </div>
+        <div class="carrousel">
+            <div class="card">
+                <video loading="lazy">
+                    <source
+                        src="./src/assets/modelloader/3d.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
+            <div class="card">
+                <video loading="lazy">
+                    <source
+                        src="./src/assets/modelloader/3d2.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
+            <div class="card">
+                <video loading="lazy">
+                    <source
+                        src="./src/assets/modelloader/3d3.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
+            <div class="card">
+                <video loading="lazy">
+                    <source
+                        src="./src/assets/modelloader/3d4.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
+        </div>
+        {{/section}}
     </body>
 </html>
