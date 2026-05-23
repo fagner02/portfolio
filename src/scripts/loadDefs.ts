@@ -2,6 +2,7 @@ import { callbackLinkSvg } from "./linkSvgAnimation.js";
 import { callbackPhraseSvg } from "./phrase.js";
 
 const obj = document.querySelector("object")! as HTMLObjectElement;
+
 const onLoad = () => {
     try {
         const svgElem = obj
@@ -11,7 +12,9 @@ const onLoad = () => {
         document.body.append(svgElem);
         obj.remove();
 
-        callbackPhraseSvg();
+        try {
+            callbackPhraseSvg();
+        } catch (e) {}
         callbackLinkSvg(svgElem);
     } catch (e) {
         return;

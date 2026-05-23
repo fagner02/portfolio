@@ -1,0 +1,230 @@
+.stack {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.stack > div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    width: fit-content;
+    padding: 7px;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding-right: 10px;
+}
+.features > div {
+    min-width: 160px;
+    flex: 1;
+}
+.features,
+.models,
+.algorithms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.models > div {
+    flex: 1;
+}
+.models > div > p {
+    text-wrap: nowrap;
+}
+.algorithms {
+    gap: 10px;
+}
+.algorithms > p {
+    background: hsl(0, 0%, 85%);
+    border-radius: 8px;
+    padding: 3px 10px;
+    margin: 0;
+}
+.sec-info {
+    display: grid;
+    grid-template-areas:
+        "title links"
+        "carrousel carrousel"
+        "left right";
+    grid-template-columns: 1fr 1fr;
+
+    row-gap: 10px;
+}
+.sec-links {
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    gap: 10px;
+    grid-area: links;
+}
+.sec-links > div {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    gap: 10px;
+    overflow-wrap: anywhere;
+}
+.sec-links > div > svg {
+    width: 24px;
+    height: 24px;
+}
+.sec-title {
+    grid-area: title;
+}
+.sec-left {
+    grid-area: left;
+    position: relative;
+}
+.sec-right {
+    grid-area: right;
+    text-align: right;
+    position: relative;
+}
+.sec-decor > svg {
+    width: 20px;
+}
+.sec-decor {
+    position: absolute;
+    width: fit-content;
+    top: 0px;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+    margin-right: 10px;
+}
+.carrousel {
+    display: grid;
+    grid-template-areas: "unit";
+    place-content: center;
+    padding: 30px 0px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    grid-area: carrousel;
+    --card-height: 250px;
+    height: var(--card-height);
+    background-color: hsl(0, 0%, 100%);
+    perspective: 15cm;
+    transform-style: preserve-3d;
+}
+
+.blackcover {
+    background-color: hsl(0, 0%, 100%, 0.2);
+    backdrop-filter: blur(10px);
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    position: fixed;
+    z-index: 1000000;
+    display: none;
+}
+.card {
+    width: fit-content;
+    height: var(--card-height);
+    grid-area: unit;
+    backface-visibility: hidden;
+    position: absolute;
+    place-self: center;
+    user-select: none;
+    box-shadow: 0 0 20px 0 hsl(0, 0%, 0%, 0.1);
+    border-radius: 10px;
+    display: flex;
+    border: 1px solid hsl(0, 0%, 0%, 0.6);
+    background: white;
+}
+.card > * {
+    height: 100%;
+    position: relative;
+    border-radius: 10px;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    width: 78%;
+    height: 6px;
+    top: 100%;
+    left: 14%;
+    background: black;
+    border-radius: 50%;
+    filter: blur(15px);
+}
+
+#clone {
+    z-index: 10000000;
+    position: fixed;
+    filter: none;
+}
+
+#clone > img {
+    width: 100%;
+}
+
+.words,
+.letters {
+    display: inline-block;
+}
+.letters {
+    transform-origin: bottom;
+}
+
+.catchphrase {
+    position: relative;
+    border-radius: 10px;
+    padding: 0px 10px;
+    max-width: 300px;
+    margin-top: 80px;
+    margin-left: 60px;
+    opacity: 0;
+    display: grid;
+    grid-template-areas: "unit";
+}
+
+.catchphrase > h1 {
+    font-weight: 300;
+    opacity: 0;
+    grid-area: unit;
+}
+
+.catchphrase > svg {
+    width: 65px;
+    position: absolute;
+    left: -33px;
+    top: 32px;
+}
+
+.catchphrase-word {
+    text-wrap-mode: nowrap;
+}
+
+.catchphrase-word > span {
+    opacity: 0;
+    display: inline-block;
+}
+
+@media (max-width: 950px) {
+    .sec-info {
+        grid-template-areas:
+            "title"
+            "carrousel"
+            "left"
+            "right"
+            "links";
+        grid-template-columns: 1fr;
+    }
+
+    .sec-links {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 700px) {
+    .carrousel {
+        --card-height: 200px;
+    }
+
+    .catchphrase {
+        margin-top: calc(var(--header-height) - 50px);
+        margin-bottom: 20px;
+    }
+}
