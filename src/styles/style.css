@@ -27,6 +27,11 @@ body {
     overflow-y: auto;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 section {
     padding: 20px;
     border: 1px solid var(--border-color);
