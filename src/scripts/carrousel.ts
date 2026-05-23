@@ -29,10 +29,14 @@ const observer = new IntersectionObserver((entries) => {
     for (let e of entries) {
         const index = parseInt(e.target.getAttribute("index") ?? "0");
         carrouselsData[index]!.visible = e.isIntersecting;
+        const cards = carrouselsData[index]!.cards;
         if (!e.isIntersecting) {
-            const cards = carrouselsData[index]!.cards;
             for (let i = 0; i < cards.length; i++) {
-                cards[i]!.elem.style.willChange = "transform,opacity,";
+                cards[i]!.elem.style.willChange = "transform,opacity";
+            }
+        } else {
+            for (let i = 0; i < cards.length; i++) {
+                cards[i]!.elem.style.willChange = "none";
             }
         }
     }
@@ -69,7 +73,9 @@ const resizeObserver = new ResizeObserver((entries) => {
 for (let i = 0; i < carrousels.length; i++) {
     const cardElems = carrousels[i]!.querySelectorAll<HTMLElement>(".card");
     carrousels[i]?.setAttribute("index", i.toString());
-    observer.observe(carrousels[i]!);
+    const section = carrousels[i]?.closest("section")!;
+    section.setAttribute("index", i.toString());
+    observer.observe(section);
     const cards: Card[] = Array(cardElems.length);
     for (let j = 0; j < cards.length; j++) {
         const cardElem = cardElems[j]!;
@@ -132,6 +138,10 @@ for (let i = 0; i < carrousels.length; i++) {
 
             cover.style.opacity = "0";
             cover.style.display = "flex";
+
+            if (clone.firstElementChild?.tagName === "VIDEO") {
+                (clone.firstElementChild as HTMLVideoElement).controls = true;
+            }
 
             elem.id = "clone";
             elem.setAttribute("indexes", `${i}-${j}`);
