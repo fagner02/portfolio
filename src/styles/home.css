@@ -215,6 +215,9 @@
     flex: 1;
     background: white;
 }
+.no-flex-children > video {
+    flex: 0;
+}
 @media (max-width: 950px) {
     .sec-info {
         grid-template-areas:
