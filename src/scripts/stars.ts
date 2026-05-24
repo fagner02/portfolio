@@ -19,7 +19,7 @@ for (let i = 0; i < blinkCount; i++) {
 
     blinks[i] = {
         elem: blink,
-        start: performance.now() + Math.random() * blinkDuration,
+        start: performance.now() - Math.random() * blinkDuration,
         started: false,
         x: 0,
         y: 0,
@@ -48,7 +48,6 @@ export const updateBlinks = () => {
         blink.elem.style.top = `${starsData.offsetTop + y}px`;
     }
 };
-updateBlinks();
 
 const animateStars = (now: number) => {
     for (let i = 0; i < blinkCount; i++) {

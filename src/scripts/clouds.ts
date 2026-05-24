@@ -44,5 +44,3 @@ export const updateClouds = () => {
         cloud.style.scale = `${cloudData[i]!.width * starsData.clientWidth * 0.0015}`;
     }
 };
-
-updateClouds();
