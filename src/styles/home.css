@@ -239,5 +239,11 @@
     .catchphrase {
         margin-top: calc(var(--header-height) - 50px);
         margin-bottom: 20px;
+        margin-left: 40px;
+        margin-right: 20px;
+    }
+
+    .catchphrase > h1 {
+        font-size: 25px;
     }
 }

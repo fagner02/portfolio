@@ -215,6 +215,10 @@ object {
         width: 96%;
     }
 
+    section {
+        margin: 0 20px;
+    }
+
     .menu {
         display: block;
         width: 40px;
