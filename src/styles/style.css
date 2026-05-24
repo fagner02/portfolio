@@ -98,7 +98,7 @@ header {
     --header-height: 250px;
     min-height: var(--header-height);
 }
-object {
+.hidden {
     width: 0;
     height: 0;
     display: block;

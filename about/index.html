@@ -6,9 +6,85 @@
         <title>About</title>
 
         {{> head}}
+        <link rel="stylesheet" href="/src/styles/contact.css" />
     </head>
     <body>
-        {{> background}}
+        {{> gear-clip}} {{> background}}
         <header>{{>banner}}</header>
+        <main
+            style="
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                place-self: center;
+                max-width: 900px;
+                gap: 20px;
+            "
+        >
+            <svg class="decor" viewBox="0 0 90 88">
+                <g clip-path="url(#gear-clip)">
+                    <use class="gear" href="#gear"></use>
+                </g>
+            </svg>
+            <h1 class="info-title">A little bit about me</h1>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px">
+                <div>
+                    <img
+                        class="info-image"
+                        src="/src/assets/profile.webp"
+                        alt="profile picture"
+                        width="200"
+                        height="200"
+                        style="border-radius: 20px; background: gray"
+                    />
+                </div>
+                <div
+                    style="
+                        flex: 1;
+                        gap: 20px;
+                        display: flex;
+                        flex-direction: column;
+                    "
+                >
+                    <div style="flex: 1; text-align: justify">
+                        <p>
+                            Hello, my name is Fagner. I'm a software developer
+                            graduated from the Universidade Federal do Ceará in
+                            the course of <b>Computer Science</b>. I started
+                            coding in the late years of highschool in 2020. I
+                            started with some game dev tutorials and fell in
+                            love with coding, that's when i decided to follow
+                            this career path.
+                        </p>
+                        <br />
+                        <p>
+                            I've worked in DellLead in 2021 building
+                            <b>C# Backend</b> for a management system. Worked
+                            developing a risk management system at my university
+                            in 2026 with <b>Vue.js</b> as <b>FullStack Dev</b>.
+                            Also built personal projects with <b>C++</b>,
+                            <b>Java</b>, <b>JavaScript</b>, <b>ReactJS</b>,
+                            <b>Svelte</b> and <b>Dart</b>. I have experience
+                            with <b>Agile Methodologies</b> like
+                            <b>Scrum</b> and team work.
+                        </p>
+                        <p>
+                            I'm always open to new experiences and love working
+                            with new things.
+                        </p>
+                    </div>
+                    <div class="info-contact">
+                        <div>
+                            <svg><use href="#education-icon"></use></svg>
+                            <p>Universidade Federal do Ceará</p>
+                        </div>
+                        <div>
+                            <svg><use href="#location-icon"></use></svg>
+                            <p>Apuiarés - Ceará, Brazil</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </body>
 </html>
