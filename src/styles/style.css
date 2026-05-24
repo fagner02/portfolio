@@ -4,14 +4,14 @@
 
 @font-face {
     font-family: Roboto Slab;
-    src: url("../assets/Roboto_Slab/RobotoSlab.woff2");
+    src: url("/src/assets/Roboto_Slab/RobotoSlab.woff2");
 }
 
 html {
     font-family: Roboto Slab;
 }
 .background {
-    background-image: url(../assets/pattern.webp);
+    background-image: url(/src/assets/pattern.webp);
     background-size: 900px;
     position: fixed;
     left: 0;

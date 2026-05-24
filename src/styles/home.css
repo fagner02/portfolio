@@ -163,6 +163,7 @@
 
 .words {
     text-wrap-mode: nowrap;
+    font-variant-ligatures: none;
 }
 .letters {
     transform-origin: bottom;

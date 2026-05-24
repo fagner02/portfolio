@@ -39,7 +39,7 @@ const callback = (entries: IntersectionObserverEntry[]) => {
 const observer = new IntersectionObserver(callback);
 
 for (let i = 0; i < textElems.length; i++) {
-    const textElem = textElems[i]!;
+    const textElem = textElems[i]! as HTMLElement;
     textElem.setAttribute("index", i.toString());
     textNodeData[i] = {
         visible: false,
@@ -126,6 +126,7 @@ export const updateLetters = () => {
             letter.left =
                 rect.left - bodyRect.left + letter.elem.clientWidth / 2;
             letter.top = rect.top - bodyRect.top + letter.elem.clientHeight / 2;
+            letter.elem.style.width = `${rect.width}px`;
         }
     }
 };
