@@ -212,6 +212,8 @@
     border-radius: 10px;
     border: 1px solid;
     max-width: 100%;
+    flex: 1;
+    background: white;
 }
 @media (max-width: 950px) {
     .sec-info {
