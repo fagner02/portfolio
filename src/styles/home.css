@@ -202,18 +202,22 @@
     opacity: 0;
     display: inline-block;
 }
-.vansi-animations {
+.videos {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
-.vansi-animations > video {
+.videos > video {
     max-height: 200px;
     border-radius: 10px;
     border: 1px solid;
     max-width: 100%;
     flex: 1;
     background: white;
+}
+
+.wine-back > video {
+    background: #893c4a;
 }
 .no-flex-children > video {
     flex: 0;

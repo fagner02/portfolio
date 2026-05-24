@@ -72,7 +72,7 @@
                 transitions. The states are pre-calculated and then used to set
                 the step of the execution as the controls are used.
             </p>
-            <div class="vansi-animations">
+            <div class="videos">
                 <video
                     style="border-color: hsl(20, 60%, 50%); padding-left: 5px"
                     src="/src/assets/vansi/tree.mp4"
@@ -138,7 +138,7 @@
                     floating window synchronized with the animations execution
                     and even add breakpoints to the pseudocode lines.
                 </p>
-                <div class="vansi-animations">
+                <div class="videos">
                     <video
                         style="
                             width: 100%;
@@ -164,6 +164,154 @@
             </div>
             <div class="card">
                 <img loading="lazy" src="./src/assets/vansi/vansi4.png" />
+            </div>
+        </div>
+        {{/section}}
+
+        <!-- Section -->
+        {{#> section}}
+        <div class="sec-title">
+            <h2>3D Model Loader</h2>
+            <p>
+                This application was made for a computer graphics course's
+                project. It was built with OpenGL and is capable of basic
+                operations on 3D models like 3D transform and camera control
+                with a basic user interface powered by the library Dear ImGui.
+            </p>
+        </div>
+        <div class="sec-left">
+            <svg viewBox="0 0 105 133" class="gear-decor2">
+                <use href="#gear-decor"></use>
+            </svg>
+            <h2>Tech Stack</h2>
+            <div class="stack">
+                <div>
+                    <div class="icon icon-cpp"></div>
+                    <p>C++</p>
+                </div>
+                <div>
+                    <div class="icon icon-opengl"></div>
+                    <p>OpenGL</p>
+                </div>
+                <div>
+                    <div class="icon icon-imgui"></div>
+                    <p>Dear ImGui</p>
+                </div>
+                <div>
+                    <div class="icon icon-assimp"></div>
+                    <p>Assimp</p>
+                </div>
+            </div>
+            <h2>Shell Texture</h2>
+            <p>
+                Great effect to create grass for low resources. We create
+                "shells" by extruding points of the model then apply a shader
+                that divides the surface into sections that get smaller the
+                farther they are from the original points.
+            </p>
+            <div class="videos wine-back">
+                <video src="/src/assets/modelloader/shellcount.mp4"></video>
+                <video src="/src/assets/modelloader/shellheight.mp4"></video>
+                <video src="/src/assets/modelloader/shelldiv.mp4"></video>
+            </div>
+        </div>
+        <div class="sec-links">
+            <div>
+                <a href="https://github.com/fagner02/3DOpenGL"
+                    >Github Repository</a
+                >
+                <svg><use href="#git-icon"></use></svg>
+            </div>
+            <div>
+                <a
+                    href="https://github.com/fagner02/3DOpenGL/releases/tag/0.1.0"
+                    >Linux Executable
+                </a>
+
+                <svg><use href="#pc-icon"></use></svg>
+            </div>
+        </div>
+        <div class="sec-right">
+            <h2>Features</h2>
+            <div class="features">
+                <div>
+                    <h3>1. Load 3D Models</h3>
+                    <p>Load 3D models of various 3D file formats</p>
+                </div>
+                <div>
+                    <h3>2. Add Texture</h3>
+                    <p>
+                        Apply textures to the models from a predefined set of
+                        textures
+                    </p>
+                </div>
+                <div>
+                    <h3>3. Orthographic & Perspective</h3>
+                    <p>Use the camera in Orthographic or Perspective mode</p>
+                </div>
+                <div>
+                    <h3>4. Apply Transformations</h3>
+                    <p>Apply translate, rotate and scale to the models</p>
+                </div>
+            </div>
+            <h2>Picking Objects Technique</h2>
+            <p>
+                An easy way of implementing object picking is to create a
+                framebuffer that draws the objects replacing the colors for an
+                id. After drawing the objects to the framebuffer we get the
+                pixel value at the mouse position when clicking on the window.
+            </p>
+            <div class="videos wine-back">
+                <video src="/src/assets/modelloader/picking.mp4"></video>
+            </div>
+
+            <h2>Shadow Drawing Technique</h2>
+            <p>
+                For the shadow implementation a framebuffer was also used. We
+                draw the objects' depth value to the depth framebuffer using the
+                light projection. After that, when drawing the objects normally,
+                we apply the ligh projection to the object again and then
+                compare the depth value of the object with the depth value in
+                the framebuffer. If the object depth is higher than the
+                framebuffer, we draw the object with the light value on,
+                otherwise, we draw the object with the light value off.
+            </p>
+            <div class="videos wine-back">
+                <video src="/src/assets/modelloader/shadow.mp4"></video>
+            </div>
+        </div>
+        <div class="carrousel">
+            <div class="card">
+                <video loading="lazy">
+                    <source
+                        src="./src/assets/modelloader/3d.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
+            <div class="card">
+                <video loading="lazy">
+                    <source
+                        src="./src/assets/modelloader/3d2.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
+            <div class="card">
+                <video loading="lazy">
+                    <source
+                        src="./src/assets/modelloader/3d3.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+            </div>
+            <div class="card">
+                <video loading="lazy">
+                    <source
+                        src="./src/assets/modelloader/3d4.mp4"
+                        type="video/mp4"
+                    />
+                </video>
             </div>
         </div>
         {{/section}}
@@ -303,10 +451,7 @@
                 Frontend input validation is done with Vuetify's field
                 component.
             </p>
-            <div
-                class="vansi-animations no-flex-children"
-                style="justify-content: end"
-            >
+            <div class="videos no-flex-children" style="justify-content: end">
                 <video src="/src/assets/npi/npi1.mp4"></video>
                 <video src="/src/assets/npi/npi2.mp4"></video>
             </div>
@@ -433,116 +578,6 @@
             </div>
             <div class="card">
                 <img loading="lazy" src="./src/assets/pathfinding/pfind3.png" />
-            </div>
-        </div>
-        {{/section}}
-
-        <!-- Section -->
-        {{#> section}}
-        <div class="sec-title">
-            <h2>3D Model Loader</h2>
-            <p>
-                This application was made for a computer graphics course's
-                project. It was built with OpenGL and is capable of basic
-                operations on 3D models like 3D transform and camera control
-                with a basic user interface powered by the library Dear ImGui.
-            </p>
-        </div>
-        <div class="sec-left">
-            <svg viewBox="0 0 105 133" class="gear-decor2">
-                <use href="#gear-decor"></use>
-            </svg>
-            <h2>Tech Stack</h2>
-            <div class="stack">
-                <div>
-                    <div class="icon icon-cpp"></div>
-                    <p>C++</p>
-                </div>
-                <div>
-                    <div class="icon icon-opengl"></div>
-                    <p>OpenGL</p>
-                </div>
-                <div>
-                    <div class="icon icon-imgui"></div>
-                    <p>Dear ImGui</p>
-                </div>
-                <div>
-                    <div class="icon icon-assimp"></div>
-                    <p>Assimp</p>
-                </div>
-            </div>
-        </div>
-        <div class="sec-links">
-            <div>
-                <a href="https://github.com/fagner02/3DOpenGL"
-                    >Github Repository</a
-                >
-                <svg><use href="#git-icon"></use></svg>
-            </div>
-            <div>
-                <a href="https://github.com/fagner02/3DOpenGL"
-                    >Linux Executable
-                </a>
-
-                <svg><use href="#pc-icon"></use></svg>
-            </div>
-        </div>
-        <div class="sec-right">
-            <h2>Features</h2>
-            <div class="features">
-                <div>
-                    <h3>1. Load 3D Models</h3>
-                    <p>Load 3D models of various 3D file formats</p>
-                </div>
-                <div>
-                    <h3>2. Add Texture</h3>
-                    <p>
-                        Apply textures to the models from a predefined set of
-                        textures
-                    </p>
-                </div>
-                <div>
-                    <h3>3. Orthographic & Perspective</h3>
-                    <p>Use the camera in Orthographic or Perspective mode</p>
-                </div>
-                <div>
-                    <h3>4. Apply Transformations</h3>
-                    <p>Apply translate, rotate and scale to the models</p>
-                </div>
-            </div>
-        </div>
-        <div class="carrousel">
-            <div class="card">
-                <video loading="lazy">
-                    <source
-                        src="./src/assets/modelloader/3d.mp4"
-                        type="video/mp4"
-                    />
-                </video>
-            </div>
-            <div class="card">
-                <video loading="lazy">
-                    <source
-                        src="./src/assets/modelloader/3d2.mp4"
-                        type="video/mp4"
-                    />
-                </video>
-            </div>
-            <div class="card">
-                <video loading="lazy">
-                    <source
-                        src="./src/assets/modelloader/3d3.mp4"
-                        type="video/mp4"
-                    />
-                </video>
-            </div>
-            <div class="card">
-                <video loading="lazy">
-                    <source
-                        src="./src/assets/modelloader/3d4.mp4"
-                        type="video/mp4"
-                    />
-                </video>
             </div>
         </div>
         {{/section}}
