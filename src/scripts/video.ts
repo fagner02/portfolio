@@ -8,20 +8,24 @@ const observer = new IntersectionObserver((entries) => {
                     (e.target as HTMLVideoElement).pause();
                 }
             } catch (e) {}
+        } else {
+            if (e.isIntersecting) {
+                (e.target as HTMLVideoElement).load();
+            }
         }
     }
 });
 
-const videos = document.querySelectorAll("video");
 const onLoad = (e: Event) => {
     const video = e.target as HTMLVideoElement;
     video.removeEventListener("loadeddata", onLoad);
-    video.muted = true;
-    video.autoplay = true;
-    video.loop = true;
-    observer.observe(video);
+    video.play();
 };
 
-for (let i = 0; i < videos.length; i++) {
-    videos[i]!.addEventListener("loadeddata", onLoad);
+const videos = document.querySelectorAll("video");
+for (let video of videos) {
+    video.muted = true;
+    video.loop = true;
+    observer.observe(video);
+    video.addEventListener("loadeddata", onLoad);
 }

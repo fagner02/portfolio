@@ -12,7 +12,6 @@
             src="/src/scripts/windowResize.ts"
             async
             fetchpriority="medium"
-            blocking="render"
         ></script>
 
         <script
@@ -76,14 +75,17 @@
                 <video
                     style="border-color: hsl(20, 60%, 50%); padding-left: 5px"
                     src="/src/assets/vansi/tree.mp4"
+                    preload="none"
                 ></video>
                 <video
                     style="border-color: hsl(210, 60%, 50%)"
                     src="/src/assets/vansi/automata.mp4"
+                    preload="none"
                 ></video>
                 <video
                     style="border-color: hsl(210, 60%, 50%)"
                     src="/src/assets/vansi/vansi.mp4"
+                    preload="none"
                 ></video>
             </div>
         </div>
@@ -147,6 +149,7 @@
                             padding-bottom: 3px;
                             padding-right: 5px;
                         "
+                        preload="none"
                         src="/src/assets/vansi/vansiall.mp4"
                     ></video>
                 </div>
@@ -210,9 +213,18 @@
                 farther they are from the original points.
             </p>
             <div class="videos wine-back">
-                <video src="/src/assets/modelloader/shellcount.mp4"></video>
-                <video src="/src/assets/modelloader/shellheight.mp4"></video>
-                <video src="/src/assets/modelloader/shelldiv.mp4"></video>
+                <video
+                    preload="none"
+                    src="/src/assets/modelloader/shellcount.mp4"
+                ></video>
+                <video
+                    preload="none"
+                    src="/src/assets/modelloader/shellheight.mp4"
+                ></video>
+                <video
+                    preload="none"
+                    src="/src/assets/modelloader/shelldiv.mp4"
+                ></video>
             </div>
         </div>
         <div class="sec-links">
@@ -262,7 +274,10 @@
                 pixel value at the mouse position when clicking on the window.
             </p>
             <div class="videos wine-back">
-                <video src="/src/assets/modelloader/picking.mp4"></video>
+                <video
+                    preload="none"
+                    src="/src/assets/modelloader/picking.mp4"
+                ></video>
             </div>
 
             <h2>Shadow Drawing Technique</h2>
@@ -277,46 +292,42 @@
                 otherwise, we draw the object with the light value off.
             </p>
             <div class="videos wine-back">
-                <video src="/src/assets/modelloader/shadow.mp4"></video>
+                <video
+                    preload="none"
+                    src="/src/assets/modelloader/shadow.mp4"
+                ></video>
             </div>
         </div>
         <div class="carrousel">
             <div class="card">
-                <video loading="lazy">
-                    <source
-                        src="./src/assets/modelloader/3d.mp4"
-                        type="video/mp4"
-                    />
-                </video>
+                <video
+                    preload="none"
+                    loading="lazy"
+                    src="/src/assets/modelloader/3d.mp4"
+                ></video>
             </div>
             <div class="card">
-                <video loading="lazy">
-                    <source
-                        src="./src/assets/modelloader/3d2.mp4"
-                        type="video/mp4"
-                    />
-                </video>
+                <video
+                    preload="none"
+                    src="/src/assets/modelloader/3d2.mp4"
+                ></video>
             </div>
             <div class="card">
-                <video loading="lazy">
-                    <source
-                        src="./src/assets/modelloader/3d3.mp4"
-                        type="video/mp4"
-                    />
-                </video>
+                <video
+                    preload="none"
+                    src="/src/assets/modelloader/3d3.mp4"
+                ></video>
             </div>
             <div class="card">
-                <video loading="lazy">
-                    <source
-                        src="./src/assets/modelloader/3d4.mp4"
-                        type="video/mp4"
-                    />
-                </video>
+                <video
+                    preload="none"
+                    src="/src/assets/modelloader/3d4.mp4"
+                ></video>
             </div>
         </div>
         {{/section}}
 
-        <!-- Section -->
+        <!-- Section-->
         {{#> section}}
         <div class="sec-title">
             <h2>Product API</h2>
@@ -452,8 +463,8 @@
                 component.
             </p>
             <div class="videos no-flex-children" style="justify-content: end">
-                <video src="/src/assets/npi/npi1.mp4"></video>
-                <video src="/src/assets/npi/npi2.mp4"></video>
+                <video preload="none" src="/src/assets/npi/npi1.mp4"></video>
+                <video preload="none" src="/src/assets/npi/npi2.mp4"></video>
             </div>
         </div>
         <div class="carrousel">
@@ -561,9 +572,8 @@
         <div class="carrousel">
             <div class="card">
                 <video
-                    loading="lazy"
+                    preload="none"
                     src="./src/assets/pathfinding/pathf.mp4"
-                    type="video/mp4"
                 ></video>
             </div>
             <div class="card">
@@ -571,9 +581,8 @@
             </div>
             <div class="card">
                 <video
-                    loading="lazy"
+                    preload="none"
                     src="./src/assets/pathfinding/pathf2.mp4"
-                    type="video/mp4"
                 ></video>
             </div>
             <div class="card">
