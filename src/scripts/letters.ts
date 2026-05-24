@@ -7,6 +7,7 @@ type Letter = {
     left: number;
     top: number;
     elem: HTMLElement;
+    width: number;
 };
 
 const textNodeData: {
@@ -17,6 +18,8 @@ const textNodeData: {
     top: number;
     width: number;
     height: number;
+    initiated: boolean;
+    inside: boolean;
 }[] = Array(textElems.length);
 
 const callback = (entries: IntersectionObserverEntry[]) => {
@@ -49,6 +52,8 @@ for (let i = 0; i < textElems.length; i++) {
         top: 0,
         width: 0,
         height: 0,
+        initiated: false,
+        inside: false,
     };
 
     const frag = document.createDocumentFragment();
@@ -100,6 +105,7 @@ for (let i = 0; i < textElems.length; i++) {
                 elem: letterSpan,
                 left: 0,
                 top: 0,
+                width: 0,
             });
         }
         addToText();
@@ -126,8 +132,18 @@ export const updateLetters = () => {
             letter.left =
                 rect.left - bodyRect.left + letter.elem.clientWidth / 2;
             letter.top = rect.top - bodyRect.top + letter.elem.clientHeight / 2;
-            letter.elem.style.width = `${rect.width}px`;
+            letter.width = rect.width;
         }
+    }
+};
+
+export const setWidths = (i: number) => {
+    const textNode = textNodeData[i];
+    if (!textNode) return;
+    const letters = textNode.letters;
+    for (let j = 0; j < letters.length; j++) {
+        const letter = letters[j]!;
+        letter.elem.style.cssText = `width:${letter.width}px;display:inline-block;`;
     }
 };
 
@@ -151,12 +167,22 @@ const animateLetters = () => {
         const dx = mousePos.x - data.left;
 
         if (Math.abs(dy) < data.height && Math.abs(dx) < data.width) {
-            for (let i = 0; i < data.letters.length; i++) {
-                data.letters[i]!.elem.style.display = "inline-block";
+            if (!data.initiated) {
+                data.initiated = true;
+                data.inside = true;
+                setWidths(i);
+            } else if (!data.inside) {
+                data.inside = true;
+                for (let i = 0; i < data.letters.length; i++) {
+                    data.letters[i]!.elem.style.display = "inline-block";
+                }
             }
         } else {
-            for (let i = 0; i < data.letters.length; i++) {
-                data.letters[i]!.elem.style.display = "inline";
+            if (data.inside) {
+                data.inside = false;
+                for (let i = 0; i < data.letters.length; i++) {
+                    data.letters[i]!.elem.style.display = "inline";
+                }
             }
             continue;
         }
