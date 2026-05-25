@@ -235,3 +235,12 @@ window.addEventListener("scroll", reset);
 window.addEventListener("mouseout", reset);
 
 animateCalls.push(animateLetters);
+
+const onResize = () => {
+    updateLetters();
+};
+const resizeObserver = new ResizeObserver(onResize);
+const sections = document.querySelectorAll("section");
+for (let sec of sections) {
+    resizeObserver.observe(sec);
+}
