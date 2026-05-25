@@ -187,35 +187,59 @@ for (let i = 0; i < carrousels.length; i++) {
         moveInitiated: false,
     };
 
-    carrousels[i]?.addEventListener("mousedown", (e) => {
-        const carrousel = carrouselsData[i]!;
-        carrousel.moving = true;
-        carrousel.mousePos = e.clientX;
-        carrousel.oldElapsed = performance.now() - carrousel.slideStart;
-        carrousel.newElapsed =
-            ((e.clientX - carrousel.mousePos) / carrousel.clientWidth) *
-            carrousel.slideDuration;
-    });
-    carrousels[i]?.addEventListener("mousemove", (e) => {
+    const move = (e: Event) => {
+        let x: number = (e as MouseEvent).clientX;
+        if (x == undefined) {
+            x = (e as TouchEvent).touches[0]?.clientX!;
+        }
         const carrousel = carrouselsData[i]!;
         if (!carrousel.moving) {
             return;
         }
         carrouselsData[i]!.moveInitiated = true;
         carrousel.newElapsed =
-            ((e.clientX - carrousel.mousePos) / carrousel.clientWidth) *
+            ((x - carrousel.mousePos) / carrousel.clientWidth) *
             carrousel.slideDuration;
-    });
-    carrousels[i]?.addEventListener("mouseup", (e) => {
+    };
+    const reset = () => {
         const carrousel = carrouselsData[i]!;
         if (carrousel.moving) {
+            document.removeEventListener("mouseout", reset);
+            document.removeEventListener("mouseup", reset);
+            document.removeEventListener("mousemove", move);
+
+            document.removeEventListener("touchcancel", reset);
+            document.removeEventListener("touchend", reset);
+            document.removeEventListener("touchmove", move);
             carrousel.slideStart =
                 performance.now() -
                 ((carrousel.oldElapsed + carrousel.newElapsed) %
                     carrousel.slideDuration);
             carrousel.moving = false;
         }
-    });
+    };
+    const start = (e: Event) => {
+        let x: number = (e as MouseEvent).clientX;
+        if (x == undefined) {
+            x = (e as TouchEvent).touches[0]?.clientX!;
+        }
+        const carrousel = carrouselsData[i]!;
+        carrousel.moving = true;
+        carrousel.mousePos = x;
+        carrousel.oldElapsed = performance.now() - carrousel.slideStart;
+        carrousel.newElapsed =
+            ((x - carrousel.mousePos) / carrousel.clientWidth) *
+            carrousel.slideDuration;
+        document.addEventListener("mouseleave", reset);
+        document.addEventListener("mousemove", move);
+        document.addEventListener("mouseup", reset);
+
+        document.addEventListener("touchcancel", reset);
+        document.addEventListener("touchend", reset);
+        document.addEventListener("touchmove", move);
+    };
+    carrousels[i]?.addEventListener("touchstart", start);
+    carrousels[i]?.addEventListener("mousedown", start);
 }
 
 export const updateCarrousel = () => {
