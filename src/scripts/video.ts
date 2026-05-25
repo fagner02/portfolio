@@ -1,20 +1,23 @@
-const observer = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-        if ((e.target as HTMLVideoElement).readyState > 2) {
-            try {
+const observer = new IntersectionObserver(
+    (entries) => {
+        for (const e of entries) {
+            if ((e.target as HTMLVideoElement).readyState > 2) {
+                try {
+                    if (e.isIntersecting) {
+                        (e.target as HTMLVideoElement).play();
+                    } else {
+                        (e.target as HTMLVideoElement).pause();
+                    }
+                } catch (e) {}
+            } else {
                 if (e.isIntersecting) {
-                    (e.target as HTMLVideoElement).play();
-                } else {
-                    (e.target as HTMLVideoElement).pause();
+                    (e.target as HTMLVideoElement).load();
                 }
-            } catch (e) {}
-        } else {
-            if (e.isIntersecting) {
-                (e.target as HTMLVideoElement).load();
             }
         }
-    }
-});
+    },
+    { threshold: 0.8 },
+);
 
 const onLoad = (e: Event) => {
     const video = e.target as HTMLVideoElement;

@@ -207,7 +207,8 @@
     flex-wrap: wrap;
     gap: 10px;
 }
-.videos > video {
+.videos > video,
+.videos > img {
     max-height: 200px;
     border-radius: 10px;
     border: 1px solid;
