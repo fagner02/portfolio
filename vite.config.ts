@@ -1,7 +1,8 @@
-import { resolve, join } from "path";
+import { resolve, join, basename, extname } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
-import { defineConfig } from "vite";
+import { defineConfig, type IndexHtmlTransformContext } from "vite";
+import Handlebars from "handlebars";
 
 import handlebars from "vite-plugin-handlebars";
 
@@ -79,7 +80,62 @@ for (const htmlPath of Object.values(htmlInputs)) {
 }
 
 /* ------------------------------------------------------------------ */
-/* 4. Vite config                                                     */
+/* 4. Fix import order overriden in bundling                          */
+/* ------------------------------------------------------------------ */
+
+function registerPartialsFromDir(dir: string) {
+    const files = fs.readdirSync(dir);
+    for (const file of files) {
+        const name = basename(file, extname(file));
+        const content = fs.readFileSync(resolve(dir, file), "utf-8");
+        Handlebars.registerPartial(name, content);
+    }
+}
+
+const hbsContext = registerPartialsFromDir("./partials");
+let stylesOrder: Record<string, string[]> = {};
+
+for (let file of Object.values(htmlInputs)) {
+    const html = fs.readFileSync(file, { encoding: "utf-8" });
+    const parsed = Handlebars.compile(html)(hbsContext);
+
+    resolve();
+
+    const linkRegex = /<link.*href="\/([^"]*.css)".*>/g;
+
+    let match;
+    stylesOrder[file] = [];
+    while ((match = linkRegex.exec(parsed)) != null) {
+        stylesOrder[file].push(match[1]!);
+    }
+}
+
+function fixCssOrder() {
+    return {
+        name: "fix-css-order",
+        transformIndexHtml: {
+            handler: (html: string, ctx: IndexHtmlTransformContext) => {
+                const linkRegex =
+                    /(?:\s*(?:<link.*href="\/[^"]*.css".*>)+\s*)+/;
+                const order = stylesOrder[ctx.filename]!;
+                let res = "\n";
+                for (let s of order) {
+                    const chunk = Object.values(ctx.bundle!).find(
+                        (x) =>
+                            x.type === "asset" && x.originalFileNames[0] === s,
+                    );
+                    console.log(chunk?.fileName);
+                    res += `<link rel="stylesheet" crossorigin href="${chunk?.fileName}"/>\n`;
+                }
+                html = html.replace(linkRegex, res);
+                return html;
+            },
+        },
+    };
+}
+
+/* ------------------------------------------------------------------ */
+/* 5. Vite config                                                     */
 /* ------------------------------------------------------------------ */
 export default defineConfig({
     appType: "mpa",
@@ -97,7 +153,10 @@ export default defineConfig({
         emptyOutDir: true,
     },
     plugins: [
-        handlebars({ partialDirectory: resolve(__dirname, "partials") }),
+        handlebars({
+            partialDirectory: resolve(__dirname, "partials"),
+        }),
+        fixCssOrder(),
         {
             name: "preserve-script-attrs",
             enforce: "post",
