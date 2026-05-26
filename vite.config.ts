@@ -1,4 +1,4 @@
-import { resolve, join, basename, extname } from "path";
+import { resolve, join, basename, extname, dirname, relative } from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import { defineConfig, type IndexHtmlTransformContext } from "vite";
@@ -124,8 +124,7 @@ function fixCssOrder() {
                         (x) =>
                             x.type === "asset" && x.originalFileNames[0] === s,
                     );
-                    console.log(chunk?.fileName);
-                    res += `<link rel="stylesheet" crossorigin href="${chunk?.fileName}"/>\n`;
+                    res += `<link rel="stylesheet" crossorigin href="/${chunk?.fileName}"/>\n`;
                 }
                 html = html.replace(linkRegex, res);
                 return html;
