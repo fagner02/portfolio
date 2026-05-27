@@ -532,6 +532,105 @@
         </div>
         {{/section}}
 
+        <!-- Section-->
+        {{#> section}}
+        <div class="sec-title">
+            <h2>Bouncing Bubbles</h2>
+            <p>
+                This is a simple game made with Godot 4.5 that can be played by
+                multiple players using the same wi-fi. It showcases the use of
+                the User Datagram Protocol (UDP) as a way of connecting the
+                users as clients to the a user that acts as a host.
+            </p>
+        </div>
+        <div class="sec-left">
+            <h2>Tech Stack</h2>
+            <div class="stack">
+                <div>
+                    <div class="icon icon-godot"></div>
+                    Godot
+                </div>
+
+                <div>
+                    <div class="icon icon-godot"></div>
+                    GDScript
+                </div>
+            </div>
+        </div>
+        <div class="sec-links">
+            <div>
+                <a href="https://github.com/fagner02/BouncingBubbles"
+                    >Github Repository</a
+                >
+                <svg><use href="#git-icon"></use></svg>
+            </div>
+            <div>
+                <a
+                    href="https://github.com/fagner02/BouncingBubbles/releases/download/1.0.0/android.apk"
+                    >Android APK</a
+                >
+                <svg><use href="#android-icon"></use></svg>
+            </div>
+            <div>
+                <a
+                    href="https://github.com/fagner02/BouncingBubbles/releases/download/1.0.0/windows.exe"
+                    >Windows Executable
+                </a>
+                <svg><use href="#win-icon"></use></svg>
+            </div>
+            <div>
+                <a
+                    href="https://github.com/fagner02/BouncingBubbles/releases/download/1.0.0/linux.x86_64"
+                    >Linux Executable</a
+                >
+                <svg><use href="#linux-icon"></use></svg>
+            </div>
+        </div>
+        <div class="sec-right">
+            <h2>How does it work?</h2>
+            <p>
+                The game works by sending JSON over UDP with requests and
+                events. The host player receives these requests and propagates
+                them to the other users. The JSON sent is used to synchronize
+                the players movements and data.
+            </p>
+            <p>
+                In comparison to the TCP/IP protocol, the UDP protocol can keep
+                a lower latency and can skip lost packets.
+            </p>
+        </div>
+        <div class="carrousel">
+            <div class="card">
+                <img
+                    loading="lazy"
+                    src="/src/assets/bubbles/dev.webp"
+                    alt="bouncing bubbles project on godot engine"
+                />
+            </div>
+            <div class="card">
+                <img
+                    loading="lazy"
+                    src="/src/assets/bubbles/play3.webp"
+                    alt="bouncing bubbles gameplay"
+                />
+            </div>
+            <div class="card">
+                <img
+                    loading="lazy"
+                    src="/src/assets/bubbles/win.webp"
+                    alt="bouncing bubbles win screen"
+                />
+            </div>
+            <div class="card">
+                <img
+                    loading="lazy"
+                    src="/src/assets/bubbles/play5.webp"
+                    alt="bouncing bubbles gameplay"
+                />
+            </div>
+        </div>
+        {{/section}}
+
         <!-- Section -->
         {{#> section}}
         <div class="sec-title">

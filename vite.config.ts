@@ -115,12 +115,13 @@ function fixCssOrder() {
         name: "fix-css-order",
         transformIndexHtml: {
             handler: (html: string, ctx: IndexHtmlTransformContext) => {
+                if (!ctx.bundle) return;
                 const linkRegex =
                     /(?:\s*(?:<link.*href="\/[^"]*.css".*>)+\s*)+/;
                 const order = stylesOrder[ctx.filename]!;
                 let res = "\n";
                 for (let s of order) {
-                    const chunk = Object.values(ctx.bundle!).find(
+                    const chunk = Object.values(ctx.bundle).find(
                         (x) =>
                             x.type === "asset" && x.originalFileNames[0] === s,
                     );
