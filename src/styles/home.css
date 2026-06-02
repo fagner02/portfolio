@@ -228,13 +228,16 @@
     object-fit: contain;
     backdrop-filter: blur(10px);
     max-height: var(--height);
+    height: 100%;
+    width: 100%;
 }
 
 .wine-back > video {
     background: #893c4a;
 }
-.no-flex-children > video {
-    flex: 0;
+.no-flex-children > * {
+    flex: unset;
+    width: 100%;
 }
 .no-max-height-children > img {
     max-height: unset;
