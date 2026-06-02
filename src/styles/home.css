@@ -206,15 +206,28 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    --height: 200px;
 }
-.videos > video,
-.videos > img {
-    max-height: 200px;
+.videos > * {
+    max-height: var(--height);
     border-radius: 10px;
     border: 1px solid;
     max-width: 100%;
     flex: 1;
     background: white;
+}
+.frame {
+    display: flex;
+    background-size: 100% 100%;
+    overflow: clip;
+    flex-wrap: wrap;
+    max-height: unset;
+}
+.frame > * {
+    flex: 1;
+    object-fit: contain;
+    backdrop-filter: blur(10px);
+    max-height: var(--height);
 }
 
 .wine-back > video {
@@ -222,6 +235,9 @@
 }
 .no-flex-children > video {
     flex: 0;
+}
+.no-max-height-children > img {
+    max-height: unset;
 }
 @media (max-width: 950px) {
     .sec-info {
