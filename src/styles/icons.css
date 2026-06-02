@@ -1,6 +1,6 @@
 .icon {
     background-image: url("/src/assets/stack/icons.webp");
-    background-size: 160px 96px;
+    background-size: 160px 128px;
     width: 32px;
     height: 32px;
 }
@@ -46,4 +46,13 @@
 }
 .icon-postgres {
     background-position: -128px -64px;
+}
+.icon-react {
+    background-position: 0px -96px;
+}
+.icon-prisma {
+    background-position: -32px -96px;
+}
+.icon-next {
+    background-position: -64px -96px;
 }
