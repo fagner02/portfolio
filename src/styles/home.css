@@ -22,13 +22,7 @@
 .algorithms {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-}
-.models > div {
-    flex: 1;
-}
-.models > div > p {
-    text-wrap: nowrap;
+    column-gap: 20px;
 }
 .algorithms {
     gap: 10px;
