@@ -15,6 +15,7 @@
         ></script>
 
         <script type="module" src="/src/scripts/low_priority.ts" defer></script>
+        <script type="module" src="/src/scripts/frame-decor.ts"></script>
         <link rel="stylesheet" href="/src/styles/home.css" />
     </head>
     <body>
@@ -265,29 +266,18 @@
                 components, used mostly to set model forms state.
             </p>
             <div class="videos no-flex-children" style="--height: 400px">
-                <div
-                    class="frame"
-                    style="
-                        background-image: url(/src/assets/expenses/register.webp);
-                    "
-                >
-                    <img
-                        src="/src/assets/expenses/anim2.webp"
-                        alt="expenses management system cards animation"
-                    />
-                </div>
-
-                <div
-                    class="frame"
-                    style="
-                        background-image: url(/src/assets/expenses/register.webp);
-                    "
-                >
-                    <img
-                        src="/src/assets/expenses/loader.webp"
-                        alt="expenses management system loading animation"
-                    />
-                </div>
+                {{#> frame}}
+                <img
+                    loading="lazy"
+                    src="/src/assets/expenses/anim2.webp"
+                    alt="expenses management system cards animation"
+                />
+                {{/frame}} {{#> frame}}
+                <img
+                    src="/src/assets/expenses/loader.webp"
+                    alt="expenses management system loading animation"
+                />
+                {{/frame}}
             </div>
         </div>
         <div class="sec-links">
@@ -313,17 +303,12 @@
                 component to validate the input value automatically.
             </p>
             <div class="videos" style="--height: 400px">
-                <div
-                    class="frame"
-                    style="
-                        background-image: url(/src/assets/expenses/register.webp);
-                    "
-                >
-                    <img
-                        src="/src/assets/expenses/input.webp"
-                        alt="input validation"
-                    />
-                </div>
+                {{#> frame}}
+                <img
+                    src="/src/assets/expenses/input.webp"
+                    alt="input validation"
+                />
+                {{/frame}}
             </div>
 
             <h2>Database</h2>
@@ -425,14 +410,17 @@
             </p>
             <div class="videos wine-back">
                 <img
+                    loading="lazy"
                     src="/src/assets/modelloader/shellcount.webp"
                     alt="shell texture shell count changing"
                 />
                 <img
+                    loading="lazy"
                     src="/src/assets/modelloader/shellheight.webp"
                     alt="shell texture height changing"
                 />
                 <img
+                    loading="lazy"
                     src="/src/assets/modelloader/shelldiv.webp"
                     alt="shell texture divisions changing"
                 />
@@ -486,6 +474,7 @@
             </p>
             <div class="videos wine-back">
                 <img
+                    loading="lazy"
                     src="/src/assets/modelloader/picking.webp"
                     alt="picking framebuffer example"
                 />
@@ -504,6 +493,7 @@
             </p>
             <div class="videos wine-back">
                 <img
+                    loading="lazy"
                     src="/src/assets/modelloader/shadow.webp"
                     alt="shadow framebuffer example"
                 />
@@ -511,22 +501,29 @@
         </div>
         <div class="carrousel">
             <div class="card">
-                <img src="/src/assets/modelloader/3d.webp" alt="car model" />
+                <img
+                    loading="lazy"
+                    src="/src/assets/modelloader/3d.webp"
+                    alt="car model"
+                />
             </div>
             <div class="card">
                 <img
+                    loading="lazy"
                     src="/src/assets/modelloader/3d2.webp"
                     alt="ant model by a cube model under light"
                 />
             </div>
             <div class="card">
                 <img
+                    loading="lazy"
                     src="/src/assets/modelloader/3d3.webp"
                     alt="cube on grass under orthographic view"
                 />
             </div>
             <div class="card">
                 <img
+                    loading="lazy"
                     src="/src/assets/modelloader/3d4.webp"
                     alt="3d car model being transformed"
                 />
@@ -677,24 +674,17 @@
                 server.
             </p>
             <div class="videos no-flex-children" style="--height: 300px">
-                <div
-                    class="frame"
-                    style="background-image: url(/src/assets/npi/npi.webp)"
-                >
-                    <img
-                        src="/src/assets/npi/npi1valid.webp"
-                        alt="product catalog input validation example"
-                    />
-                </div>
-                <div
-                    class="frame"
-                    style="background-image: url(/src/assets/npi/npi.webp)"
-                >
-                    <img
-                        src="/src/assets/npi/npi2valid.webp"
-                        alt="product catalog input validation example"
-                    />
-                </div>
+                {{#> frame}}
+                <img
+                    src="/src/assets/npi/npi1valid.webp"
+                    alt="product catalog input validation example"
+                />
+                {{/frame}} {{#> frame}}
+                <img
+                    src="/src/assets/npi/npi2valid.webp"
+                    alt="product catalog input validation example"
+                />
+                {{/frame}}
             </div>
         </div>
         <div class="carrousel">

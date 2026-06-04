@@ -1,0 +1,37 @@
+<div class="frame">
+    {{> @partial-block}}
+    <div
+        class="frame-decor"
+        style="
+            display: grid;
+            grid-template-areas: &quot;unit&quot;;
+            place-items: start center;
+        "
+    >
+        <div style="border-radius: 9px; overflow: hidden; grid-area: unit">
+            <svg
+                viewBox="0 0 90 88"
+                style="
+                    transform: translate(0, -50%) rotate(90deg);
+                    max-width: 150px;
+                    width: 100%;
+                "
+            >
+                <g clip-path="url(#gear-clip)">
+                    <use href="#gear" class="gear"></use>
+                </g>
+            </svg>
+        </div>
+        <img
+            style="
+                grid-area: unit;
+                z-index: 1;
+                max-width: 50px;
+                width: 27%;
+                transform: translate(0, -15%);
+            "
+            src="/src/assets/banner/star-front.webp"
+            alt="star"
+        />
+    </div>
+</div>

@@ -212,20 +212,27 @@
 }
 .frame {
     display: flex;
-    background-size: 100% 100%;
-    overflow: clip;
-    flex-wrap: wrap;
     max-height: unset;
+    position: relative;
+    justify-content: start;
+    background: none;
+    border: none;
+}
+.frame-decor {
+    background: url(/src/assets/pattern.webp);
+    background-size: 900px;
+    border: 1px solid;
+    margin-left: 10px;
+    flex: 1;
 }
 .frame > * {
-    flex: 1;
-    object-fit: contain;
-    backdrop-filter: blur(10px);
     max-height: var(--height);
-    height: 100%;
-    width: 100%;
+    z-index: 1;
+    object-fit: contain;
+    border: 1px solid;
+    border-radius: 10px;
+    max-width: 100%;
 }
-
 .wine-back > video {
     background: #893c4a;
 }
