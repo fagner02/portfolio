@@ -1,64 +1,61 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Contact</title>
 
-        {{> head}}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
 
-        <link rel="stylesheet" href="/src/styles/contact.css" />
-    </head>
-    <body>
-        {{>background}}
-        <header>{{>banner}}</header>
-        <main class="info">
-            <svg class="decor" viewBox="0 0 90 88">
-                <clipPath id="gear-clip">
-                    <use href="#gear-clip-path" />
-                </clipPath>
-                <g clip-path="url(#gear-clip)">
-                    <use class="gear" href="#gear"></use>
-                </g>
-            </svg>
-            <h1 class="info-title">Let's work together</h1>
-            <img
-                class="info-image"
-                src="/src/assets/profile.webp"
-                alt="profile picture"
-                width="200"
-                height="200"
-                style="border-radius: 20px; background: gray"
-            />
-            <div class="info-contact">
-                <div>
-                    <svg><use href="#email-icon"></use></svg>
-                    <p>fagnerrc12@gmail.com</p>
-                </div>
-                <div>
-                    <svg><use href="#git-icon"></use></svg>
-                    <a href="https://github.com/fagner02">Github</a>
-                </div>
-                <div>
-                    <svg><use href="#linkedin-icon"></use></svg>
-                    <a href="linkedin.com/in/fagner-ferreira-157582218"
-                        >LinkedIn</a
-                    >
-                </div>
+    {{> head}}
+
+    <link rel="stylesheet" href="/src/styles/contact.css" />
+</head>
+
+<body>
+    {{>background}}
+    <header>{{>banner}}</header>
+    <main class="info">
+        <svg class="decor" viewBox="0 0 90 88">
+            <clipPath id="gear-clip">
+                <use href="#gear-clip-path" />
+            </clipPath>
+            <g clip-path="url(#gear-clip)">
+                <use class="gear" href="#gear"></use>
+            </g>
+        </svg>
+        <h1 class="info-title">Let's work together</h1>
+        <img class="info-image" src="/src/assets/profile.webp" alt="profile picture" width="200" height="200"
+            style="border-radius: 20px; background: gray" />
+        <div class="info-contact">
+            <div>
+                <svg>
+                    <use href="#email-icon"></use>
+                </svg>
+                <p>fagnerrc12@gmail.com</p>
             </div>
-            <div
-                class="info-extra"
-                style="
+            <div>
+                <svg>
+                    <use href="#git-icon"></use>
+                </svg>
+                <a href="https://github.com/fagner02">Github</a>
+            </div>
+            <div>
+                <svg>
+                    <use href="#linkedin-icon"></use>
+                </svg>
+                <a href="linkedin.com/in/fagner-ferreira-157582218">LinkedIn</a>
+            </div>
+        </div>
+        <div class="info-extra" style="
                     text-align: right;
                     display: flex;
                     flex-direction: column;
                     gap: 10px;
-                "
-            >
-                <p>Open to full-time roles and freelance projects</p>
-                <p>Only taking remote work offers at the moment</p>
-                <p>Based in Apuiarés, Brazil</p>
-            </div>
-        </main>
-    </body>
+                ">
+            <p>Open to full-time roles and freelance projects</p>
+            <p>Based in Fortaleza, Brazil</p>
+        </div>
+    </main>
+</body>
+
 </html>
